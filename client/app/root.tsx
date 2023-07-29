@@ -5,6 +5,7 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@re
 import global from "./styles/global.css";
 import styles from "./root.module.css";
 import SideNavigation, { SideNavigationLink } from "./components/SideNavigation/SideNavigation";
+import Headers from "./components/Header/Header";
 
 export const meta = () => {
   return [
@@ -31,9 +32,12 @@ export default function App() {
       <body className={styles.root}>
         <SideNavigation expand="right">
           <SideNavigationLink to="/events">Events</SideNavigationLink>
-					<SideNavigationLink to="/chats">Chats</SideNavigationLink>
+          <SideNavigationLink to="/chats">Chats</SideNavigationLink>
         </SideNavigation>
-        <Outlet />
+        <div className={styles.wrapper}>
+          <Headers />
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

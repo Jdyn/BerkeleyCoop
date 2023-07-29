@@ -5,6 +5,8 @@ defmodule Berkeley.User do
 
   use Berkeley.Web, :model
 
+  alias Berkeley.Chat.Room
+  alias Berkeley.House
   alias Berkeley.User
   alias Berkeley.UserToken
 
@@ -29,6 +31,7 @@ defmodule Berkeley.User do
     has_many(:tokens, UserToken)
 
     belongs_to(:house, House)
+
     many_to_many(:rooms, Room, join_through: "users_rooms")
 
     timestamps()

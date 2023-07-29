@@ -2,14 +2,16 @@ defmodule Berkeley.Chat do
   @moduledoc """
   The Chat context.
   """
+  use Berkeley.Web, :service
 
   import Ecto.Query, warn: false
 
   alias Berkeley.Chat
   alias Berkeley.Chat.Message
   alias Berkeley.Chat.Room
-  alias Berkeley.Repo
   alias Berkeley.Endpoint
+  alias Berkeley.Repo
+  alias Berkeley.User
 
   @doc """
   Returns the list of rooms.
@@ -20,8 +22,8 @@ defmodule Berkeley.Chat do
       [%Room{}, ...]
 
   """
-  def list_rooms do
-    Repo.all(Room)
+  def list_rooms_for_user(%User{} = user) do
+    Repo.all(assoc(user, :rooms))
   end
 
   @doc """

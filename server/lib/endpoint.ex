@@ -10,6 +10,8 @@ defmodule Berkeley.Endpoint do
     signing_salt: "AwA3CM4V"
   ]
 
+  plug(CORSPlug, origin: ["http://localhost:3000"])
+
   socket("/socket", Berkeley.UserSocket,
     websocket: true,
     longpoll: false
@@ -37,8 +39,6 @@ defmodule Berkeley.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
   )
-
-  plug(CORSPlug, origin: ["http://localhost:3000"])
 
   plug(Plug.MethodOverride)
   plug(Plug.Head)
