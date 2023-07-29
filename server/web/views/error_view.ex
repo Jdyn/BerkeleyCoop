@@ -1,7 +1,7 @@
-defmodule Nimble.ErrorView do
-  use Nimble.Web, :view
+defmodule Berkeley.ErrorView do
+  use Berkeley.Web, :view
 
-  alias Nimble.ErrorHelpers
+  alias Berkeley.ErrorHelpers
 
   # Customize a particular status code:
   # def render("500.json", _assigns) do

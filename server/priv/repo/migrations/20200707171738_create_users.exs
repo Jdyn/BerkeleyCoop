@@ -1,4 +1,4 @@
-defmodule Nimble.Repo.Migrations.CreateUsers do
+defmodule Berkeley.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
@@ -15,6 +15,8 @@ defmodule Nimble.Repo.Migrations.CreateUsers do
       add(:confirmed_at, :naive_datetime)
 
       add(:is_admin, :boolean, default: false, null: false)
+
+      add(:house_id, references(:houses, on_delete: :nothing))
 
       timestamps()
     end

@@ -1,5 +1,5 @@
-defmodule Nimble.UserTokenView do
-  use Nimble.Web, :view
+defmodule Berkeley.UserTokenView do
+  use Berkeley.Web, :view
 
   def render("token.json", %{token: token}) do
     %{

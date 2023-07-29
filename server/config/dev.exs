@@ -1,10 +1,10 @@
 import Config
 
 # Configure your database
-config :nimble, Nimble.Repo,
+config :berkeley, Berkeley.Repo,
   username: "postgres",
   password: "postgres",
-  database: "nimble_dev",
+  database: "berkeley_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,17 +15,17 @@ config :nimble, Nimble.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :nimble, Nimble.Endpoint,
+config :berkeley, Berkeley.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: []
 
-config :nimble, Nibmle.Mailer, adapter: Swoosh.Adapters.Local
+config :berkeley, Nibmle.Mailer, adapter: Swoosh.Adapters.Local
 config :swoosh, :api_client, false
 
-config :nimble, :strategies,
+config :berkeley, :strategies,
   github: [
     client_id: "REPLACE_WITH_CLIENT_ID",
     client_secret: "REPLACE_WITH_CLIENT_SECRET",

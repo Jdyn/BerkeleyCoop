@@ -1,4 +1,4 @@
-defmodule Nimble.Auth.OAuth do
+defmodule Berkeley.Auth.OAuth do
   @moduledoc false
   alias Assent.Config
 
@@ -25,13 +25,13 @@ defmodule Nimble.Auth.OAuth do
   end
 
   defp config(provider) do
-    Application.get_env(:nimble, :strategies)[String.to_existing_atom(provider)]
+    Application.get_env(:berkeley, :strategies)[String.to_existing_atom(provider)]
   rescue
     ArgumentError ->
       nil
   end
 
   defp build_uri(provider) do
-    "#{Nimble.Endpoint.url()}/api/account/#{provider}/callback"
+    "#{Berkeley.Endpoint.url()}/api/account/#{provider}/callback"
   end
 end

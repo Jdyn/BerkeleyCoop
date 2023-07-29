@@ -1,9 +1,9 @@
-defmodule Nimble.MixProject do
+defmodule Berkeley.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :nimble,
+      app: :berkeley,
       version: "0.1.0",
       elixir: "~> 1.15.4",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule Nimble.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Nimble.Application, []},
+      mod: {Berkeley.Application, []},
       extra_applications: [:logger, :runtime_tools, :inets]
     ]
   end

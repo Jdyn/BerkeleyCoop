@@ -1,4 +1,4 @@
-defmodule Nimble.UserToken do
+defmodule Berkeley.UserToken do
   @moduledoc """
   Defines a UserToken for use with authenticating and verifying User operations
   """
@@ -6,8 +6,8 @@ defmodule Nimble.UserToken do
 
   import Ecto.Query
 
-  alias Nimble.User
-  alias Nimble.UserToken
+  alias Berkeley.User
+  alias Berkeley.UserToken
 
   @hash_algorithm :sha256
   @rand_size 32

@@ -1,10 +1,10 @@
-defmodule Nimble.Auth.FetchUser do
+defmodule Berkeley.Auth.FetchUser do
   @moduledoc false
   use Phoenix.Controller
 
   import Plug.Conn
 
-  alias Nimble.Accounts
+  alias Berkeley.Accounts
 
   @remember_me_cookie "remember_token"
 

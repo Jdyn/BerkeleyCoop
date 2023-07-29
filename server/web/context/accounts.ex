@@ -1,10 +1,10 @@
-defmodule Nimble.Accounts do
+defmodule Berkeley.Accounts do
   @moduledoc false
-  alias Nimble.Auth.OAuth
-  alias Nimble.Repo
-  alias Nimble.User
-  alias Nimble.UserNotifier
-  alias Nimble.UserToken
+  alias Berkeley.Auth.OAuth
+  alias Berkeley.Repo
+  alias Berkeley.User
+  alias Berkeley.UserNotifier
+  alias Berkeley.UserToken
 
   def authenticate(email, password) when is_binary(email) and is_binary(password) do
     with %User{} = user <- Repo.get_by(User, email: email),

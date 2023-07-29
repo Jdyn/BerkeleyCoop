@@ -1,5 +1,5 @@
-defmodule Nimble.Repo do
+defmodule Berkeley.Repo do
   use Ecto.Repo,
-    otp_app: :nimble,
+    otp_app: :berkeley,
     adapter: Ecto.Adapters.Postgres
 end

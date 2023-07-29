@@ -1,4 +1,4 @@
-defmodule Nimble.Mailer do
+defmodule Berkeley.Mailer do
   @moduledoc false
-  use Swoosh.Mailer, otp_app: :nimble, adapter: Swoosh.Adapters.Local
+  use Swoosh.Mailer, otp_app: :berkeley, adapter: Swoosh.Adapters.Local
 end

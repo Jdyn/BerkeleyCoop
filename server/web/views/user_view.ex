@@ -1,8 +1,8 @@
-defmodule Nimble.UserView do
-  use Nimble.Web, :view
+defmodule Berkeley.UserView do
+  use Berkeley.Web, :view
 
-  alias Nimble.UserTokenView
-  alias Nimble.UserView
+  alias Berkeley.UserTokenView
+  alias Berkeley.UserView
 
   def render("show.json", %{user: user}) do
     %{

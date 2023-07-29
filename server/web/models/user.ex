@@ -1,12 +1,12 @@
-defmodule Nimble.User do
+defmodule Berkeley.User do
   @moduledoc """
   Defines a User model to track and authenticate users across the application.
   """
 
-  use Nimble.Web, :model
+  use Berkeley.Web, :model
 
-  alias Nimble.User
-  alias Nimble.UserToken
+  alias Berkeley.User
+  alias Berkeley.UserToken
 
   @registration_fields ~w(email first_name last_name)a
 
@@ -27,6 +27,9 @@ defmodule Nimble.User do
     field(:is_admin, :boolean, default: false)
 
     has_many(:tokens, UserToken)
+
+    belongs_to(:house, House)
+    many_to_many(:rooms, Room, join_through: "users_rooms")
 
     timestamps()
   end

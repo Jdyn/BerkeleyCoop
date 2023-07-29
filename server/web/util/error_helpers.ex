@@ -1,4 +1,4 @@
-defmodule Nimble.ErrorHelpers do
+defmodule Berkeley.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

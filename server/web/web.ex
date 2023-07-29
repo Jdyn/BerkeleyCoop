@@ -1,11 +1,11 @@
-defmodule Nimble.Web do
+defmodule Berkeley.Web do
   @moduledoc false
   def view do
     quote do
-      import Nimble.ErrorHelpers
+      import Berkeley.ErrorHelpers
       import Phoenix.View
 
-      alias Nimble.Router.Helpers, as: Routes
+      alias Berkeley.Router.Helpers, as: Routes
     end
   end
 
@@ -24,12 +24,12 @@ defmodule Nimble.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: Nimble
+      use Phoenix.Controller, namespace: Berkeley
 
       import Ecto.Query
       import Plug.Conn
 
-      alias Nimble.Router.Helpers, as: Routes
+      alias Berkeley.Router.Helpers, as: Routes
     end
   end
 

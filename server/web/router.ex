@@ -1,5 +1,5 @@
-defmodule Nimble.Router do
-  use Nimble.Web, :router
+defmodule Berkeley.Router do
+  use Berkeley.Web, :router
 
   pipeline :api do
     plug(:accepts, ["json"])
@@ -8,15 +8,15 @@ defmodule Nimble.Router do
   end
 
   pipeline :ensure_auth do
-    plug(Nimble.Auth.FetchUser)
-    plug(Nimble.Auth.EnsureAuth)
+    plug(Berkeley.Auth.FetchUser)
+    plug(Berkeley.Auth.EnsureAuth)
   end
 
   if Mix.env() == :dev do
     forward("/mailbox", Plug.Swoosh.MailboxPreview)
   end
 
-  scope "/api", Nimble do
+  scope "/api", Berkeley do
     pipe_through(:api)
 
     resources("/account", UserController, singleton: true, only: []) do
@@ -27,7 +27,7 @@ defmodule Nimble.Router do
     end
   end
 
-  scope "/api", Nimble do
+  scope "/api", Berkeley do
     pipe_through([:api, :ensure_auth])
 
     resources("/account", UserController, singleton: true, only: [:show]) do

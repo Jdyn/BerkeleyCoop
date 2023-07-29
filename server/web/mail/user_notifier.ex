@@ -1,10 +1,10 @@
-defmodule Nimble.UserNotifier do
+defmodule Berkeley.UserNotifier do
   @moduledoc false
   import Swoosh.Email
 
-  alias Nimble.Mailer
+  alias Berkeley.Mailer
 
-  @delivery_name "Nimble"
+  @delivery_name "Berkeley"
   @delivery_email "no-reply@nimble.com"
 
   # Delivers the email using the application mailer.

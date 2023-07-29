@@ -1,10 +1,10 @@
-defmodule Nimble.Auth.EnsureAuth do
+defmodule Berkeley.Auth.EnsureAuth do
   @moduledoc false
   use Phoenix.Controller
 
   import Plug.Conn
 
-  alias Nimble.ErrorView
+  alias Berkeley.ErrorView
 
   def init(opts), do: opts
 

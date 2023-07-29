@@ -1,5 +1,5 @@
-defmodule Nimble.Endpoint do
-  use Phoenix.Endpoint, otp_app: :nimble
+defmodule Berkeley.Endpoint do
+  use Phoenix.Endpoint, otp_app: :berkeley
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -10,7 +10,7 @@ defmodule Nimble.Endpoint do
     signing_salt: "AwA3CM4V"
   ]
 
-  socket("/socket", Nimble.UserSocket,
+  socket("/socket", Berkeley.UserSocket,
     websocket: true,
     longpoll: false
   )
@@ -21,7 +21,7 @@ defmodule Nimble.Endpoint do
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
     plug(Phoenix.CodeReloader)
-    plug(Phoenix.Ecto.CheckRepoStatus, otp_app: :nimble)
+    plug(Phoenix.Ecto.CheckRepoStatus, otp_app: :berkeley)
   end
 
   # plug(Phoenix.LiveDashboard.RequestLogger,
@@ -43,5 +43,5 @@ defmodule Nimble.Endpoint do
   plug(Plug.MethodOverride)
   plug(Plug.Head)
   plug(Plug.Session, @session_options)
-  plug(Nimble.Router)
+  plug(Berkeley.Router)
 end

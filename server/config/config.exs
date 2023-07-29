@@ -7,15 +7,15 @@
 # General application configuration
 import Config
 
-config :nimble,
-  ecto_repos: [Nimble.Repo]
+config :berkeley,
+  ecto_repos: [Berkeley.Repo]
 
 # Configures the endpoint
-config :nimble, Nimble.Endpoint,
+config :berkeley, Berkeley.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "hbfYDlpG/H+OUeyXAdH3v71oxfA504VjHz/LWlmJS0f4u/c9HxHpBdGhSa+TyLd2",
-  render_errors: [view: Nimble.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: Nimble.PubSub,
+  render_errors: [view: Berkeley.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: Berkeley.PubSub,
   live_view: [signing_salt: "JOaxJkdG"]
 
 # Configures Elixir's Logger

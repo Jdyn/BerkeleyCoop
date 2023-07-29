@@ -1,10 +1,10 @@
-defmodule Nimble.UserController do
-  use Nimble.Web, :controller
+defmodule Berkeley.UserController do
+  use Berkeley.Web, :controller
 
-  alias Nimble.Accounts
-  alias Nimble.Auth.OAuth
+  alias Berkeley.Accounts
+  alias Berkeley.Auth.OAuth
 
-  action_fallback(Nimble.ErrorController)
+  action_fallback(Berkeley.ErrorController)
 
   # Valid for 30 days.
   @max_age 60 * 60 * 24 * 30
