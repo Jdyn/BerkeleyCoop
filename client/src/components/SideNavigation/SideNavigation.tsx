@@ -1,8 +1,7 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { Link, useNavigation } from "@remix-run/react";
-import type { RemixLinkProps } from "@remix-run/react/dist/components";
+import { Link, LinkProps, useNavigation } from "react-router-dom";
 
 import styles from "./SideNavigation.module.css";
 
@@ -39,7 +38,7 @@ const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
   );
 };
 
-export const SideNavigationLink = ({ to, children }: RemixLinkProps) => {
+export const SideNavigationLink = ({ to, children }: LinkProps) => {
   const { location } = useNavigation();
   const isActive = location?.pathname === to;
 

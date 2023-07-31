@@ -1,0 +1,128 @@
+.root {
+  display: grid;
+  grid-template-columns: 10fr 15fr;
+  grid-template-rows: 1fr;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  height: 100%;
+  position: relative;
+  width: 100%;
+	color: black;
+  background: var(--mauve-5);
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  z-index: 0;
+  background: var(--mauve-5);
+}
+
+.container::before {
+  background: var(--mauve-11);
+  border-radius: 100%;
+  content: '';
+  display: block;
+  right: -10vw;
+  transform-origin: 0 50%;
+  transform: translate(0);
+  height: 200vh;
+  position: absolute;
+  width: 60vw;
+  z-index: -1;
+}
+
+.container > span {
+  font-weight: 300;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 500px;
+  width: 550px;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.wrapper > h1 {
+  width: 300px;
+  margin: 0px 0px 30px 0px;
+}
+
+.form {
+  display: flex;
+  width: 100%;
+  width: 300px;
+  flex-direction: column;
+}
+
+.form > div {
+  margin: 15px 0px;
+  text-align: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 0px 10px 0px;
+  padding: 0;
+  outline: none;
+  border: none;
+}
+
+.error {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	background: var(--red-9);
+	border-radius: 6px;
+	font-size: 0.8rem;
+	padding: 2px 10px;
+	color: white;
+	margin-top: 10px;
+	border: 2px solid var(--red-11)
+}
+
+.error > svg {
+	height: 20px;
+}
+
+.button {
+  background: var(--accent);
+  border-radius: 6px;
+  border: 1px solid rgba(63, 136, 247, 1);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  outline: 0;
+  padding: 15px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+}
+
+.button:hover {
+  box-shadow: 0 0 0 4px var(--shade);
+}
+
+.button:focus {
+  box-shadow: 0 0 0 4px var(--shade);
+}
+
+@media (min-width: 960px) {
+}

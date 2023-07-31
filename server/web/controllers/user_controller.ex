@@ -79,13 +79,13 @@ defmodule Berkeley.UserController do
       |> renew_session()
       |> put_session(:user_token, token)
       |> put_remember_token(token)
-      |> render("login.json", user: user)
+      |> render("login.json", %{user: user, token: Base.url_encode64(token, padding: false)})
     else
-      nil ->
-        {:unauthorized, "You are already signed in."}
+      {:unauthorized, message} ->
+        {:unauthorized, message}
 
-      error ->
-        error
+      _ ->
+        {:unauthorized, "You are already signed in."}
     end
   end
 

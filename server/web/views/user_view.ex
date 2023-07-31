@@ -3,22 +3,20 @@ defmodule Berkeley.UserView do
 
   alias Berkeley.UserTokenView
   alias Berkeley.UserView
+  alias Berkeley.UserTokenView
 
   def render("show.json", %{user: user}) do
     %{
       ok: true,
-      data: %{
-        user: render_one(user, UserView, "user.json", as: :user)
-      }
+      user: render_one(user, UserView, "user.json", as: :user)
     }
   end
 
-  def render("login.json", %{user: user}) do
+  def render("login.json", %{user: user, token: token}) do
     %{
       ok: true,
-      data: %{
-        user: render_one(user, UserView, "user.json", as: :user)
-      }
+      user: render_one(user, UserView, "user.json", as: :user),
+      token: token
     }
   end
 
@@ -41,27 +39,21 @@ defmodule Berkeley.UserView do
   def render("sessions.json", %{tokens: tokens}) do
     %{
       ok: true,
-      data: %{
-        tokens: render_many(tokens, UserTokenView, "token.json", as: :token)
-      }
+      tokens: render_many(tokens, UserTokenView, "token.json", as: :token)
     }
   end
 
   def render("session.json", %{token: token}) do
     %{
       ok: true,
-      data: %{
-        token: render_one(token, UserTokenView, "token.json", as: :token)
-      }
+      token: render_one(token, UserTokenView, "token.json", as: :token)
     }
   end
 
   def render("get_provider.json", %{url: url}) do
     %{
       ok: true,
-      data: %{
-        url: url
-      }
+      url: url
     }
   end
 end

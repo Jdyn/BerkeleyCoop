@@ -38,12 +38,12 @@
 
 .wrapper[data-expand='left'] {
 	right: 0;
-	/* border-left: 2px solid var(--mauve-6); */
+	border-left: 2px solid var(--mauve-6);
 }
 
 .wrapper[data-expand='right'] {
 	left: 0;
-	/* border-right: 2px solid var(--mauve-6); */
+	border-right: 2px solid var(--mauve-6);
 }
 
 .list {
@@ -73,11 +73,3 @@
 .collapse:hover {
 	background: var(--mauve-4);
 }
-/*
-.wrapper[data-expand='left'] > .collapse {
-	border-bottom-left-radius: 16px;
-}
-
-.wrapper[data-expand='right'] > .collapse {
-	border-bottom-right-radius: 16px;
-} */
