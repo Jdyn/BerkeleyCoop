@@ -7,6 +7,7 @@
 @import '@radix-ui/colors/green-dark.css';
 @import '@radix-ui/colors/red-dark.css';
 @import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/indigo.css';
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -14,14 +15,18 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text);
+	background: var(--primary-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+	--text: var(--gray-12);
+	--primary-bg: var(--mauve-7);
+	--secondary-bg: var(--mauve-4);
 }
 
 body {

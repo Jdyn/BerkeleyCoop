@@ -4,7 +4,7 @@ import styles from "./Auth.module.css";
 // import Input from "../../common/Input";
 import { useForm } from "react-hook-form";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import { useAccountSignInMutation, useAccountSignOutMutation } from "../../api/account/account";
+import { useAccountSignInMutation } from "../../api/account/account";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +24,6 @@ type Props = {
 
 const LogIn = (_props: Props): JSX.Element => {
   const [signIn, { isSuccess, error }] = useAccountSignInMutation();
-	// const [signOut] = useAccountSignOutMutation();
 
   const navigate = useNavigate();
   const {
@@ -37,11 +36,11 @@ const LogIn = (_props: Props): JSX.Element => {
     signIn(data);
   });
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     navigate("/events");
-  //   }
-  // }, [isSuccess, navigate]);
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/events");
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <div className={styles.root}>

@@ -76,4 +76,4 @@ const updateSession = (user: User, token: string): void => {
   }
 };
 
-export const { useAccountSignInMutation, useAccountSignOutMutation } = accountApi;
+export const { useAccountSignInMutation, useAccountSignOutMutation, useGetAccountQuery } = accountApi;

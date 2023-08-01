@@ -25,7 +25,6 @@ defmodule Berkeley.UserSocket do
         socket =
           socket
           |> assign(:user, user)
-          |> dbg()
 
         {:ok, socket}
     end

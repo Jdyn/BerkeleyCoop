@@ -51,6 +51,9 @@ defmodule Berkeley.Web do
   def channel do
     quote do
       use Phoenix.Channel
+
+      import Ecto
+      import Ecto.Query, only: [from: 1, from: 2]
     end
   end
 

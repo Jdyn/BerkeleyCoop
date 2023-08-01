@@ -7,15 +7,18 @@ interface Props {
   token: string;
   onPresenceState?(payload: any): void;
   onPresenceDiff?(payload: any): void;
-  onNewMessage(payload: any): void;
+  onNewMessage(payload: Record<string, any>): void;
 }
+
+let socket: Socket;
 
 function useWebsockets({ room, token, onNewMessage, onPresenceState, onPresenceDiff }: Props) {
   const [channel, setChannel] = useState<Channel>();
   const [connected, setConnected] = useState<boolean>(false);
+
   useEffect(() => {
-    if (token && room) {
-      const socket = new Socket(`ws://localhost:4000/socket`, {
+    if (token) {
+      socket = new Socket(`ws://localhost:4000/socket`, {
         params: { token },
         reconnectAfterMs: (_) => 10000,
         rejoinAfterMs: (_) => 10000,
@@ -23,24 +26,6 @@ function useWebsockets({ room, token, onNewMessage, onPresenceState, onPresenceD
       });
 
       socket.connect();
-      const channel = socket.channel(room);
-
-      setChannel(channel);
-      channel
-        .join()
-        .receive("ok", () => {
-          setConnected(true);
-        })
-        .receive("error", () => {
-          setConnected(false);
-        });
-      channel.on("new_msg", onNewMessage);
-      if (onPresenceState) {
-        channel.on("presence_state", onPresenceState);
-      }
-      if (onPresenceDiff) {
-        channel.on("presence_diff", onPresenceDiff);
-      }
 
       return () => {
         setConnected(false);
@@ -52,17 +37,26 @@ function useWebsockets({ room, token, onNewMessage, onPresenceState, onPresenceD
   }, []);
 
   useEffect(() => {
-    if (onPresenceState) {
-      channel?.off("presence_state");
-      channel?.on("presence_state", onPresenceState);
-    }
-    if (onPresenceDiff) {
-      channel?.off("presence_diff");
-      channel?.on("presence_diff", onPresenceDiff);
-    }
-    channel?.off("new_msg");
-    channel?.on("new_msg", onNewMessage);
-  }, [room, onNewMessage, onPresenceState, onPresenceDiff]);
+    const newChannel = socket.channel(room);
+    defaultListeners(newChannel);
+    setChannel(newChannel);
+  }, [room]);
+
+  const defaultListeners = (channel: Channel) => {
+    channel
+      .join()
+      .receive("ok", () => {
+        setConnected(true);
+      })
+      .receive("error", () => {
+        setConnected(false);
+      });
+
+    channel.on("new_msg", onNewMessage);
+
+    if (onPresenceState) channel.on("presence_state", onPresenceState);
+    if (onPresenceDiff) channel.on("presence_diff", onPresenceDiff);
+  };
 
   return { connected, channel };
 }

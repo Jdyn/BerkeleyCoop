@@ -1,11 +1,10 @@
-import { Provider } from "react-redux";
-import { store } from "./api/store";
-import useWebsockets from "./hooks/useWebsocket";
 import "./styles/global.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./components/Layout/Root";
 import Auth from "./screens/Auth/Auth";
-import Cookies from "js-cookie";
+import { useGetAccountQuery } from "./api/account/account";
+import Chat from "./screens/Chat/Chat";
+import Events from "./screens/Events/Events";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +13,18 @@ const router = createBrowserRouter([
     // loader: rootLoader,
     children: [
       {
-        path: "rooms",
-        element: <></>,
+        path: "chats",
+        element: <Chat />,
+				children: [
+					{
+						path: ":id",
+						element: <Chat />,
+					},
+				]
+      },
+			{
+        path: "events",
+        element: <Events />,
       },
     ],
   },
@@ -31,21 +40,11 @@ const router = createBrowserRouter([
 ]);
 
 const Application = () => {
-  const res = useWebsockets({
-    room: "room:lobby",
-    token: JSON.parse(Cookies.get("user") ?? "")?.token ?? "",
-    onNewMessage: () => {
-      console.log("new message");
-    },
-  });
-
-  console.log(res);
+	useGetAccountQuery();
 
   return (
     // <ErrorBoundary FallbackComponent={ErrorFallback}>
-    <Provider store={store}>
       <RouterProvider router={router} />
-    </Provider>
     // </ErrorBoundary>
   );
 };

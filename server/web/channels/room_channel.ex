@@ -1,15 +1,52 @@
 defmodule Berkeley.RoomChannel do
   @moduledoc false
-  use Phoenix.Channel
+  use Berkeley.Web, :channel
 
   alias Berkeley.Chat
+  alias Berkeley.Repo
 
+  @impl true
   def join("room:lobby", _message, socket) do
-    user = socket.assigns.user
-    {:ok, assign(socket, :rooms, Chat.list_rooms_for_user(user))}
+    send(self(), :after_join)
+
+    {:ok, socket}
   end
 
-  def join("room:" <> _private_room_id, _params, _socket) do
-    {:error, %{reason: "unauthorized"}}
+  @impl true
+  def handle_info(:after_join, socket) do
+    user = socket.assigns.user
+    room_id = socket.assigns.room_id
+
+    rooms =
+      user
+      |> Chat.list_rooms_for_user()
+      |> Enum.map(fn r -> %{name: r.name, id: r.id, description: r.description} end)
+
+    push(socket, "lobby", %{rooms: rooms})
+
+    if room_id do
+      push(socket, "messages", %{
+        messages:
+          Repo.all(
+            from(m in Chat.Message,
+              where: m.room_id == ^room_id,
+              order_by: [asc: m.inserted_at],
+              preload: [:user]
+            )
+          )
+          |> Enum.map(fn m ->
+            %{content: m.content, user: m.user.first_name <> " " <> m.user.last_name}
+          end)
+      })
+    end
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def join("room:" <> room_id, _params, socket) do
+    send(self(), :after_join)
+
+    {:ok, assign(socket, :room_id, room_id)}
   end
 end

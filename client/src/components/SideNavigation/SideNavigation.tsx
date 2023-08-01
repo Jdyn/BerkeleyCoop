@@ -1,9 +1,11 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { Link, LinkProps, useNavigation } from "react-router-dom";
+import { Link, LinkProps, useLocation } from "react-router-dom";
 
 import styles from "./SideNavigation.module.css";
+import { ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
 interface SideNavigationProps {
   expand: "left" | "right";
@@ -23,14 +25,23 @@ const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
       <div className={styles.wrapper} data-expand={expand}>
         <div className={styles.list}>
           {children.map((child, index) => (
-            <NavigationMenu.Item key={index} className={styles.listItem}>
+            <NavigationMenu.Item key={index} asChild>
               {child}
             </NavigationMenu.Item>
           ))}
         </div>
         <NavigationMenu.Item asChild>
-          <button className={styles.collapse} onClick={() => setExpanded((prev) => !prev)}>
-            {expanded ? "Collapse" : "Expand"}
+          <button
+            className={styles.collapse}
+            onClick={() => setExpanded((prev) => !prev)}
+            type="button"
+          >
+            {expanded ? (
+              <ArrowLeftOnRectangleIcon width="24px" />
+            ) : (
+              <ArrowRightOnRectangleIcon width="24px" />
+            )}
+            <span>{expanded ? "Collapse" : "Expand"}</span>
           </button>
         </NavigationMenu.Item>
       </div>
@@ -39,12 +50,14 @@ const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
 };
 
 export const SideNavigationLink = ({ to, children }: LinkProps) => {
-  const { location } = useNavigation();
+  const location = useLocation();
   const isActive = location?.pathname === to;
 
   return (
     <NavigationMenu.Link active={isActive} asChild>
-      <Link to={to}>{children}</Link>
+      <Link className={clsx(styles.listItem, isActive && styles.active)} to={to}>
+        {children}
+      </Link>
     </NavigationMenu.Link>
   );
 };

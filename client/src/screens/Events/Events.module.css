@@ -1,0 +1,15 @@
+.root {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.item {
+  background: var(--mauve-11);
+  height: 400px;
+  border-radius: 15px;
+  width: 100%;
+}
