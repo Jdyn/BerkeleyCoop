@@ -37,9 +37,11 @@ function useWebsockets({ room, token, onNewMessage, onPresenceState, onPresenceD
   }, []);
 
   useEffect(() => {
-    const newChannel = socket.channel(room);
-    defaultListeners(newChannel);
-    setChannel(newChannel);
+    if (socket) {
+      const newChannel = socket.channel(room);
+      defaultListeners(newChannel);
+      setChannel(newChannel);
+    }
   }, [room]);
 
   const defaultListeners = (channel: Channel) => {
@@ -52,7 +54,7 @@ function useWebsockets({ room, token, onNewMessage, onPresenceState, onPresenceD
         setConnected(false);
       });
 
-    channel.on("new_msg", onNewMessage);
+    channel.on("shout", onNewMessage);
 
     if (onPresenceState) channel.on("presence_state", onPresenceState);
     if (onPresenceDiff) channel.on("presence_diff", onPresenceDiff);

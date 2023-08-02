@@ -49,4 +49,19 @@ defmodule Berkeley.RoomChannel do
 
     {:ok, assign(socket, :room_id, room_id)}
   end
+
+  @impl true
+  def handle_in("shout", payload, socket) do
+    msg =
+      Chat.Message.changeset(
+        %Chat.Message{}, Map.merge(payload, %{"room_id" => socket.assigns.room_id, "user_id" => socket.assigns.user.id})
+      )
+      |> Repo.insert!()
+      |> Repo.preload(:user)
+
+    socket
+    |> broadcast("shout", %{content: msg.content, user: msg.user.first_name <> " " <> msg.user.last_name})
+
+    {:noreply, socket}
+  end
 end
