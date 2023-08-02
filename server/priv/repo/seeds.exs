@@ -28,6 +28,7 @@ Accounts.register(
 Repo.insert(%Room{
   name: "General",
   description: "General chat room",
+  creator_id: 1,
   users: [Repo.get!(User, 1)],
   messages: [
     %Message{
@@ -44,6 +45,7 @@ Repo.insert(%Room{
 Repo.insert(%Room{
   name: "Casa Zimbabwe",
   description: "General chat room",
+  creator_id: 1,
   users: [Repo.get!(User, 1)],
   messages: [
     %Message{

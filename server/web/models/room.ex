@@ -15,13 +15,15 @@ defmodule Berkeley.Chat.Room do
     many_to_many(:users, User, join_through: "users_rooms")
     many_to_many(:houses, House, join_through: "houses_rooms")
 
+    belongs_to(:creator, User)
+
     timestamps()
   end
 
   @doc false
   def changeset(room, attrs) do
     room
-    |> cast(attrs, [:name, :description])
-    |> validate_required([:name, :description])
+    |> cast(attrs, [:name, :description, :creator_id])
+    |> validate_required([:name, :description, :creator_id])
   end
 end

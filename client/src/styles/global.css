@@ -9,8 +9,32 @@
 @import '@radix-ui/colors/mauve.css';
 @import '@radix-ui/colors/indigo.css';
 
+@font-face {
+  font-display: swap;
+  font-family: 'dinn';
+  src: url('../fonts/dinn-700.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'dinn';
+  src: url('../fonts/dinn-500.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'dinn';
+  src: url('..fonts/dinn-300.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: dinn, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -25,8 +49,9 @@
   -webkit-text-size-adjust: 100%;
 
 	--text: var(--gray-12);
-	--primary-bg: var(--mauve-7);
+	--primary-bg: var(--mauve-8);
 	--secondary-bg: var(--mauve-4);
+	--tertiary-bg: var(--mauve-7)
 }
 
 body {

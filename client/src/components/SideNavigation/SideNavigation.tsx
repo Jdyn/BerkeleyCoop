@@ -12,7 +12,7 @@ interface SideNavigationProps {
 }
 
 const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   return (
     <NavigationMenu.Root

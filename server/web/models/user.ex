@@ -33,7 +33,7 @@ defmodule Berkeley.User do
     belongs_to(:house, House)
 
     many_to_many(:rooms, Room, join_through: "users_rooms")
-
+    
     timestamps()
   end
 
