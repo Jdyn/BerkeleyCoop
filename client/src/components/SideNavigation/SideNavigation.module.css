@@ -8,7 +8,7 @@
   --left-nav-width: var(--left-nav-width-collapsed);
   width: var(--left-nav-width-collapsed);
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 10;
+  z-index: 1;
 }
 
 .root[data-hover-expand="true"]:hover:not([data-expanded="true"]) {
@@ -65,7 +65,6 @@
   color: var(--text);
   border-top: 2px solid var(--mauve-8);
   background: var(--primary-bg);
-  outline: none;
   cursor: pointer;
   transition-duration: 0.2s;
 	font-size: 1rem;

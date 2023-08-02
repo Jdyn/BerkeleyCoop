@@ -1,8 +1,7 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { Link, LinkProps, useLocation } from "react-router-dom";
-
+import { Link, LinkProps, useMatches } from "react-router-dom";
 import styles from "./SideNavigation.module.css";
 import { ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
@@ -50,9 +49,8 @@ const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
 };
 
 export const SideNavigationLink = ({ to, children }: LinkProps) => {
-  const location = useLocation();
-  const isActive = location?.pathname === to;
-
+  const match = useMatches();
+  const isActive = match.length > 1 && match[1].pathname === to;
   return (
     <NavigationMenu.Link active={isActive} asChild>
       <Link className={clsx(styles.listItem, isActive && styles.active)} to={to}>
