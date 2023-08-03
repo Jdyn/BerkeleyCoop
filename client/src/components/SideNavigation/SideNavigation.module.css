@@ -63,7 +63,7 @@
   padding: 10px 20px;
   border: none;
   color: var(--text);
-  border-top: 2px solid var(--mauve-8);
+  /* border-top: 2px solid var(--tertiary-bg); */
   background: var(--primary-bg);
   cursor: pointer;
   transition-duration: 0.2s;
@@ -78,9 +78,9 @@
 	overflow: hidden;
 }
 
-.collapse:hover {
-  background: var(--mauve-8);
-}
+/* .collapse:hover {
+  background: var(--mauve-11);
+} */
 
 /* .wrapper[data-expand="left"] > .collapse {
   border-bottom-left-radius: 16px;
@@ -113,13 +113,13 @@
 }
 
 .listItem:hover {
-  background: var(--indigo-7);
-	border: 2px solid var(--indigo-10);
+  background: var(--accent-bg);
+	border: 2px solid var(--accent-b);
 	border-left: none;
 }
 
 .active {
-	background: var(--indigo-7);
-	border: 2px solid var(--indigo-10);
+	background: var(--accent-bg);
+	border: 2px solid var(--accent-b);
 	border-left: none;
 }

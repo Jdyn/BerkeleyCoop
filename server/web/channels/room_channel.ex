@@ -39,7 +39,7 @@ defmodule Berkeley.RoomChannel do
           from(m in Chat.Message,
             where: m.room_id == ^room_id,
             order_by: [asc: m.inserted_at],
-            preload: [:user]
+            preload: [:creator]
           )
         )
 
@@ -54,7 +54,7 @@ defmodule Berkeley.RoomChannel do
     payload
     |> Map.merge(%{
       "room_id" => socket.assigns.room_id,
-      "user_id" => socket.assigns.user.id
+      "creator_id" => socket.assigns.user.id
     })
     |> Chat.create_message()
 

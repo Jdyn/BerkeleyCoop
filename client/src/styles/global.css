@@ -51,8 +51,11 @@
 
 	--text: var(--gray-12);
 	--primary-bg: var(--mauve-8);
-	--secondary-bg: var(--mauve-4);
-	--tertiary-bg: var(--mauve-7)
+	--secondary-bg: var(--mauve-6);
+	--tertiary-bg: var(--mauve-7);
+
+	--accent-bg: var(--indigo-8);
+	--accent-b: var(--indigo-9);
 }
 
 * {
