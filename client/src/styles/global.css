@@ -55,6 +55,11 @@
 	--tertiary-bg: var(--mauve-7)
 }
 
+* {
+	text: var(--text);
+	font-family: dinn, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 body {
   margin: 0;
   display: flex;

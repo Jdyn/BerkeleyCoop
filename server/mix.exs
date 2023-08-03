@@ -58,7 +58,7 @@ defmodule Berkeley.MixProject do
     [
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "ecto.reset": ["ecto.drop", "ecto.setup", "run priv/repo/seeds.exs"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end

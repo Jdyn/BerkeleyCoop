@@ -1,23 +1,13 @@
 import styles from "./Root.module.css";
 import SideNavigation, { SideNavigationLink } from "../SideNavigation/SideNavigation";
 import Header from "../Header/Header";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
-import { useGetAccountQuery } from "../../api/account/account";
-import { useEffect } from "react";
 import { UserProvider } from "../../hooks/useUser";
+import { memo } from "react";
 
-const RootLayout = () => {
-  const navigate = useNavigate();
-  const { isError, error } = useGetAccountQuery();
-
-  useEffect(() => {
-    if (isError && !(error?.status === "FETCH_ERROR")) {
-      navigate("/signin");
-    }
-  }, [isError, error, navigate]);
-
+const RootLayout = memo(() => {
   return (
     <main className={styles.root}>
       <UserProvider>
@@ -40,6 +30,6 @@ const RootLayout = () => {
       </UserProvider>
     </main>
   );
-};
+});
 
 export default RootLayout;

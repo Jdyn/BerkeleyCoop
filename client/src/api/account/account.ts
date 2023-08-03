@@ -51,7 +51,6 @@ export const accountApi = createApi({
       onQueryStarted: async (_payload, { queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
-          console.log(data);
           if (data.user) {
             updateSession(data.user, data.token);
           }

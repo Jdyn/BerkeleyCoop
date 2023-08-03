@@ -9,7 +9,7 @@ defmodule Berkeley.Chat.Message do
     field(:content, :string)
 
     belongs_to(:room, Room)
-    belongs_to(:user, User)
+    belongs_to(:creator, User)
 
     timestamps()
   end
@@ -17,7 +17,7 @@ defmodule Berkeley.Chat.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:content, :user_id, :room_id])
-    |> validate_required([:content, :user_id, :room_id])
+    |> cast(attrs, [:content, :creator_id, :room_id])
+    |> validate_required([:content, :creator_id, :room_id])
   end
 end

@@ -4,7 +4,8 @@ defmodule Berkeley.Repo.Migrations.CreateHouses do
   def change do
     create table(:houses) do
       add :name, :string
-      add :description, :string
+      add :full_name, :string
+      add :description, :text
 
       timestamps()
     end

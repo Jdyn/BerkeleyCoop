@@ -5,7 +5,7 @@ defmodule Berkeley.Repo.Migrations.CreateMessages do
     create table(:messages) do
       add :content, :string
 
-      add :user_id, references(:users), null: false
+      add :creator_id, references(:users), null: false
       add :room_id, references(:rooms), null: false
 
       timestamps()

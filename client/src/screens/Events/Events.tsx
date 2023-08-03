@@ -1,4 +1,8 @@
+import { memo } from "react";
+import { useUser } from "../../hooks/useUser";
 import styles from "./Events.module.css";
+import EventCard from "./EventCard/EventCard";
+import Button from "../../components/Button/Button";
 
 const items = [
   "item1",
@@ -27,17 +31,23 @@ const items = [
   "item24",
 ];
 
-const Events = () => {
+const Events = memo(() => {
+  const user = useUser();
+  console.log(user);
+
   return (
     <>
-      <h1>Events</h1>
+      <h1 className={styles.header}>
+        Events
+          <Button>Create</Button>
+      </h1>
       <div className={styles.root}>
         {items.map((item) => (
-          <div key={item} className={styles.item} />
+          <EventCard event={item} />
         ))}
       </div>
     </>
   );
-};
+});
 
 export default Events;

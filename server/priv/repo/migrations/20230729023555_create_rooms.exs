@@ -11,7 +11,7 @@ defmodule Berkeley.Repo.Migrations.CreateRooms do
       timestamps()
     end
 
-    create table(:house_rooms, primary_key: false) do
+    create table(:houses_rooms, primary_key: false) do
       add :house_id, references(:houses)
       add :room_id, references(:rooms)
     end

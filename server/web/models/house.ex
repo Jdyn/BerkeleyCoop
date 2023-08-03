@@ -7,9 +7,10 @@ defmodule Berkeley.House do
 
   schema "houses" do
     field(:name, :string)
+    field(:full_name, :string)
     field(:description, :string)
 
-    has_many(:users, User)
+    has_many(:occupants, User)
 
     many_to_many(:rooms, Room, join_through: "houses_rooms")
 

@@ -150,7 +150,7 @@ defmodule Berkeley.Chat do
   end
 
   def preload_message_creator(message = %Message{}) do
-    Repo.preload(message, :user)
+    Repo.preload(message, :creator)
   end
 
   def publish_message_created(message = %Chat.Message{}) do

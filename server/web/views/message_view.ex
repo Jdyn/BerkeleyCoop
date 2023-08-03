@@ -10,11 +10,11 @@ defmodule Berkeley.Chat.MessageView do
   def render("message.json", %{message: message}) do
     %{
       id: message.id,
-      username: message.user.first_name <> " " <> message.user.last_name,
+      username: message.creator.first_name <> " " <> message.creator.last_name,
       content: message.content,
       inserted_at: message.inserted_at,
       room_id: message.room_id,
-      user: render_one(message.user, Berkeley.UserView, "user.json", as: :user)
+      user: render_one(message.creator, Berkeley.UserView, "user.json", as: :user)
     }
   end
 end
