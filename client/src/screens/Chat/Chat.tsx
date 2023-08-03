@@ -14,15 +14,16 @@ import {
 } from "@heroicons/react/24/outline";
 import useDimensions from "react-cool-dimensions";
 import { HashtagIcon } from "@heroicons/react/20/solid";
+import { useUser } from "../../hooks/useUser";
 
 const Chat = () => {
   const params = useParams<{ id: string }>();
   const [list, setList] = useState<Record<string, any>[]>([]);
   const [messages, setMessages] = useState<Record<string, any>[]>([]);
   const { observe, height } = useDimensions();
-
+	const user = useUser();
   const currentRoom = useMemo(() => list.find((room) => room.id == params?.id), [list, params?.id]);
-
+	console.log(user);
   const { channel, connected } = useWebsockets({
     room: params?.id ? `room:${params.id}` : "room:lobby",
     token: JSON.parse(Cookies.get("user") ?? "{}")?.token ?? "",
