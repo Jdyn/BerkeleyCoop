@@ -2,7 +2,8 @@ import { memo } from "react";
 import { useUser } from "../../hooks/useUser";
 import styles from "./Events.module.css";
 import EventCard from "./EventCard/EventCard";
-import Button from "../../components/Button/Button";
+import Dialog from "../../components/Dialog/Dialog";
+import Form, { FormTemplate } from "../../components/Form";
 
 const items = [
   "item1",
@@ -31,19 +32,59 @@ const items = [
   "item24",
 ];
 
+const template: FormTemplate = {
+  type: "event",
+  fields: [
+    {
+      name: "Title",
+      type: "input",
+      key: "title",
+      placeholder: "Enter a title",
+    },
+    {
+      name: "Description",
+      type: "input",
+      key: "description",
+      placeholder: "Enter a description",
+    },
+		{
+      name: "Start date",
+      type: "datetime-local",
+      key: "start_date",
+      placeholder: "Enter a start date",
+    },
+		{
+      name: "End date",
+      type: "datetime-local",
+      key: "end_date",
+      placeholder: "Enter an end date",
+    },
+  ],
+  submit: "Create Event",
+};
+
 const Events = memo(() => {
-  const user = useUser();
-  console.log(user);
+  // const user = useUser();
 
   return (
     <>
       <h1 className={styles.header}>
         Events
-          <Button>Create</Button>
+        <Dialog
+          title="Create an event"
+          description="Publish an event for others to join and participate!"
+        >
+          <Form
+            template={template}
+            onSubmit={(_type, payload) => {
+              console.log(payload);
+            }}
+          />
+        </Dialog>
       </h1>
       <div className={styles.root}>
         {items.map((item) => (
-          <EventCard event={item} />
+          <EventCard key={item} event={item} />
         ))}
       </div>
     </>
