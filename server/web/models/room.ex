@@ -15,6 +15,7 @@ defmodule Berkeley.Chat.Room do
     many_to_many(:users, User, join_through: "users_rooms")
     many_to_many(:houses, House, join_through: "houses_rooms")
 
+    belongs_to(:event, Berkeley.Event, foreign_key: :event_id)
     belongs_to(:creator, User)
 
     timestamps()
@@ -23,7 +24,7 @@ defmodule Berkeley.Chat.Room do
   @doc false
   def changeset(room, attrs) do
     room
-    |> cast(attrs, [:name, :description, :creator_id])
+    |> cast(attrs, [:name, :description, :creator_id, :event_id])
     |> validate_required([:name, :description, :creator_id])
   end
 end

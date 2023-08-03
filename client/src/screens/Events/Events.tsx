@@ -1,36 +1,10 @@
-import { memo } from "react";
-import { useUser } from "../../hooks/useUser";
+import { memo, useEffect, useState } from "react";
+// import { useUser } from "../../hooks/useUser";
 import styles from "./Events.module.css";
 import EventCard from "./EventCard/EventCard";
-import Dialog from "../../components/Dialog/Dialog";
-import Form, { FormTemplate } from "../../components/Form";
-
-const items = [
-  "item1",
-  "item2",
-  "item3",
-  "item4",
-  "item5",
-  "item6",
-  "item7",
-  "item8",
-  "item9",
-  "item10",
-  "item11",
-  "item12",
-  "item13",
-  "item14",
-  "item15",
-  "item16",
-  "item17",
-  "item18",
-  "item19",
-  "item20",
-  "item21",
-  "item22",
-  "item23",
-  "item24",
-];
+import DialogForm from "../../components/DialogForm/DialogForm";
+import { FormTemplate } from "../../components/Form";
+import { useCreateEventMutation, useGetEventsQuery } from "../../api/event/event";
 
 const template: FormTemplate = {
   type: "event",
@@ -47,14 +21,14 @@ const template: FormTemplate = {
       key: "description",
       placeholder: "Enter a description",
     },
-		{
-      name: "Start date",
+    {
+      name: "Start Date",
       type: "datetime-local",
       key: "start_date",
       placeholder: "Enter a start date",
     },
-		{
-      name: "End date",
+    {
+      name: "End Date",
       type: "datetime-local",
       key: "end_date",
       placeholder: "Enter an end date",
@@ -64,28 +38,34 @@ const template: FormTemplate = {
 };
 
 const Events = memo(() => {
-  // const user = useUser();
+  const { data } = useGetEventsQuery();
+  const [createEvent, { isSuccess, reset }] = useCreateEventMutation();
+  const modal = useState(false);
 
+  useEffect(() => {
+    if (isSuccess) {
+      modal[1](false);
+      reset();
+    }
+  }, [isSuccess, modal, reset]);
+  console.log(data);
   return (
     <>
       <h1 className={styles.header}>
         Events
-        <Dialog
+        <DialogForm
+          modal={modal}
           title="Create an event"
           description="Publish an event for others to join and participate!"
-        >
-          <Form
-            template={template}
-            onSubmit={(_type, payload) => {
-              console.log(payload);
-            }}
-          />
-        </Dialog>
+          template={template}
+          onSubmit={(_type, payload) => {
+            console.log(payload);
+            createEvent({ event: payload });
+          }}
+        />
       </h1>
       <div className={styles.root}>
-        {items.map((item) => (
-          <EventCard key={item} event={item} />
-        ))}
+        {data?.events && data.events.map((item) => <EventCard key={item.id} event={item} />)}
       </div>
     </>
   );

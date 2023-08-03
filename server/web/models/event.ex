@@ -3,6 +3,7 @@ defmodule Berkeley.Event do
   use Berkeley.Web, :model
 
   alias Berkeley.User
+  alias Berkeley.Chat.Room
 
   schema "events" do
     field(:title, :string)
@@ -10,11 +11,12 @@ defmodule Berkeley.Event do
     field(:start_date, :utc_datetime)
     field(:end_date, :utc_datetime)
 
-    belongs_to(:creator, User)
-    belongs_to(:room, Room)
+    belongs_to(:creator, User, foreign_key: :creator_id)
 
     # you have to basically join the event...
-    many_to_many(:participants, User, join_through: "events_users")
+    many_to_many(:participants, User, join_through: "events_participants")
+
+    has_one(:room, Room)
 
     timestamps()
   end
@@ -22,7 +24,7 @@ defmodule Berkeley.Event do
   @doc false
   def changeset(room, attrs) do
     room
-    |> cast(attrs, [:name, :description])
-    |> validate_required([:name, :description])
+    |> cast(attrs, [:title, :description, :start_date, :end_date, :creator_id])
+    |> validate_required([:title, :description, :start_date, :end_date, :creator_id])
   end
 end

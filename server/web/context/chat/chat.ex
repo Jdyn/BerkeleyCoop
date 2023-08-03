@@ -79,6 +79,12 @@ defmodule Berkeley.Chat do
     |> Repo.insert()
   end
 
+  def create_room!(attrs \\ %{}) do
+    %Room{}
+    |> Room.changeset(attrs)
+    |> Repo.insert!()
+  end
+
   @doc """
   Updates a room.
 

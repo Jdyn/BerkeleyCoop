@@ -4,8 +4,13 @@ defmodule Berkeley.Events do
   """
   use Berkeley.Web, :service
 
+  alias Berkeley.Accounts
+  alias Berkeley.Chat
   alias Berkeley.Event
   alias Berkeley.Repo
+  alias Berkeley.User
+  alias Berkeley.Chat
+  alias Ecto.Multi
 
   @doc """
   Returns the list of events.
@@ -17,7 +22,7 @@ defmodule Berkeley.Events do
 
   """
   def list_events do
-    Repo.all(event_query())
+    Repo.all(Event)
   end
 
   @doc """
@@ -32,12 +37,35 @@ defmodule Berkeley.Events do
       {:not_found, reason}
 
   """
-  def get_event(id) do
+  def get_event!(id) do
     with %Event{} = event <- Repo.one(event_query(id: id)) do
       event
     else
       _ -> {:not_found, "Event does not exist."}
     end
+  end
+
+  def create(attrs \\ %{}) do
+    Multi.new()
+    |> Multi.insert(:event, Event.changeset(%Event{}, attrs))
+    |> Multi.insert(:room, fn %{event: event} ->
+      Chat.Room.changeset(%Chat.Room{}, %{
+        name: event.title <> " Chat",
+        description: "Chat about the " <> event.title <> " Event",
+        creator_id: event.creator_id,
+        event_id: event.id,
+        users: [Repo.get!(User, event.creator_id)]
+      })
+    end)
+    |> Multi.update(:user, fn %{event: event, room: room} ->
+      user =  Repo.get_by!(User, id: event.creator_id) |> Repo.preload(:rooms)
+      rooms = user.rooms ++ [room]
+
+      user
+      |> Ecto.Changeset.change()
+      |> Ecto.Changeset.put_assoc(:rooms, rooms)
+    end)
+    |> Repo.transaction()
   end
 
   @doc """
@@ -52,17 +80,10 @@ defmodule Berkeley.Events do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_event(attrs \\ %{}) do
+  def create_event!(attrs \\ %{}) do
     %Event{}
     |> Event.changeset(attrs)
-    |> Repo.insert()
-    |> case do
-      {:ok, event} ->
-        {:ok, Repo.one(event_query(id: event.id))}
-
-      {:error, changeset} ->
-        {:error, changeset}
-    end
+    |> Repo.insert!()
   end
 
   @doc """
@@ -81,6 +102,12 @@ defmodule Berkeley.Events do
     event
     |> Event.changeset(attrs)
     |> Repo.update()
+  end
+
+  def update_event!(%Event{} = event, attrs) do
+    event
+    |> Event.changeset(attrs)
+    |> Repo.update!()
   end
 
   @doc """
@@ -114,11 +141,7 @@ defmodule Berkeley.Events do
 
   def event_query(params \\ []) do
     from(e in Event,
-      where: ^params,
-      left_join: c in assoc(e, :creator),
-      left_join: r in assoc(e, :room),
-      left_join: p in assoc(e, :participants),
-      preload: [creator: c, room: r, participants: p]
+      where: ^params
     )
   end
 end

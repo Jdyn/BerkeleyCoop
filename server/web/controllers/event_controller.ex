@@ -12,7 +12,13 @@ defmodule Berkeley.EventController do
   end
 
   def create(conn, attrs) do
-    with {:ok, %Event{} = event} <- Events.create(attrs) do
+    current_user = conn.assigns[:current_user]
+
+    payload = Map.put_new(attrs["event"], "creator_id", current_user.id)
+
+    dbg(payload)
+
+    with {:ok, %Event{} = event} <- Events.create(payload) do
       conn
       |> put_status(:created)
       |> render("show.json", event: event)

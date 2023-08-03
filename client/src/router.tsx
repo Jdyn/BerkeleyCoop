@@ -6,6 +6,7 @@ import Chat from "./screens/Chat/Chat";
 import Events from "./screens/Events/Events";
 import { accountApi } from "./api";
 import { AnyAction, Dispatch, Store } from "@reduxjs/toolkit";
+import Event from "./screens/Events/Event/Event";
 
 const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (_request) => {
   const result = dispatch(accountApi.endpoints.getAccount.initiate() as unknown as AnyAction);
@@ -16,7 +17,7 @@ const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (
       return null;
     }
   } catch (error) {
-		dispatch(accountApi.endpoints.accountSignOut.initiate() as unknown as AnyAction);
+    dispatch(accountApi.endpoints.accountSignOut.initiate() as unknown as AnyAction);
     return redirect("/signin");
   }
 
@@ -40,6 +41,10 @@ const router = (store: Store) =>
             },
           ],
         },
+				{
+					path: "events/:id",
+					element: <Event />,
+				},
         {
           path: "events",
           element: <Events />,

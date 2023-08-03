@@ -5,6 +5,7 @@ defmodule Berkeley.Accounts do
   alias Berkeley.User
   alias Berkeley.UserNotifier
   alias Berkeley.UserToken
+  alias Berkeley.Chat
 
   def authenticate(email, password) when is_binary(email) and is_binary(password) do
     with %User{} = user <- Repo.get_by(User, email: email),
@@ -343,5 +344,20 @@ defmodule Berkeley.Accounts do
 
   def find_session(%User{} = user, token: token) do
     Repo.one(UserToken.user_and_token_query(user, token))
+  end
+
+  @spec get_user!(integer()) :: User.t() | nil
+  def get_user!(id) do
+    Repo.get(User, id)
+  end
+
+  def assoc_room!(user_id, room_id) do
+    user = get_user!(user_id) |> Repo.preload(:rooms)
+    new_room = Chat.get_room!(room_id)
+
+    user
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:rooms, [new_room | user.rooms])
+    |> Repo.update!()
   end
 end

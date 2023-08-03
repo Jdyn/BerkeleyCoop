@@ -74,8 +74,8 @@ const Chat = () => {
           )}
           <div ref={observe} className={styles.chatList} style={{ height: height }}>
             <div className={styles.chatContent}>
-              {messages.map((message, index) => (
-                <div className={styles.message} key={index}>
+              {messages.map((message) => (
+                <div className={styles.message} key={message.id}>
                   <span>{message.username}</span>
                   <div className={styles.messageContent}>
                     <p>{message.content}</p>
@@ -107,7 +107,7 @@ const Chat = () => {
           </h2>
           {currentRoom?.users &&
             currentRoom.users.map((user: any) => (
-              <div>
+              <div key={user.id}>
                 {user.firstName} {user.lastName}
               </div>
             ))}

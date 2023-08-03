@@ -152,3 +152,16 @@ input {
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+.group {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	gap: 10px;
+	margin: 16px 0px;
+}
+
+
+.group > button {
+	flex: 1;
+}

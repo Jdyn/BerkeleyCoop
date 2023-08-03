@@ -7,6 +7,7 @@ defmodule Berkeley.Repo.Migrations.CreateRooms do
       add :description, :string
 
       add(:creator_id, references(:users, on_delete: :delete_all))
+      add(:event_id, references(:events, on_delete: :delete_all))
 
       timestamps()
     end

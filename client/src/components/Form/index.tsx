@@ -30,7 +30,7 @@ const Form = (props: Props): JSX.Element => {
     onSubmit(template.type, form);
   };
 	console.log(formatDate(new Date(Date.now())))
-	
+
   return (
     <form className={styles.form} onSubmit={submitForm}>
       {template.fields.map((field) => (
