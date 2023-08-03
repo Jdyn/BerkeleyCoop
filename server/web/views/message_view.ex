@@ -13,6 +13,7 @@ defmodule Berkeley.Chat.MessageView do
       username: message.user.first_name <> " " <> message.user.last_name,
       content: message.content,
       inserted_at: message.inserted_at,
+      room_id: message.room_id,
       user: render_one(message.user, Berkeley.UserView, "user.json", as: :user)
     }
   end

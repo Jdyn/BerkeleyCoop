@@ -3,6 +3,7 @@ defmodule Berkeley.House do
   use Berkeley.Web, :model
 
   alias Berkeley.Chat.Room
+  alias Berkeley.User
 
   schema "houses" do
     field(:name, :string)

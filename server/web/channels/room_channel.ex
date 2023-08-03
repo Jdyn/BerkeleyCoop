@@ -22,10 +22,7 @@ defmodule Berkeley.RoomChannel do
 
   @impl true
   def handle_info(:after_join, socket) do
-    user = socket.assigns.user
-    rooms = Chat.list_rooms_for_user(user)
-
-    dbg(rooms)
+    rooms = Chat.list_rooms(socket.assigns.user)
 
     push(socket, "lobby", Chat.RoomView.render("index.json", %{rooms: rooms}))
 
@@ -36,33 +33,31 @@ defmodule Berkeley.RoomChannel do
   def handle_info(:send_messages, socket) do
     room_id = socket.assigns.room_id
 
-    messages =
-      Repo.all(
-        from(m in Chat.Message,
-          where: m.room_id == ^room_id,
-          order_by: [asc: m.inserted_at],
-          preload: [:user]
+    with true <- is_binary(room_id) do
+      messages =
+        Repo.all(
+          from(m in Chat.Message,
+            where: m.room_id == ^room_id,
+            order_by: [asc: m.inserted_at],
+            preload: [:user]
+          )
         )
-      )
 
-    push(socket, "messages", Chat.MessageView.render("index.json", %{messages: messages}))
+      push(socket, "messages", Chat.MessageView.render("index.json", %{messages: messages}))
+    end
 
     {:noreply, socket}
   end
 
   @impl true
   def handle_in("shout", payload, socket) do
-    msg =
-      %Chat.Message{}
-      |> Chat.Message.changeset(
-        Map.merge(payload, %{"room_id" => socket.assigns.room_id, "user_id" => socket.assigns.user.id})
-      )
-      |> Repo.insert!()
-      |> Repo.preload(:user)
+    payload
+    |> Map.merge(%{
+      "room_id" => socket.assigns.room_id,
+      "user_id" => socket.assigns.user.id
+    })
+    |> Chat.create_message()
 
-    message = Berkeley.Chat.MessageView.render("message.json", %{message: msg})
-
-    broadcast(socket, "shout", message)
     {:noreply, socket}
   end
 end

@@ -30,6 +30,7 @@ defmodule Berkeley.UserView do
     %{
       id: user.id,
       firstName: user.first_name,
+      lastName: user.last_name,
       email: user.email,
       confirmedAt: user.confirmed_at,
       isAdmin: user.is_admin

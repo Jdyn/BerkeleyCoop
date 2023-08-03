@@ -13,7 +13,8 @@ defmodule Berkeley.Chat.RoomView do
       name: room.name,
       description: room.description,
       inserted_at: room.inserted_at,
-      creator: render_one(room.creator, Berkeley.UserView, "user.json", as: :user)
+      creator: render_one(room.creator, Berkeley.UserView, "user.json", as: :user),
+      users: render_many(room.users, Berkeley.UserView, "user.json", as: :user)
     }
   end
 end

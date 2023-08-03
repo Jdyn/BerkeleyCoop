@@ -5,11 +5,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import clsx from "clsx";
 import {
-  ArrowLongRightIcon,
+  ArrowSmallRightIcon,
   ChatBubbleLeftRightIcon,
   HomeIcon,
   PaperAirplaneIcon,
   PlusCircleIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import useDimensions from "react-cool-dimensions";
 import { HashtagIcon } from "@heroicons/react/20/solid";
@@ -60,7 +61,7 @@ const Chat = () => {
                 <span>
                   <HashtagIcon width="24px" /> {room.name}
                 </span>
-                <ArrowLongRightIcon width="24px" />
+                <ArrowSmallRightIcon width="24px" />
               </h3>
               <div>{room.description}</div>
             </Link>
@@ -76,7 +77,7 @@ const Chat = () => {
             <div className={styles.chatContent}>
               {messages.map((message, index) => (
                 <div className={styles.message} key={index}>
-                  <h4>{message.username}</h4>
+                  <span>{message.username}</span>
                   <div className={styles.messageContent}>
                     <p>{message.content}</p>
                   </div>
@@ -98,6 +99,19 @@ const Chat = () => {
               <PaperAirplaneIcon width="24px" />
             </button>
           </form>
+        </div>
+        <div className={styles.list}>
+          <h2>
+            <div>
+              <UserCircleIcon width="32px" /> <span>People</span>
+            </div>
+          </h2>
+          {currentRoom?.users &&
+            currentRoom.users.map((user: any) => (
+              <div>
+                {user.firstName} {user.lastName}
+              </div>
+            ))}
         </div>
       </main>
     </>
