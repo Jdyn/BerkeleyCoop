@@ -9,6 +9,7 @@ defmodule Berkeley.User do
   alias Berkeley.House
   alias Berkeley.User
   alias Berkeley.UserToken
+  alias Berkeley.Event
 
   @registration_fields ~w(email first_name last_name)a
 
@@ -30,10 +31,12 @@ defmodule Berkeley.User do
 
     has_many(:tokens, UserToken)
 
+    has_many(:created_events, Event, foreign_key: :creator_id)
+
     belongs_to(:house, House)
 
     many_to_many(:rooms, Room, join_through: "users_rooms")
-    
+    many_to_many(:events, Event, join_through: "events_users")
     timestamps()
   end
 
