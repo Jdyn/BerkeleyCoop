@@ -44,8 +44,8 @@ const Chat = () => {
     <>
       <h1 className={styles.header}>Chat</h1>
       <main className={styles.root}>
-        <div className={styles.list}>
-          <h2>
+        <div className={styles.rooms}>
+          <h2 className={styles.roomHeader}>
             <div>
               <HomeIcon width="32px" /> <span>Rooms</span>
             </div>
@@ -61,16 +61,16 @@ const Chat = () => {
                 <HashtagIcon width="24px" /> {room.name}
                 <ArrowSmallRightIcon width="24px" />
               </h3>
-              <div>{room.description}</div>
+              <p>{room.description}</p>
             </Link>
           ))}
         </div>
         <div className={styles.window}>
           {currentRoom?.name && (
             <h2 className={styles.windowHeader}>
-              <span>
+              <div>
                 <ChatBubbleLeftRightIcon width="32px" /> {currentRoom.name}
-              </span>
+              </div>
               {currentRoom.event && (
                 <Link to={`/events/${currentRoom.event?.id}`}>
                   {`This chat is linked to an Event: ${currentRoom.event.title} `}

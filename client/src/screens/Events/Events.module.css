@@ -12,4 +12,5 @@
 	padding: 20px;
 	border-bottom: 2px solid var(--tertiary-bg);
 	justify-content: space-between;
+	align-items: center;
 }

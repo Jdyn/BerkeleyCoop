@@ -36,8 +36,7 @@ const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
             signOut();
             navigate("/signin", { replace: true });
           }}
-          className={clsx(styles.listItem, styles.active, styles.logout)}
-					style={{justifyContent: 'center'}}
+          className={clsx(styles.listItem, styles.logout)}
         >
           <ArrowRightOnRectangleIcon width="24px" />
           Log out

@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-columns: minmax(200px, 1fr) minmax(350px, 3fr) minmax(0px, 1fr);
+  grid-template-columns: minmax(250px, 1fr) minmax(350px, 3fr) minmax(250px, 1fr);
   grid-template-rows: 1fr;
   padding: 20px;
   flex-grow: 1;
@@ -14,15 +14,6 @@
   padding: 20px;
   border-bottom: 2px solid var(--tertiary-bg);
   justify-content: space-between;
-}
-
-.list {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid var(--tertiary-bg);
-  padding: 10px;
-  gap: 5px;
-  border-radius: 16px;
 }
 
 .message {
@@ -63,7 +54,6 @@
 .windowHeader {
   display: flex;
 	flex-direction: column;
-  padding: 0 20px 0 20px;
   margin: 20px 0px;
   justify-self: flex-start;
   border-bottom: 2px solid var(--tertiary-bg);
@@ -73,7 +63,7 @@
 	display: flex;
 	align-items: center;
 	font-size: 1rem;
-	color: var(--accent-b);
+	color: var(--accent-bg);
 }
 
 .chatList {
@@ -92,37 +82,55 @@
   overflow: auto;
 }
 
-.roomItem {
+.rooms {
   display: flex;
   flex-direction: column;
+  border: 2px solid var(--tertiary-bg);
   padding: 10px;
-  border: 2px solid transparent;
-  border: 2px solid var(--primary-bg);
-  color: var(--text);
-  gap: 10px;
-  text-decoration: none;
-  transition-duration: 0.2s;
+  gap: 5px;
   border-radius: 16px;
 }
 
-.list > h2 {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
+.roomHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 20px 0px;
 }
 
-.list > h2 > div {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+.roomHeader > div {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
-.list > h2 > div > span {
+.roomItem {
   display: flex;
-  margin-top: auto;
-  align-items: flex-end;
-  line-height: 0.8;
+  flex-direction: column;
+  padding: 20px 10px;
+  border: 2px solid var(--tertiary-bg);
+  color: var(--text);
+  gap: 10px;
+  text-decoration: none;
+  transition-duration: 0.1s;
+  border-radius: 16px;
+}
+
+.roomItem:hover {
+  background: var(--accent-bg);
+  border: 2px solid var(--accent-b);
+	color: white;
+}
+
+.roomItem:hover > p {
+	color: #e6ebf1 !important;
+}
+
+.active {
+  background: var(--accent-bg);
+	border: 2px solid var(--accent-b);
+	color: white;
 }
 
 .roomItem > h3 {
@@ -133,14 +141,12 @@
   margin: 0;
 }
 
-.roomItem:hover {
-  background: var(--indigo-7);
-  border: 2px solid var(--indigo-10);
+.active > p {
+	color: #e6ebf1 !important;
 }
 
-.active {
-  background: var(--indigo-7);
-  border: 2px solid var(--indigo-10);
+.roomItem > p {
+	color: var(--secondary-text);
 }
 
 .inputForm {
@@ -149,7 +155,7 @@
   gap: 20px;
   margin: 0px 20px 20px 20px;
   align-items: center;
-  border: 2px solid var(--primary-bg);
+  border: 2px solid var(--tertiary-bg);
   padding: 5px 10px 5px 20px;
   border-radius: 16px;
 }
@@ -172,7 +178,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-bg);
+  color: var(--tertiary-bg);
   border-radius: 50%;
   height: 24px;
   width: 24px;

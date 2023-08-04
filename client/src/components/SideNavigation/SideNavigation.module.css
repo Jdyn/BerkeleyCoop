@@ -92,7 +92,7 @@
 
 .listItem {
   display: flex;
-	gap: 10px;
+	gap: 20px;
   border-radius: 0px 16px 16px 0px;
 	padding: 10px 20px;
 	align-items: center;
@@ -103,10 +103,8 @@
   text-decoration: none;
 	cursor: pointer;
 	overflow: hidden;
-}
-
-.logout {
-	list-style: none;
+	text-transform: uppercase;
+	font-weight: 700;
 }
 
 .listItem > span {
@@ -121,4 +119,19 @@
   background: var(--accent-bg);
 	border: 2px solid var(--accent-b);
 	border-left: none;
+	color: white;
+}
+
+.active {
+	background: var(--accent-bg);
+	border: 2px solid var(--accent-b);
+	color: white;
+	border-left: none;
+}
+
+.logout {
+	list-style: none;
+	border: 2px solid #e3e3e3;
+	white-space: nowrap;
+	margin-right: 10px;
 }

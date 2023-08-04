@@ -13,10 +13,10 @@ const RootLayout = memo(() => {
       <UserProvider>
         <SideNavigation expand="right">
           <SideNavigationLink to="/events">
-            <CalendarDaysIcon width="24px" /> <span>Events</span>
+            <CalendarDaysIcon width="24px" />Events
           </SideNavigationLink>
           <SideNavigationLink to="/chats">
-            <ChatBubbleBottomCenterIcon width="24px" /> <span>Chats</span>
+            <ChatBubbleBottomCenterIcon width="24px" />Chats
           </SideNavigationLink>
         </SideNavigation>
         <Header />

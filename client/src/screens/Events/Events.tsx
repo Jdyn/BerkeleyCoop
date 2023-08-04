@@ -33,7 +33,7 @@ const template: FormTemplate = {
       placeholder: "Enter an end date",
     },
   ],
-  submit: "Create Event",
+  submit: "Create",
 };
 
 const Events = memo(() => {

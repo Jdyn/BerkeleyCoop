@@ -4,14 +4,16 @@
 	justify-content: center;
 	background: var(--indigo-9);
 	border: 2px solid var(--indigo-11);
-	padding: 5px 10px;
+	padding: 8px 10px;
 	border-radius: 12px;
 	gap: 5px;
 	cursor: pointer;
 	color: white;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	transition-duration: 0.2s;
-	/* box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px; */
+	box-shadow: var(--card-small);
+	text-transform: uppercase;
+	font-weight: 700;
 }
 
 .root:hover {

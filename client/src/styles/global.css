@@ -14,7 +14,15 @@
 @font-face {
   font-display: swap;
   font-family: 'dinn';
-  src: url('../fonts/dinn-700.woff') format('woff');
+  src: url('src/fonts/dinn-900.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'dinn';
+  src: url('src/fonts/dinn-700.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
@@ -22,27 +30,15 @@
 @font-face {
   font-display: swap;
   font-family: 'dinn';
-  src: url('../fonts/dinn-500.woff') format('woff');
+  src: url('src/fonts/dinn-500.woff2') format('woff2');
   font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'dinn';
-  src: url('..fonts/dinn-300.woff') format('woff');
-  font-weight: 300;
   font-style: normal;
 }
 
 :root {
   font-family: dinn, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1;
-  font-weight: 400;
-
-  color-scheme: light;
-  color: var(--text);
-	background: var(--primary-bg);
+  font-weight: 500;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -50,17 +46,26 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-	--text: var(--gray-12);
-	--primary-bg: var(--mauve-8);
-	--secondary-bg: var(--mauve-6);
-	--tertiary-bg: var(--mauve-7);
+	--text: #4B4B4B;
+	--white: #fff;
+	--secondary-text: rgb(119, 119, 119);
+	--primary-bg: #f2f6fc;
+	/* var(--mauve-8); */
+	--secondary-bg: rgb(255,255,255);
+	--tertiary-bg: rgb(229,229,229);
 
-	--accent-bg: var(--indigo-8);
-	--accent-b: var(--indigo-9);
+	/* var(--mauve-7); */
+	--card-small: 0 6px 12px -2px rgba(50,50,160,0.25),0 3px 7px -3px rgba(0,0,0,0.3);
+	--accent-bg: var(--indigo-9);
+	--accent-b: var(--indigo-11);
+	--border: #e3e3e3;
+	
+	color-scheme: light;
+  color: var(--text);
+	background: var(--primary-bg);
 }
-
+/* #f2f6fc; */
 * {
-	text: var(--text);
 	font-family: dinn, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	margin: 0;
 }

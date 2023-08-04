@@ -19,9 +19,9 @@ defmodule Berkeley.EventView do
       id: event.id,
       title: event.title,
       description: event.description,
-      start_date: event.start_date,
-      end_date: event.end_date,
-      inserted_at: event.inserted_at,
+      startDate: event.start_date,
+      endDate: event.end_date,
+      insertedAt: event.inserted_at,
     }
   end
 end
