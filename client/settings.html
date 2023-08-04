@@ -34,6 +34,8 @@
 
 .wrapper {
   display: flex;
+  width: 200%;
+
   text-decoration: none;
   transition: all 0.4s;
 }
@@ -117,6 +119,7 @@ ul ul a {
     </style>
   </head>
   <body>
+    
     <div class="wrapper">
         <nav id="sidebar">
           <div class="sidebar-header">
@@ -126,11 +129,11 @@ ul ul a {
             <p>My Nav</p>
             <li class="active">
               
-              <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="events.html">Event</a> </button></li>
+              <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="#">Event</a> </button></li>
               <br>
                 <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="#">Channel</a></button></li>
                 <br>
-                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="settings.html">Settings</a></button></li>
+                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="#">Settings</a></button></li>
             
 
             <li>
@@ -150,8 +153,41 @@ ul ul a {
             </div>
           </nav>
           <!-- Main Content Here -->
+          <div class="jumbotron bg-light">
+
+            <h1 class="display-4">Settings</h1>
+            <p class="lead">Name</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+            <p>Email</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+              </div>
+            
+              <p>Password</p>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                </div>
+              
+          </div>
+        
         </div>
+            <!-- Image and text -->
+
       </div>
+
+      
       
       
 
