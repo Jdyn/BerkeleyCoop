@@ -62,6 +62,7 @@
 * {
 	text: var(--text);
 	font-family: dinn, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	margin: 0;
 }
 
 body {
