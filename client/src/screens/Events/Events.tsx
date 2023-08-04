@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from "react";
-// import { useUser } from "../../hooks/useUser";
 import styles from "./Events.module.css";
 import EventCard from "./EventCard/EventCard";
 import DialogForm from "../../components/DialogForm/DialogForm";
@@ -39,7 +38,7 @@ const template: FormTemplate = {
 
 const Events = memo(() => {
   const { data } = useGetEventsQuery();
-  const [createEvent, { isSuccess, reset }] = useCreateEventMutation();
+  const [createEvent, { isSuccess, reset, error }] = useCreateEventMutation();
   const modal = useState(false);
 
   useEffect(() => {
@@ -48,7 +47,7 @@ const Events = memo(() => {
       reset();
     }
   }, [isSuccess, modal, reset]);
-  console.log(data);
+
   return (
     <>
       <h1 className={styles.header}>
@@ -58,8 +57,8 @@ const Events = memo(() => {
           title="Create an event"
           description="Publish an event for others to join and participate!"
           template={template}
+          errors={(error as any)?.data?.errors || {}}
           onSubmit={(_type, payload) => {
-            console.log(payload);
             createEvent({ event: payload });
           }}
         />

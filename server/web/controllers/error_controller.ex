@@ -8,6 +8,14 @@ defmodule Berkeley.ErrorController do
     |> render("changeset_error.json", changeset: changeset)
   end
 
+  def call(conn, {:error, _key, %Ecto.Changeset{} = changeset, _}) do
+    dbg changeset
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(Berkeley.ErrorView)
+    |> render("changeset_error.json", changeset: changeset)
+  end
+
   def call(conn, {:not_found, reason}) do
     conn
     |> put_status(:not_found)

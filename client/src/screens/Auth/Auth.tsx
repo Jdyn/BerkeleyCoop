@@ -7,6 +7,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { useAccountSignInMutation } from "../../api/account/account";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 const schema = Yup.object({
   email: Yup.string().email("Invalid email address").required(),
@@ -51,7 +52,7 @@ const LogIn = (_props: Props): JSX.Element => {
           <form className={styles.form} onSubmit={onSubmit}>
             <fieldset className={styles.field}>
               <label htmlFor="email">Email</label>
-              <input {...register("email")} />
+              <input {...register("email")} type="email" />
               {errors.email && (
                 <div className={styles.error}>
                   <ExclamationCircleIcon />
@@ -62,7 +63,7 @@ const LogIn = (_props: Props): JSX.Element => {
 
             <fieldset className={styles.field}>
               <label htmlFor="password">Password</label>
-              <input {...register("password")} />
+              <input {...register("password")} type="password" />
               {errors.password && (
                 <div className={styles.error}>
                   <ExclamationCircleIcon />
@@ -77,7 +78,7 @@ const LogIn = (_props: Props): JSX.Element => {
               </div>
             )}
 
-            <button type="submit">Sign In</button>
+            <Button type="submit">Sign In</Button>
           </form>
         </div>
       </div>

@@ -16,7 +16,6 @@ defmodule Berkeley.EventController do
 
     payload = Map.put_new(attrs["event"], "creator_id", current_user.id)
 
-    dbg(payload)
 
     with {:ok, %Event{} = event} <- Events.create(payload) do
       conn

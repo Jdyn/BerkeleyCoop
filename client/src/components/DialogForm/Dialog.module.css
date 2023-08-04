@@ -125,6 +125,7 @@ input {
   padding: 0 10px;
   font-size: 15px;
   line-height: 1;
+	margin: 0;
   color: var(--violet-11);
   box-shadow: 0 0 0 1px var(--violet-7);
   height: 35px;
@@ -164,4 +165,22 @@ input {
 
 .group > button {
 	flex: 1;
+}
+
+.error {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	background: var(--red-9);
+	border-radius: 6px;
+	font-size: 0.8rem;
+	padding: 5px 10px;
+	color: white;
+	margin-top: 5px;
+	border: 2px solid var(--red-11)
+}
+
+.error > svg {
+	height: 20px;
 }

@@ -102,6 +102,11 @@
 	color: var(--text);
   text-decoration: none;
 	cursor: pointer;
+	overflow: hidden;
+}
+
+.logout {
+	list-style: none;
 }
 
 .listItem > span {
@@ -114,12 +119,6 @@
 
 .listItem:hover {
   background: var(--accent-bg);
-	border: 2px solid var(--accent-b);
-	border-left: none;
-}
-
-.active {
-	background: var(--accent-bg);
 	border: 2px solid var(--accent-b);
 	border-left: none;
 }

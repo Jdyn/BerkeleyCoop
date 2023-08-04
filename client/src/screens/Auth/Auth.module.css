@@ -32,7 +32,7 @@
 }
 
 .container::before {
-  background: var(--mauve-11);
+  background: var(--primary-bg);
   border-radius: 100%;
   content: '';
   display: block;
@@ -85,6 +85,13 @@
   border: none;
 }
 
+.field > input {
+	background: var(--secondary-bg);
+	border: 2px solid var(--tertiary-bg);
+	border-radius: 12px;
+	padding: 5px 10px;
+}
+
 .error {
 	display: flex;
 	flex-direction: row;
@@ -122,7 +129,4 @@
 
 .button:focus {
   box-shadow: 0 0 0 4px var(--shade);
-}
-
-@media (min-width: 960px) {
 }

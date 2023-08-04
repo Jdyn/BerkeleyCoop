@@ -1,10 +1,11 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { Link, LinkProps, useMatches } from "react-router-dom";
+import { Link, LinkProps, useMatches, useNavigate } from "react-router-dom";
 import styles from "./SideNavigation.module.css";
-import { ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
+import { ArrowLongLeftIcon, ArrowLongRightIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { useAccountSignOutMutation } from "../../api/account/account";
 
 interface SideNavigationProps {
   expand: "left" | "right";
@@ -13,7 +14,8 @@ interface SideNavigationProps {
 
 const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
   const [expanded, setExpanded] = useState(true);
-
+  const [signOut] = useAccountSignOutMutation();
+  const navigate = useNavigate();
   return (
     <NavigationMenu.Root
       className={styles.root}
@@ -29,6 +31,17 @@ const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
             </NavigationMenu.Item>
           ))}
         </div>
+        <NavigationMenu.Item
+          onClick={() => {
+            signOut();
+            navigate("/signin", { replace: true });
+          }}
+          className={clsx(styles.listItem, styles.active, styles.logout)}
+					style={{justifyContent: 'center'}}
+        >
+          <ArrowRightOnRectangleIcon width="24px" />
+          Log out
+        </NavigationMenu.Item>
         <NavigationMenu.Item asChild>
           <button
             className={styles.collapse}
@@ -36,9 +49,9 @@ const SideNavigation = ({ expand, children = [] }: SideNavigationProps) => {
             type="button"
           >
             {expanded ? (
-              <ArrowLeftOnRectangleIcon width="24px" />
+              <ArrowLongLeftIcon width="24px" />
             ) : (
-              <ArrowRightOnRectangleIcon width="24px" />
+              <ArrowLongRightIcon width="24px" />
             )}
             <span>{expanded ? "Collapse" : "Expand"}</span>
           </button>

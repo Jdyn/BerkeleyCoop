@@ -62,11 +62,18 @@
 
 .windowHeader {
   display: flex;
+	flex-direction: column;
   padding: 0 20px 0 20px;
   margin: 20px 0px;
-  gap: 10px;
   justify-self: flex-start;
-  /* border-bottom: 2px solid var(--tertiary-bg); */
+  border-bottom: 2px solid var(--tertiary-bg);
+}
+
+.windowHeader > a {
+	display: flex;
+	align-items: center;
+	font-size: 1rem;
+	color: var(--accent-b);
 }
 
 .chatList {
@@ -121,15 +128,9 @@
 .roomItem > h3 {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+	gap: 5px;
+  justify-content: flex-start;
   margin: 0;
-}
-
-.roomItem > h3 > span {
-  display: flex;
-  line-height: 1;
-  align-items: center;
-  text-align: center;
 }
 
 .roomItem:hover {

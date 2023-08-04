@@ -9,7 +9,6 @@ defmodule Berkeley.Events do
   alias Berkeley.Event
   alias Berkeley.Repo
   alias Berkeley.User
-  alias Berkeley.Chat
   alias Ecto.Multi
 
   @doc """
@@ -46,26 +45,29 @@ defmodule Berkeley.Events do
   end
 
   def create(attrs \\ %{}) do
-    Multi.new()
-    |> Multi.insert(:event, Event.changeset(%Event{}, attrs))
-    |> Multi.insert(:room, fn %{event: event} ->
-      Chat.Room.changeset(%Chat.Room{}, %{
-        name: event.title <> " Chat",
-        description: "Chat about the " <> event.title <> " Event",
-        creator_id: event.creator_id,
-        event_id: event.id,
-        users: [Repo.get!(User, event.creator_id)]
-      })
-    end)
-    |> Multi.update(:user, fn %{event: event, room: room} ->
-      user =  Repo.get_by!(User, id: event.creator_id) |> Repo.preload(:rooms)
-      rooms = user.rooms ++ [room]
+    with {:ok, result} <-
+           Multi.new()
+           |> Multi.insert(:event, Event.changeset(%Event{}, attrs))
+           |> Multi.insert(:room, fn %{event: event} ->
+             Chat.Room.changeset(%Chat.Room{}, %{
+               name: event.title <> " Chat",
+               description: "Chat about the " <> event.title <> " Event",
+               creator_id: event.creator_id,
+               event_id: event.id,
+               users: [Repo.get!(User, event.creator_id)]
+             })
+           end)
+           |> Multi.update(:user, fn %{event: event, room: room} ->
+             user = User |> Repo.get_by!(id: event.creator_id) |> Repo.preload(:rooms)
+             rooms = user.rooms ++ [room]
 
-      user
-      |> Ecto.Changeset.change()
-      |> Ecto.Changeset.put_assoc(:rooms, rooms)
-    end)
-    |> Repo.transaction()
+             user
+             |> Ecto.Changeset.change()
+             |> Ecto.Changeset.put_assoc(:rooms, rooms)
+           end)
+           |> Repo.transaction() do
+      {:ok, result[:event]}
+    end
   end
 
   @doc """

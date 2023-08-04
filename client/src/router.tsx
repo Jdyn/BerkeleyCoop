@@ -7,9 +7,11 @@ import Events from "./screens/Events/Events";
 import { accountApi } from "./api";
 import { AnyAction, Dispatch, Store } from "@reduxjs/toolkit";
 import Event from "./screens/Events/Event/Event";
+import Cookies from "js-cookie";
 
 const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (_request) => {
   const result = dispatch(accountApi.endpoints.getAccount.initiate() as unknown as AnyAction);
+	// const user = JSON.parse(Cookies.get("user") ?? "{}");
 
   try {
     const response = await result.unwrap();
@@ -18,9 +20,11 @@ const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (
     }
   } catch (error) {
     dispatch(accountApi.endpoints.accountSignOut.initiate() as unknown as AnyAction);
+    Cookies.remove("user");
     return redirect("/signin");
   }
 
+  Cookies.remove("user");
   return redirect("/signin");
 };
 
@@ -41,10 +45,10 @@ const router = (store: Store) =>
             },
           ],
         },
-				{
-					path: "events/:id",
-					element: <Event />,
-				},
+        {
+          path: "events/:id",
+          element: <Event />,
+        },
         {
           path: "events",
           element: <Events />,

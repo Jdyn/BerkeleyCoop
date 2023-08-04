@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import clsx from "clsx";
 import {
+  ArrowLongRightIcon,
   ArrowSmallRightIcon,
   ChatBubbleLeftRightIcon,
   HomeIcon,
@@ -57,9 +58,7 @@ const Chat = () => {
               key={room.id}
             >
               <h3>
-                <span>
-                  <HashtagIcon width="24px" /> {room.name}
-                </span>
+                <HashtagIcon width="24px" /> {room.name}
                 <ArrowSmallRightIcon width="24px" />
               </h3>
               <div>{room.description}</div>
@@ -69,7 +68,15 @@ const Chat = () => {
         <div className={styles.window}>
           {currentRoom?.name && (
             <h2 className={styles.windowHeader}>
-              <ChatBubbleLeftRightIcon width="32px" /> {currentRoom.name}
+              <span>
+                <ChatBubbleLeftRightIcon width="32px" /> {currentRoom.name}
+              </span>
+              {currentRoom.event && (
+                <Link to={`/events/${currentRoom.event?.id}`}>
+                  {`This chat is linked to an Event: ${currentRoom.event.title} `}
+                  <ArrowLongRightIcon width="24px" />
+                </Link>
+              )}
             </h2>
           )}
           <div ref={observe} className={styles.chatList} style={{ height: height }}>

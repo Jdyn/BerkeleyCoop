@@ -4,8 +4,9 @@
 	justify-content: center;
 	background: var(--indigo-9);
 	border: 2px solid var(--indigo-11);
-	padding: 5px 20px;
+	padding: 5px 10px;
 	border-radius: 12px;
+	gap: 5px;
 	cursor: pointer;
 	color: white;
 	font-size: 1rem;

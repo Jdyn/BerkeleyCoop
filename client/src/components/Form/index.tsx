@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Form = (props: Props): JSX.Element => {
-  const { onSubmit, template, isPending } = props;
+  const { onSubmit, template } = props;
 
   const [form, setForm] = useState<Record<string, any>>({});
 
@@ -53,7 +53,7 @@ const Form = (props: Props): JSX.Element => {
           />
         </fieldset>
       ))}
-      <Button isPending={isPending}>{template.submit}</Button>
+      <Button>{template.submit}</Button>
     </form>
   );
 };

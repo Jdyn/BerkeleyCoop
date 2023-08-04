@@ -17,6 +17,7 @@ defmodule Berkeley.Auth.EnsureAuth do
     else
       conn
       |> put_status(:unauthorized)
+      |> clear_session()
       |> put_view(ErrorView)
       |> render("error.json", error: "You do not have access to this resource.")
       |> halt()

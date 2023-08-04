@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import buttonStyles from "../Button/Button.module.css";
 import formatDate from "../../util/formatDate";
 import formStyles from "../Form/index.module.css";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 
 interface FormTemplate {
   title?: string;
@@ -20,17 +21,18 @@ interface FormTemplate {
 }
 
 interface Props {
-	modal: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+  modal: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
   title?: string;
   description?: string;
   onSubmit: (type: string, form: Record<string, unknown>) => void;
   isPending?: boolean;
   template: FormTemplate;
+	errors: Record<string, string>;
 }
 
-const DialogForm = ({ modal, title, description, ...rest }: Props) => {
+const DialogForm = ({ errors, modal, title, description, ...rest }: Props) => {
   const { template, onSubmit } = rest;
-	const [open, setOpen] = modal;
+  const [open, setOpen] = modal;
   const [form, setForm] = useState<Record<string, any>>({});
 
   const submitForm = (event: FormEvent): void => {
@@ -41,7 +43,7 @@ const DialogForm = ({ modal, title, description, ...rest }: Props) => {
   return (
     <DialogPrimative.Root open={open} onOpenChange={(newOpen) => setOpen(newOpen)}>
       <DialogPrimative.Trigger className={buttonStyles.root} onClick={() => setOpen(true)}>
-        Create
+        <PlusCircleIcon width="24px"/> Create
       </DialogPrimative.Trigger>
       <DialogPrimative.Portal>
         <DialogPrimative.Overlay className={styles.overlay} />
@@ -70,6 +72,9 @@ const DialogForm = ({ modal, title, description, ...rest }: Props) => {
                       })
                     }
                   />
+                  {errors[field.key || field.name] && (
+                    <span className={styles.error}>{errors[field.key || field.name]}</span>
+                  )}
                 </fieldset>
               ))}
               <div className={styles.group}>

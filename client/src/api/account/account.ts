@@ -65,6 +65,9 @@ export const accountApi = createApi({
         url: "/account/signout",
         method: "DELETE",
       }),
+      onQueryStarted: async (_payload, _) => {
+        Cookies.remove("user");
+      },
     }),
   }),
 });
@@ -75,4 +78,5 @@ const updateSession = (user: User, token: string): void => {
   }
 };
 
-export const { useAccountSignInMutation, useAccountSignOutMutation, useGetAccountQuery } = accountApi;
+export const { useAccountSignInMutation, useAccountSignOutMutation, useGetAccountQuery } =
+  accountApi;

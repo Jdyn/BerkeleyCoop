@@ -23,7 +23,7 @@ defmodule Berkeley.Chat do
 
   """
   def list_rooms(%User{} = user) do
-    Repo.all(assoc(user, :rooms)) |> Repo.preload([:creator, :users])
+    Repo.all(assoc(user, :rooms)) |> Repo.preload([:creator, :users, :event])
   end
 
   @doc """

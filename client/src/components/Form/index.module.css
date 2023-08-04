@@ -15,6 +15,7 @@
   color: var(--text);
   margin: 0;
   text-align: left;
+	margin-bottom: 20px;
 }
 
 .container > span {
@@ -27,7 +28,7 @@
   border: none;
   outline: none;
   border-radius: 8px;
-  margin: 10px 0;
+  margin: 0;
   padding: 10px;
   background: var(--primary-bg);
   color: var(--text);
