@@ -89,7 +89,10 @@ a[aria-expanded="true"] {
 a[data-toggle="collapse"] {
   position: relative;
 }
-
+#profile-pic {
+  width: 100px;
+  height: 100px;
+}
 .dropdown-toggle::after {
   display: block;
   position: absolute;
@@ -99,6 +102,7 @@ a[data-toggle="collapse"] {
 }
 .jumbotron {
   background-color: antiquewhite;
+  width: 80vw;
 }
 ul ul a {
   font-size: 0.9em !important;
@@ -155,9 +159,15 @@ ul ul a {
             </div>
           </nav>
           <!-- Main Content Here -->
-          <div class="jumbotron ">
+          <div class="jumbotron">
 
             <h1 class="display-4">Settings</h1>
+
+            <div class = "wrapper">
+              <img id = "profile-pic" alt = "Student profile picture" src = "depositphotos_68789187-stock-photo-students.jpg">
+              </div>
+              <br>
+
             <p class="lead">Name</p>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -181,9 +191,11 @@ ul ul a {
                   </div>
                   <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
                 </div>
-              
+
+                
+                
           </div>
-          <img src = "c:\Users\skylo\AppData\Local\Temp\depositphotos_68789187-stock-photo-students.jpg">
+          
         
         </div>
             <!-- Image and text -->

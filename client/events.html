@@ -34,6 +34,8 @@
 
 .wrapper {
   display: flex;
+  width: 100vw;
+  background-color: antiquewhite;
   text-decoration: none;
   transition: all 0.4s;
 }
@@ -87,7 +89,10 @@ a[aria-expanded="true"] {
 a[data-toggle="collapse"] {
   position: relative;
 }
-
+#profile-pic {
+  width: 100px;
+  height: 100px;
+}
 .dropdown-toggle::after {
   display: block;
   position: absolute;
@@ -95,7 +100,10 @@ a[data-toggle="collapse"] {
   right: 20%;
   transform: translateY(-50%);
 }
-
+.jumbotron {
+  background-color: antiquewhite;
+  width: 80vw;
+}
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
@@ -117,41 +125,248 @@ ul ul a {
     </style>
   </head>
   <body>
+    
     <div class="wrapper">
-      <nav id="sidebar">
-        <div class="sidebar-header">
-          <h3>Berkeley Housing Coop</h3>
-        </div>
-        <ul class="lisst-unstyled components">
-          <p>My Nav</p>
-          <li class="active">
+        <nav id="sidebar">
+          <div class="sidebar-header">
+            <h3>Berkeley Housing Coop</h3>
             
-            <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="events.html">Event</a> </button></li>
-            <br>
-              <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="login.html">Channel</a></button></li>
-              <br>
-              <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="settings.html">Settings</a></button></li>
-          
-
-          <li>
-            <a href="index.html">Log Out</a>
-          </li>
-        </ul>
-      </nav>
-      <div id="content">
-        <!-- Toggler -->
-        <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-            <button type="button" id="sidebarCollapse" class="btn btn-dark">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z"/>
-              </svg>
-            </button>
           </div>
+          <ul class="lisst-unstyled components">
+            <p>My Nav</p>
+            <li class="active">
+              
+              <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="events.html">Event</a> </button></li>
+              <br>
+                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="login.html">Channel</a></button></li>
+                <br>
+                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="settings.html">Settings</a></button></li>
+            
+
+            <li>
+              <a href="index.html">Log Out</a>
+            </li>
+          </ul>
         </nav>
+        <div id="content">
+          <!-- Toggler -->
+          <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+              <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z"/>
+                </svg>
+              </button>
+            </div>
+          </nav>
           <!-- Main Content Here -->
+          <div class="jumbotron">
+
+            <h1 class="display-4">Events</h1>
+            <!-- Gallery goes here -->
+          
+            <div class="container-fluid">
+              <div class="px-lg-5">
+
+                <!-- Row starts here -->
+                <div class="row">
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Party</a></h5>
+                        <p class="small text-muted mb-0">A party at ___ house.</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">Party</span></p>
+                          <div class="badge badge-danger px-3 rounded-pill font-weight-normal">House 1</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-2.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Blorange</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">PNG</span></p>
+                          <div class="badge badge-primary px-3 rounded-pill font-weight-normal">Finished</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-3.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">And She Realized</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">JPG</span></p>
+                          <div class="badge badge-warning px-3 rounded-pill font-weight-normal text-white">WIP</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-4.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">DOSE Juice</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">JPEG</span></p>
+                          <div class="badge badge-success px-3 rounded-pill font-weight-normal">New</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-5.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Pineapple</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">PNG</span></p>
+                          <div class="badge badge-primary px-3 rounded-pill font-weight-normal">Finished</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-6.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Yellow banana</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">JPG</span></p>
+                          <div class="badge badge-warning px-3 rounded-pill font-weight-normal text-white">WIP</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-7.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Teal Gameboy</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">JPEG</span></p>
+                          <div class="badge badge-primary px-3 rounded-pill font-weight-normal">Finished</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-8.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Color in Guatemala.</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">PNG</span></p>
+                          <div class="badge badge-warning px-3 rounded-pill font-weight-normal text-white">WIP</div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-1.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Red paint cup</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">JPG</span></p>
+                          <div class="badge badge-danger px-3 rounded-pill font-weight-normal">Dropped</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-2.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Lorem ipsum dolor</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">PNG</span></p>
+                          <div class="badge badge-primary px-3 rounded-pill font-weight-normal">Finished</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-3.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Lorem ipsum dolor</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">JPG</span></p>
+                          <div class="badge badge-warning px-3 rounded-pill font-weight-normal text-white">WIP</div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                  <!-- Gallery item -->
+                  <div class="gallery-item col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="bg-white rounded shadow-sm"><img src="https://bootstrapious.com/i/snippets/sn-gallery/img-4.jpg" alt="" class="img-fluid card-img-top">
+                      <div class="p-4">
+                        <h5> <a href="#" class="text-dark">Lorem ipsum dolor</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                          <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span class="font-weight-bold">JPEG</span></p>
+                          <div class="badge badge-success px-3 rounded-pill font-weight-normal">New</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End -->
+            
+                </div>
+                <!-- End -->
+
+              </div>
+            </div>
+          
+          <!-- Gallery ends -->
+            
+                
+                
+          </div>
+          
+        
         </div>
+            <!-- Image and text -->
+
       </div>
+
+      
       
       
 

@@ -34,6 +34,8 @@
 
 .wrapper {
   display: flex;
+  width: 100vw;
+  background-color: antiquewhite;
   text-decoration: none;
   transition: all 0.4s;
 }
@@ -87,7 +89,10 @@ a[aria-expanded="true"] {
 a[data-toggle="collapse"] {
   position: relative;
 }
-
+#profile-pic {
+  width: 100px;
+  height: 100px;
+}
 .dropdown-toggle::after {
   display: block;
   position: absolute;
@@ -95,7 +100,10 @@ a[data-toggle="collapse"] {
   right: 20%;
   transform: translateY(-50%);
 }
-
+.jumbotron {
+  background-color: antiquewhite;
+  width: 80vw;
+}
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
@@ -117,6 +125,7 @@ ul ul a {
     </style>
   </head>
   <body>
+    
     <div class="wrapper">
         <nav id="sidebar">
           <div class="sidebar-header">
@@ -128,13 +137,13 @@ ul ul a {
               
               <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="events.html">Event</a> </button></li>
               <br>
-                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="#">Channel</a></button></li>
+                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="login.html">Channel</a></button></li>
                 <br>
                 <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="settings.html">Settings</a></button></li>
             
 
             <li>
-              <a href="#">Log Out</a>
+              <a href="index.html">Log Out</a>
             </li>
           </ul>
         </nav>
@@ -150,8 +159,50 @@ ul ul a {
             </div>
           </nav>
           <!-- Main Content Here -->
+          <div class="jumbotron">
+
+            <h1 class="display-4">Settings</h1>
+
+            <div class = "wrapper">
+              <img id = "profile-pic" alt = "Student profile picture" src = "depositphotos_68789187-stock-photo-students.jpg">
+              </div>
+              <br>
+
+            <p class="lead">Name</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+            <p>Email</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+              </div>
+            
+              <p>Password</p>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                </div>
+
+                
+                
+          </div>
+          
+        
         </div>
+            <!-- Image and text -->
+
       </div>
+
+      
       
       
 
