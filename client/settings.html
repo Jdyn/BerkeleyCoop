@@ -35,8 +35,7 @@
 .wrapper {
   display: flex;
   width: 100vw;
-  background: rgb(210, 210, 210);
-  border-radius: 10 px;
+  background-color: antiquewhite;
   text-decoration: none;
   transition: all 0.4s;
 }
@@ -49,10 +48,7 @@
   transition: all 0.4s;
   height: 100vh;
 }
-.jumbotron {
-    width: 80vw;
 
-}
 #sidebar.active {
   margin-left: -250px;
 
@@ -101,7 +97,9 @@ a[data-toggle="collapse"] {
   right: 20%;
   transform: translateY(-50%);
 }
-
+.jumbotron {
+  background-color: antiquewhite;
+}
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
@@ -123,100 +121,75 @@ ul ul a {
     </style>
   </head>
   <body>
-    <main>
-      <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
-            </div>
-
-            <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Page Content  -->
-        <div id="content">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-                </main>
     
+    <div class="wrapper">
+        <nav id="sidebar">
+          <div class="sidebar-header">
+            <h3>Berkeley Housing Coop</h3>
+          </div>
+          <ul class="lisst-unstyled components">
+            <p>My Nav</p>
+            <li class="active">
+              
+              <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="events.html">Event</a> </button></li>
+              <br>
+                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="login.html">Channel</a></button></li>
+                <br>
+                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="settings.html">Settings</a></button></li>
+            
+
+            <li>
+              <a href="index.html">Log Out</a>
+            </li>
+          </ul>
+        </nav>
+        <div id="content">
+          <!-- Toggler -->
+          <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+              <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z"/>
+                </svg>
+              </button>
+            </div>
+          </nav>
+          <!-- Main Content Here -->
+          <div class="jumbotron ">
+
+            <h1 class="display-4">Settings</h1>
+            <p class="lead">Name</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+            <p>Email</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+              </div>
+            
+              <p>Password</p>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                </div>
+              
+          </div>
+          <img src = "c:\Users\skylo\AppData\Local\Temp\depositphotos_68789187-stock-photo-students.jpg">
+        
+        </div>
+            <!-- Image and text -->
+
+      </div>
+
       
       
       
