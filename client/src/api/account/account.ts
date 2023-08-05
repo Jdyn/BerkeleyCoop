@@ -10,7 +10,18 @@ export const accountApi = createApi({
   baseQuery,
   tagTypes: ["user", "sessions"],
   endpoints: ({ query, mutation }) => ({
-    getAccount: query<{ user: User }, void>({ query: () => `/account`, providesTags: ["user"] }),
+    getAccount: query<{ user: User, token: string }, void>({
+      query: () => `/account`,
+      providesTags: ["user"],
+      onQueryStarted: async (_payload, { queryFulfilled }) => {
+
+				const res = await queryFulfilled
+
+				if (res.data.user) {
+					updateSession(res.data.user, res.data.token)
+				}
+			},
+    }),
     getSessions: query<{ tokens: Session[] }, void>({
       query: () => `/account/sessions`,
       providesTags: ["sessions"],

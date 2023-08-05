@@ -3,6 +3,7 @@ defmodule Berkeley.RoomChannel do
   use Berkeley.Web, :channel
 
   alias Berkeley.Chat
+  alias Berkeley.Presence
   alias Berkeley.Repo
 
   @impl true
@@ -22,9 +23,18 @@ defmodule Berkeley.RoomChannel do
 
   @impl true
   def handle_info(:after_join, socket) do
-    rooms = Chat.list_rooms(socket.assigns.user)
+    user = socket.assigns.user
+    rooms = Chat.list_rooms(user)
+    members = Berkeley.User |> Repo.all() |> Repo.preload(:house)
 
+    push(socket, "members", Berkeley.UserView.render("index.json", %{users: members}))
     push(socket, "lobby", Chat.RoomView.render("index.json", %{rooms: rooms}))
+
+    online_at = inspect(System.system_time(:millisecond))
+
+    with {:ok, _} <- Presence.track(socket, user.id, %{onlineAt: online_at}) do
+      push(socket, "presence_state", Presence.list(socket))
+    end
 
     {:noreply, socket}
   end

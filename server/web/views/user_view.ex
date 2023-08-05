@@ -5,6 +5,12 @@ defmodule Berkeley.UserView do
   alias Berkeley.UserView
   alias Berkeley.UserTokenView
 
+  def render("index.json", %{users: users}) do
+    %{
+      users: render_many(users, UserView, "user_with_house.json", as: :user)
+    }
+  end
+
   def render("show.json", %{user: user}) do
     %{
       ok: true,
@@ -34,6 +40,18 @@ defmodule Berkeley.UserView do
       email: user.email,
       confirmedAt: user.confirmed_at,
       isAdmin: user.is_admin
+    }
+  end
+
+  def render("user_with_house.json", %{user: user}) do
+    %{
+      id: user.id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      email: user.email,
+      confirmedAt: user.confirmed_at,
+      isAdmin: user.is_admin,
+      house: render_one(user.house, Berkeley.HouseView, "house.json", as: :house)
     }
   end
 

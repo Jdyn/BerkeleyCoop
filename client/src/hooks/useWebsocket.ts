@@ -7,7 +7,7 @@ interface Props {
   token: string;
   onPresenceState?(payload: any): void;
   onPresenceDiff?(payload: any): void;
-  onNewMessage(payload: Record<string, any>): void;
+  onNewMessage?(payload: Record<string, any>): void;
 }
 
 let socket: Socket;
@@ -54,8 +54,7 @@ function useWebsockets({ room, token, onNewMessage, onPresenceState, onPresenceD
         setConnected(false);
       });
 
-    channel.on("shout", onNewMessage);
-
+		if (onNewMessage) channel.on("new_message", onNewMessage);
     if (onPresenceState) channel.on("presence_state", onPresenceState);
     if (onPresenceDiff) channel.on("presence_diff", onPresenceDiff);
   };

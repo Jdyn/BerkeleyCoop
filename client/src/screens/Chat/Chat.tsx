@@ -11,34 +11,15 @@ import {
   HomeIcon,
   PaperAirplaneIcon,
   PlusCircleIcon,
-  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import useDimensions from "react-cool-dimensions";
 import { HashtagIcon } from "@heroicons/react/20/solid";
 
 const Chat = () => {
   const params = useParams<{ id: string }>();
-  const [list, setList] = useState<Record<string, any>[]>([]);
-  const [messages, setMessages] = useState<Record<string, any>[]>([]);
+
   const { observe, height } = useDimensions();
 
-  const currentRoom = useMemo(() => list.find((room) => room.id == params?.id), [list, params?.id]);
-  const { channel, connected } = useWebsockets({
-    room: params?.id ? `room:${params.id}` : "room:lobby",
-    token: JSON.parse(Cookies.get("user") ?? "{}")?.token ?? "",
-    onNewMessage: (message) => {
-      setMessages((messages) => [...messages, message]);
-    },
-  });
-
-  useEffect(() => {
-    channel?.on("lobby", (payload) => {
-      setList(payload.rooms);
-    });
-    channel?.on("messages", (payload) => {
-      setMessages(payload.messages);
-    });
-  }, [channel, connected]);
 
   return (
     <>
@@ -106,7 +87,7 @@ const Chat = () => {
             </button>
           </form>
         </div>
-        <div className={styles.list}>
+        {/* <div className={styles.list}>
           <h2>
             <div>
               <UserCircleIcon width="32px" /> <span>People</span>
@@ -118,7 +99,7 @@ const Chat = () => {
                 {user.firstName} {user.lastName}
               </div>
             ))}
-        </div>
+        </div> */}
       </main>
     </>
   );

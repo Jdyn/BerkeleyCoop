@@ -14,6 +14,7 @@ defmodule Berkeley.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Berkeley.PubSub},
       # Start the Endpoint (http/https)
+      Berkeley.Presence,
       Berkeley.Endpoint
       # Start a worker by calling: Berkeley.Worker.start_link(arg)
       # {Berkeley.Worker, arg}

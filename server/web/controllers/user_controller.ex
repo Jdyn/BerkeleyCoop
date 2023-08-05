@@ -17,7 +17,7 @@ defmodule Berkeley.UserController do
     conn
     |> put_remember_token(token)
     |> configure_session(renew: true)
-    |> render("show.json", user: conn.assigns[:current_user])
+    |> render("login.json", user: conn.assigns[:current_user], token: Base.url_encode64(token, padding: false))
   end
 
   def show_sessions(conn, _params) do

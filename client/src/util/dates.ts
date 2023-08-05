@@ -61,3 +61,21 @@ export function isStarted(dateStr: string): boolean {
   const now = new Date();
   return date.getTime() < now.getTime();
 }
+
+export function getLastSeen(epochNumber: number): string {
+  const currentTime = new Date().getTime();
+  const timeDifferenceInSeconds = Math.floor((currentTime - epochNumber) / 1000);
+
+  if (timeDifferenceInSeconds < 60) {
+    return `last seen just now`;
+  } else if (timeDifferenceInSeconds < 3600) {
+    const minutes = Math.floor(timeDifferenceInSeconds / 60);
+    return `last seen ${minutes} minutes ago`;
+  } else if (timeDifferenceInSeconds < 86400) {
+    const hours = Math.floor(timeDifferenceInSeconds / 3600);
+    return `last seen ${hours} hours ago`;
+  } else {
+    const days = Math.floor(timeDifferenceInSeconds / 86400);
+    return `last seen ${days} days ago`;
+  }
+}
