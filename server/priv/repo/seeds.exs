@@ -16,16 +16,6 @@ alias Berkeley.Chat.Message
 alias Berkeley.Accounts
 alias Berkeley.House
 
-Accounts.register(
-  %{
-    first_name: "John",
-    last_name: "Doe",
-    email: "test@test.com",
-    password: "Password123"
-  },
-  :default
-)
-
 houses = [
   %House{
     name: "Casa Zimbabwe",
@@ -130,12 +120,23 @@ end)
 
 houses = Repo.all(House)
 
+dbg Accounts.register(
+  %{
+    first_name: "John",
+    last_name: "Doe",
+    email: "test@test.com",
+    password: "Password123",
+    house_id: 1
+  },
+  :default
+)
+
 Repo.insert(%Room{
   name: "Global Chat",
   description: "All houses in one room.",
   creator_id: 1,
   houses: houses,
-  users: [Repo.get!(User, 1)],
+  users: [],
   messages: []
 })
 

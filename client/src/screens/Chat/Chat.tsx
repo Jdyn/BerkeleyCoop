@@ -1,7 +1,6 @@
 import styles from "./Chat.module.css";
-import useWebsockets from "../../hooks/useWebsocket";
-import Cookies from "js-cookie";
-import { useEffect, useMemo, useState } from "react";
+// import { useChannel } from "../../hooks/useWebsocket";
+import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import clsx from "clsx";
 import {
@@ -17,9 +16,10 @@ import { HashtagIcon } from "@heroicons/react/20/solid";
 
 const Chat = () => {
   const params = useParams<{ id: string }>();
-
   const { observe, height } = useDimensions();
 
+  // const { channel, messages, rooms } = useChannel();
+  // const currentRoom = useMemo(() => rooms.find((room) => room.id == params?.id), [rooms, params?.id]);
 
   return (
     <>
@@ -32,7 +32,7 @@ const Chat = () => {
             </div>
             <PlusCircleIcon width="32px" />
           </h2>
-          {list.map((room) => (
+          {/* {rooms.map((room) => (
             <Link
               to={`${room.id}`}
               className={clsx(styles.roomItem, room.id == params.id && styles.active)}
@@ -44,7 +44,7 @@ const Chat = () => {
               </h3>
               <p>{room.description}</p>
             </Link>
-          ))}
+          ))} */}
         </div>
         <div className={styles.window}>
           {currentRoom?.name && (
@@ -62,17 +62,17 @@ const Chat = () => {
           )}
           <div ref={observe} className={styles.chatList} style={{ height: height }}>
             <div className={styles.chatContent}>
-              {messages.map((message) => (
+              {/* {messages.map((message) => (
                 <div className={styles.message} key={message.id}>
                   <span>{message.username}</span>
                   <div className={styles.messageContent}>
                     <p>{message.content}</p>
                   </div>
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
-          <form
+          {/* <form
             className={styles.inputForm}
             onSubmit={(e) => {
               e.preventDefault();
@@ -85,7 +85,7 @@ const Chat = () => {
             <button title="Send a chat message" className={styles.submit} type="submit">
               <PaperAirplaneIcon width="24px" />
             </button>
-          </form>
+          </form> */}
         </div>
         {/* <div className={styles.list}>
           <h2>

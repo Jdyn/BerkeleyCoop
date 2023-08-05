@@ -4,101 +4,111 @@ import Header from "../Header/Header";
 import { Outlet, useParams } from "react-router-dom";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { ArrowRightOnRectangleIcon, ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
-import { UserProvider } from "../../hooks/useUser";
-import { memo, useEffect, useMemo, useState } from "react";
-import useWebsockets from "../../hooks/useWebsocket";
-import Cookies from "js-cookie";
-import { Presence } from "phoenix";
 import UserListCard from "../UserListCard/UserListCard";
 import clsx from "clsx";
+import { useChannel } from "../../hooks/socket/useChannel";
+import useEvent from "../../hooks/socket/useEvent";
+import { useState } from "react";
+import { Presence } from "phoenix";
 
-const RootLayout = memo(() => {
-  const params = useParams<{ id: string }>();
-  const [members, setMembers] = useState<Record<string, any>[]>([]);
-  const [presence, setPresence] = useState<Record<string, any>[]>([]);
+const RootLayout = () => {
+  const { id } = useParams<{ id: string }>();
+  const channel = useChannel(id ? `room:${id}` : "room:lobby");
+  const [members, setMembers] = useState<any[]>([]);
 
-  const { channel, connected } = useWebsockets({
-    room: params?.id ? `room:${params.id}` : "room:lobby",
-    token: JSON.parse(Cookies.get("user") ?? "{}")?.token ?? "",
-    onPresenceState: (state) => {
-      setPresence(state);
-    },
-    onPresenceDiff: (diff) => {
-      setPresence(Presence.syncState(presence, diff));
-    },
+  const [{ presence, onlineList, offlineList }, setState] = useState({
+    presence: {},
+    onlineList: [],
+    offlineList: [],
   });
 
-  const [onlineList, offlineList] = useMemo(() => {
+  useEvent(channel, "presence_diff", (message) => {
+    if (Object.keys(presence).length === 0) return;
+
+    const newPresence = Presence.syncDiff(presence, message);
+    const [onlineList, offlineList] = consolidate(newPresence);
+
+    setState({ presence: newPresence, onlineList, offlineList });
+  });
+
+  useEvent(channel, "presence_state", (message) => {
+    // const newPresence = Presence.syncState(presence, message);
+    const [onlineList, offlineList] = consolidate(message);
+
+    setState({ presence: message, onlineList, offlineList });
+  });
+
+  useEvent(channel, "members", (message) => {
+    setMembers(message.users);
+  });
+
+  const consolidate = (newPresence: any) => {
     const online: any = [];
     const offline: any = [];
 
+    if (!members) return consolidate(newPresence);
+
     members.forEach((member) => {
-      if (member.id in presence) {
-        online.push({ ...member, onlineAt: presence[member.id].metas[0].onlineAt });
+      if (member.id in newPresence) {
+        online.push({ ...member, onlineAt: newPresence[member.id].metas[0].onlineAt });
       } else {
         offline.push(member);
       }
     });
 
     return [online, offline];
-  }, [members, presence]);
+  };
 
-  useEffect(() => {
-    channel?.on("members", (payload) => {
-      setMembers(payload.users);
-    });
-  }, [channel, connected]);
+  // console.log(onlineList, offlineList);
 
   return (
     <main className={styles.root}>
-      <UserProvider>
-        <SideNavigation expand="right" style={{ gridArea: "left" }}>
-          <SideNavigationLink to="/events">
-            <CalendarDaysIcon width="24px" />
-            Events
-          </SideNavigationLink>
-          <SideNavigationLink to="/chats">
-            <ChatBubbleBottomCenterIcon width="24px" />
-            Chats
-          </SideNavigationLink>
-          <SideNavigationLink
-            to="/signin"
-            replace
-            onClick={() => {
-              signOut();
-            }}
-            className={clsx(styles.listItem, styles.logout)}
-						style={{justifySelf: "flex-end"}}
-          >
-            <ArrowRightOnRectangleIcon width="24px" />
-            Log out
-          </SideNavigationLink>
-        </SideNavigation>
-        <Header />
-        <div className={styles.main}>
-          <div className={styles.container}>
-            <div className={styles.wrapper}>
-              <Outlet />
-            </div>
+      <SideNavigation expand="right" style={{ gridArea: "left" }}>
+        <SideNavigationLink to="/events">
+          <CalendarDaysIcon width="24px" />
+          Events
+        </SideNavigationLink>
+        <SideNavigationLink to="/chats">
+          <ChatBubbleBottomCenterIcon width="24px" />
+          Chats
+        </SideNavigationLink>
+        <SideNavigationLink
+          to="/signin"
+          replace
+          onClick={() => {
+            // signOut();
+          }}
+          className={clsx(styles.listItem, styles.logout)}
+          style={{ justifySelf: "flex-end" }}
+        >
+          <ArrowRightOnRectangleIcon width="24px" />
+          Log out
+        </SideNavigationLink>
+      </SideNavigation>
+      <Header />
+      <div className={styles.main}>
+        <div className={styles.container}>
+          <div className={styles.wrapper}>
+            <Outlet />
           </div>
         </div>
-        <SideNavigation expand="left" style={{ gridArea: "right" }}>
-          <div className={styles.userList} style={{ flexGrow: 1}}>
-            <h3>Online</h3>
-            {onlineList.map((user: any) => (
-              <UserListCard key={user.id} user={user} online />
-            ))}
-          </div>
-          <div className={styles.userList}>
-            <h3>Offline</h3>
-            {offlineList.map((user: any) => (
-              <UserListCard key={user.id} user={user} />
-            ))}
-          </div>
-        </SideNavigation>
-      </UserProvider>
+      </div>
+      <SideNavigation expand="left" style={{ gridArea: "right" }}>
+        <div className={styles.userList} style={{ flexGrow: 1 }}>
+          <h3>Online</h3>
+          {onlineList.map((user: any) => (
+            <UserListCard key={user.id} user={user} online />
+          ))}
+        </div>
+        <div className={styles.userList}>
+          <h3>Offline</h3>
+          {offlineList.map((user: any) => (
+            <UserListCard key={user.id} user={user} />
+          ))}
+        </div>
+      </SideNavigation>
     </main>
   );
-});
+};
 
 export default RootLayout;

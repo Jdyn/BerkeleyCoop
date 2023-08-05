@@ -11,7 +11,7 @@ defmodule Berkeley.User do
   alias Berkeley.UserToken
   alias Berkeley.Event
 
-  @registration_fields ~w(email first_name last_name)a
+  @registration_fields ~w(email first_name last_name house_id)a
 
   schema "users" do
     field(:email, :string)
@@ -31,7 +31,7 @@ defmodule Berkeley.User do
 
     has_many(:tokens, UserToken)
 
-    has_many(:created_events, Event, foreign_key: :creator_id)
+    has_many(:created_events, Event)
 
     belongs_to(:house, House)
 

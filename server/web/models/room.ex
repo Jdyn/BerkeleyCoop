@@ -16,7 +16,7 @@ defmodule Berkeley.Chat.Room do
     many_to_many(:houses, House, join_through: "houses_rooms")
 
     belongs_to(:event, Berkeley.Event, foreign_key: :event_id)
-    belongs_to(:creator, User)
+    belongs_to(:creator, User, foreign_key: :creator_id)
 
     timestamps()
   end
@@ -26,5 +26,6 @@ defmodule Berkeley.Chat.Room do
     room
     |> cast(attrs, [:name, :description, :creator_id, :event_id])
     |> validate_required([:name, :description, :creator_id])
+    |> foreign_key_constraint(:creator_id)
   end
 end
