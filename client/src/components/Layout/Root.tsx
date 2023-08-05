@@ -10,15 +10,11 @@ import useWebsockets from "../../hooks/useWebsocket";
 import Cookies from "js-cookie";
 import { Presence } from "phoenix";
 import UserListCard from "../UserListCard/UserListCard";
-import { NavigationMenu } from "@radix-ui/react-navigation-menu";
 import clsx from "clsx";
 
 const RootLayout = memo(() => {
   const params = useParams<{ id: string }>();
-  const [list, setList] = useState<Record<string, any>[]>([]);
-  // const [messages, setMessages] = useState<Record<string, any>[]>([]);
   const [members, setMembers] = useState<Record<string, any>[]>([]);
-  // const currentRoom = useMemo(() => list.find((room) => room.id == params?.id), [list, params?.id]);
   const [presence, setPresence] = useState<Record<string, any>[]>([]);
 
   const { channel, connected } = useWebsockets({
@@ -38,7 +34,6 @@ const RootLayout = memo(() => {
 
     members.forEach((member) => {
       if (member.id in presence) {
-        console.log(presence);
         online.push({ ...member, onlineAt: presence[member.id].metas[0].onlineAt });
       } else {
         offline.push(member);
@@ -48,24 +43,11 @@ const RootLayout = memo(() => {
     return [online, offline];
   }, [members, presence]);
 
-  console.log("online", onlineList);
-  console.log("offline", offlineList);
-
   useEffect(() => {
-    channel?.on("lobby", (payload) => {
-      setList(payload.rooms);
-    });
-    // channel?.on("messages", (payload) => {
-    //   setMessages(payload.messages);
-    // });
     channel?.on("members", (payload) => {
       setMembers(payload.users);
     });
   }, [channel, connected]);
-
-  function signOut() {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <main className={styles.root}>
@@ -103,14 +85,14 @@ const RootLayout = memo(() => {
         <SideNavigation expand="left" style={{ gridArea: "right" }}>
           <div className={styles.userList} style={{ flexGrow: 1}}>
             <h3>Online</h3>
-            {onlineList.map((user) => (
-              <UserListCard user={user} online />
+            {onlineList.map((user: any) => (
+              <UserListCard key={user.id} user={user} online />
             ))}
           </div>
           <div className={styles.userList}>
             <h3>Offline</h3>
-            {offlineList.map((user) => (
-              <UserListCard user={user} />
+            {offlineList.map((user: any) => (
+              <UserListCard key={user.id} user={user} />
             ))}
           </div>
         </SideNavigation>

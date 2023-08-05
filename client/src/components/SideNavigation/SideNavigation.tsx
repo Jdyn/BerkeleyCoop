@@ -1,15 +1,13 @@
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { Link, LinkProps, useMatches, useNavigate } from "react-router-dom";
+import { Link, LinkProps, useMatches } from "react-router-dom";
 import styles from "./SideNavigation.module.css";
 import {
   ArrowLongLeftIcon,
   ArrowLongRightIcon,
-  ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import { useAccountSignOutMutation } from "../../api/account/account";
 
 interface SideNavigationProps {
   expand: "left" | "right";
@@ -19,8 +17,6 @@ interface SideNavigationProps {
 
 const SideNavigation = ({ style, expand, children }: SideNavigationProps) => {
   const [expanded, setExpanded] = useState(true);
-  const [signOut] = useAccountSignOutMutation();
-  const navigate = useNavigate();
 
   return (
     <NavigationMenu.Root
@@ -31,13 +27,21 @@ const SideNavigation = ({ style, expand, children }: SideNavigationProps) => {
       data-expanded={expanded}
     >
       <div className={styles.wrapper} data-expand={expand}>
-			<NavigationMenu.Item asChild>
+        <NavigationMenu.Item asChild>
           <button
             className={styles.collapse}
             onClick={() => setExpanded((prev) => !prev)}
             type="button"
           >
-            {expanded ? <ArrowLongLeftIcon width="24px" /> : <ArrowLongRightIcon width="24px" />}
+            {expanded && expand === "left" ? (
+              <ArrowLongRightIcon width="24px" />
+            ) : expanded && expand === "right" ? (
+              <ArrowLongLeftIcon width="24px" />
+            ) : expand === "left" ? (
+              <ArrowLongLeftIcon width="24px" />
+            ) : (
+              <ArrowLongRightIcon width="24px" />
+            )}
             <span>{expanded ? "Collapse" : "Expand"}</span>
           </button>
         </NavigationMenu.Item>
