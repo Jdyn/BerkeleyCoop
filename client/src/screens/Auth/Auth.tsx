@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { useAccountSignInMutation } from "../../api/account/account";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 
 const schema = Yup.object({
@@ -45,7 +45,12 @@ const LogIn = (_props: Props): JSX.Element => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.info} />
+      <div className={styles.hero}>
+        <div className={styles.info}>
+          <h1>The Berkeley Student Cooperative</h1>
+          {/* <p>Join the BSC and start connecting with other members from all over the world.</p> */}
+        </div>
+      </div>
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <h1>Sign in to your account.</h1>
@@ -77,9 +82,11 @@ const LogIn = (_props: Props): JSX.Element => {
                 <div>{(error as any).data.error}</div>
               </div>
             )}
-
             <Button type="submit">Sign In</Button>
           </form>
+          <Link className={styles.link} to="/signup">
+            Don't have an account yet? Sign up
+          </Link>
         </div>
       </div>
     </div>

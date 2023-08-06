@@ -71,8 +71,7 @@ defmodule Berkeley.UserController do
   to avoid fixation attacks.
   """
   def sign_in(conn, %{"email" => email, "password" => password} = _params) do
-    with {:ok, user} <- Accounts.authenticate(email, password),
-         nil <- get_session(conn, :user_token) do
+    with {:ok, user} <- Accounts.authenticate(email, password) do
       token = Accounts.create_session_token(user)
 
       conn
@@ -80,12 +79,6 @@ defmodule Berkeley.UserController do
       |> put_session(:user_token, token)
       |> put_remember_token(token)
       |> render("login.json", %{user: user, token: Base.url_encode64(token, padding: false)})
-    else
-      {:unauthorized, message} ->
-        {:unauthorized, message}
-
-      _ ->
-        {:unauthorized, "You are already signed in."}
     end
   end
 
