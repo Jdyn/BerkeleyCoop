@@ -11,6 +11,13 @@ export function useChannel(topic: string, onJoin?: (channel: any, message: any) 
 
   useEffect(() => {
     if (socket === null) return;
+    // console.log(socket);
+    // if (socket.channels?.find((ch: any) => ch.topic === topic)) {
+    //   const oldChannel = socket.channels.find((ch: any) => ch.topic === topic);
+		// 	setChannel(oldChannel);
+    //   oldChannel.push("rejoin", oldChannel.topic);
+    //   return;
+    // }
 
     const ch = socket.channel(topic);
     ch.join().receive("ok", (message: any) => onJoinFun?.current && onJoinFun.current(ch, message));

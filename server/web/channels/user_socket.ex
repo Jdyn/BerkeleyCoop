@@ -4,6 +4,7 @@ defmodule Berkeley.UserSocket do
   alias Berkeley.Accounts
 
   channel("room:*", Berkeley.RoomChannel)
+  channel("chat:*", Berkeley.ChatChannel)
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

@@ -23,7 +23,7 @@ const Chat = () => {
   const { observe, height } = useDimensions();
   const [messages, setMessages] = useState<any[]>([]);
   const [rooms, setRooms] = useState<any[]>([]);
-  const channel = useChannel(id ? `room:${id}` : `room:lobby`);
+  const channel = useChannel(id ? `chat:${id}` : `chat:lobby`);
   const user = useUser();
 
   useEvent(channel, "shout", (message) => {
