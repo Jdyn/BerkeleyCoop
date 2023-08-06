@@ -142,6 +142,17 @@ Accounts.register(
   :default
 )
 
+Accounts.register(
+  %{
+    first_name: "Alice",
+    last_name: "Wonder",
+    email: "test@test2.com",
+    password: "Password123",
+    house_id: 2
+  },
+  :default
+)
+
 Repo.insert(%Room{
   name: "Global Chat",
   description: "All houses in one room.",

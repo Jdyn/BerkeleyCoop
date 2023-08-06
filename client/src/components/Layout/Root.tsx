@@ -39,14 +39,19 @@ const RootLayout = () => {
 
   useEvent(channel, "members", (message) => {
     setMembers(message.users);
+    // const [onlineList, offlineList] = consolidate(presence, message.users);
+
+    // setState({ presence: message, onlineList, offlineList });
   });
 
   const consolidate = (newPresence: any): [any[], any[]] => {
     const online: any[] = [];
     const offline: any[] = [];
 
-    if (!members) return consolidate(newPresence);
-
+    if (members.length === 0) {
+			console.log('recurse')
+			return consolidate(newPresence);
+		}
     members.forEach((member) => {
       if (member.id in newPresence) {
         online.push({ ...member, onlineAt: newPresence[member.id].metas[0].onlineAt });
@@ -63,11 +68,11 @@ const RootLayout = () => {
   return (
     <main className={styles.root}>
       <SideNavigation expand="right" style={{ gridArea: "left" }}>
-        <SideNavigationLink to="/events">
+        <SideNavigationLink to="events">
           <CalendarDaysIcon width="24px" />
           Events
         </SideNavigationLink>
-        <SideNavigationLink to="/chats">
+        <SideNavigationLink to="chats">
           <ChatBubbleBottomCenterIcon width="24px" />
           Chats
         </SideNavigationLink>

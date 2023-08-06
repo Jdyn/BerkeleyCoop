@@ -31,12 +31,12 @@ defmodule Berkeley.User do
 
     has_many(:tokens, UserToken)
 
-    has_many(:created_events, Event)
 
     belongs_to(:house, House)
 
     many_to_many(:rooms, Room, join_through: "users_rooms")
     many_to_many(:events, Event, join_through: "events_users")
+    has_many(:created_events, Event, foreign_key: :creator_id)
     timestamps()
   end
 

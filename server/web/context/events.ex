@@ -4,7 +4,6 @@ defmodule Berkeley.Events do
   """
   use Berkeley.Web, :service
 
-  alias Berkeley.Accounts
   alias Berkeley.Chat
   alias Berkeley.Event
   alias Berkeley.Repo

@@ -8,7 +8,6 @@ interface Props {
 }
 
 const UserListCard = ({ user, online }: Props) => {
-	console.log(user)
   return (
     <div className={styles.root}>
       <Avatar firstName={user.firstName} lastName={user.lastName} />
