@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Socket } from "phoenix";
+import { Socket, SocketConnectOption } from "phoenix";
 
 export const SocketContext = React.createContext<Socket | null>(null);
 
-export function SocketProvider({ children, options, url }) {
+interface Props {
+	children: React.ReactNode;
+	options?: SocketConnectOption;
+	url: string;
+}
+
+export function SocketProvider({ children, options, url }: Props) {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {

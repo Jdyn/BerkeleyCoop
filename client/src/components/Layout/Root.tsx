@@ -12,11 +12,10 @@ import { useState } from "react";
 import { Presence } from "phoenix";
 
 const RootLayout = () => {
-  const { id } = useParams<{ id: string }>();
-  const channel = useChannel(id ? `room:${id}` : "room:lobby");
+  const channel = useChannel("room:lobby");
   const [members, setMembers] = useState<any[]>([]);
 
-  const [{ presence, onlineList, offlineList }, setState] = useState({
+  const [{ presence, onlineList, offlineList }, setState] = useState<Record<string, any>>({
     presence: {},
     onlineList: [],
     offlineList: [],
@@ -42,9 +41,9 @@ const RootLayout = () => {
     setMembers(message.users);
   });
 
-  const consolidate = (newPresence: any) => {
-    const online: any = [];
-    const offline: any = [];
+  const consolidate = (newPresence: any): [any[], any[]] => {
+    const online: any[] = [];
+    const offline: any[] = [];
 
     if (!members) return consolidate(newPresence);
 

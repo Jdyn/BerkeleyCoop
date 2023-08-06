@@ -1,6 +1,6 @@
 import styles from "./Chat.module.css";
 // import { useChannel } from "../../hooks/useWebsocket";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import clsx from "clsx";
 import {
@@ -13,13 +13,29 @@ import {
 } from "@heroicons/react/24/outline";
 import useDimensions from "react-cool-dimensions";
 import { HashtagIcon } from "@heroicons/react/20/solid";
+import { useChannel } from "../../hooks/socket/useChannel";
+import useEvent from "../../hooks/socket/useEvent";
 
 const Chat = () => {
-  const params = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
   const { observe, height } = useDimensions();
+  const [messages, setMessages] = useState<any[]>([]);
+  const [rooms, setRooms] = useState<any[]>([]);
+  const channel = useChannel(`room:${id}`);
 
-  // const { channel, messages, rooms } = useChannel();
-  // const currentRoom = useMemo(() => rooms.find((room) => room.id == params?.id), [rooms, params?.id]);
+  useEvent(channel, "shout", (message) => {
+    setMessages((prev) => [...prev, message]);
+  });
+
+  useEvent(channel, "lobby", (message) => {
+    setRooms(message.rooms);
+  });
+
+	useEvent(channel, "messages", (message) => {
+		setMessages(message.messages);
+  });
+
+  const currentRoom = useMemo(() => rooms.find((room) => room.id == id), [rooms, id]);
 
   return (
     <>
@@ -32,10 +48,10 @@ const Chat = () => {
             </div>
             <PlusCircleIcon width="32px" />
           </h2>
-          {/* {rooms.map((room) => (
+          {rooms.map((room) => (
             <Link
               to={`${room.id}`}
-              className={clsx(styles.roomItem, room.id == params.id && styles.active)}
+              className={clsx(styles.roomItem, room.id == id && styles.active)}
               key={room.id}
             >
               <h3>
@@ -44,7 +60,7 @@ const Chat = () => {
               </h3>
               <p>{room.description}</p>
             </Link>
-          ))} */}
+          ))}
         </div>
         <div className={styles.window}>
           {currentRoom?.name && (
@@ -62,17 +78,17 @@ const Chat = () => {
           )}
           <div ref={observe} className={styles.chatList} style={{ height: height }}>
             <div className={styles.chatContent}>
-              {/* {messages.map((message) => (
+              {messages.map((message) => (
                 <div className={styles.message} key={message.id}>
                   <span>{message.username}</span>
                   <div className={styles.messageContent}>
                     <p>{message.content}</p>
                   </div>
                 </div>
-              ))} */}
+              ))}
             </div>
           </div>
-          {/* <form
+          <form
             className={styles.inputForm}
             onSubmit={(e) => {
               e.preventDefault();
@@ -85,21 +101,8 @@ const Chat = () => {
             <button title="Send a chat message" className={styles.submit} type="submit">
               <PaperAirplaneIcon width="24px" />
             </button>
-          </form> */}
+          </form>
         </div>
-        {/* <div className={styles.list}>
-          <h2>
-            <div>
-              <UserCircleIcon width="32px" /> <span>People</span>
-            </div>
-          </h2>
-          {currentRoom?.users &&
-            currentRoom.users.map((user: any) => (
-              <div key={user.id}>
-                {user.firstName} {user.lastName}
-              </div>
-            ))}
-        </div> */}
       </main>
     </>
   );
