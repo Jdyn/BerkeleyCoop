@@ -8,6 +8,7 @@ interface Props {
 }
 
 const UserListCard = ({ user, online }: Props) => {
+	console.log(user)
   return (
     <div className={styles.root}>
       <Avatar firstName={user.firstName} lastName={user.lastName} />
@@ -15,6 +16,13 @@ const UserListCard = ({ user, online }: Props) => {
         <h4 className={styles.name}>
           {user.firstName} {user.lastName}
         </h4>
+				<div>
+					{user.house && (
+						<div className={styles.house}>
+							{user.house.title}
+						</div>
+					)}
+				</div>
         <div className={styles.status}>
           {online ? (
             <>

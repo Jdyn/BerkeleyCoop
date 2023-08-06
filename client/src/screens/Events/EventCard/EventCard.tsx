@@ -15,9 +15,10 @@ const EventCard = ({ event }: Props) => {
           <h3>Event</h3>
           <h2>{event.title}</h2>
           <span>{dateRange(event.startDate, event.endDate)}</span>
-					{isStarted(event.startDate) && <div className={styles.started}>Event Started!</div>}
+          {isStarted(event.startDate) && <div className={styles.started}>Event Started!</div>}
         </div>
         <div className={styles.wrapper}>
+          <span>description:</span>
           <p className={styles.description}>{event.description}</p>
           <span>{formatEventStatus(event.startDate, event.endDate)}</span>
         </div>
