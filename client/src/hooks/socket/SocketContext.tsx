@@ -5,7 +5,7 @@ export const SocketContext = React.createContext<Socket | null>(null);
 
 interface Props {
 	children: React.ReactNode;
-	options?: SocketConnectOption;
+	options?: Partial<SocketConnectOption>;
 	url: string;
 }
 
