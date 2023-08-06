@@ -1,7 +1,7 @@
 import styles from "./Root.module.css";
 import SideNavigation, { SideNavigationLink } from "../SideNavigation/SideNavigation";
 import Header from "../Header/Header";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
 import { ArrowRightOnRectangleIcon, ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 import UserListCard from "../UserListCard/UserListCard";

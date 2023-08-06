@@ -15,13 +15,16 @@ import useDimensions from "react-cool-dimensions";
 import { HashtagIcon } from "@heroicons/react/20/solid";
 import { useChannel } from "../../hooks/socket/useChannel";
 import useEvent from "../../hooks/socket/useEvent";
+import { useUser } from "../../hooks/useUser";
+import { formatTimeAgo } from "../../util/dates";
 
 const Chat = () => {
   const { id } = useParams<{ id: string }>();
   const { observe, height } = useDimensions();
   const [messages, setMessages] = useState<any[]>([]);
   const [rooms, setRooms] = useState<any[]>([]);
-  const channel = useChannel(`room:${id}`);
+  const channel = useChannel(id ? `room:${id}` : `room:lobby`);
+  const user = useUser();
 
   useEvent(channel, "shout", (message) => {
     setMessages((prev) => [...prev, message]);
@@ -31,8 +34,8 @@ const Chat = () => {
     setRooms(message.rooms);
   });
 
-	useEvent(channel, "messages", (message) => {
-		setMessages(message.messages);
+  useEvent(channel, "messages", (message) => {
+    setMessages(message.messages);
   });
 
   const currentRoom = useMemo(() => rooms.find((room) => room.id == id), [rooms, id]);
@@ -79,9 +82,28 @@ const Chat = () => {
           <div ref={observe} className={styles.chatList} style={{ height: height }}>
             <div className={styles.chatContent}>
               {messages.map((message) => (
-                <div className={styles.message} key={message.id}>
-                  <span>{message.username}</span>
-                  <div className={styles.messageContent}>
+                <div
+                  className={clsx(
+                    styles.message,
+                    message.user.id === user?.id && styles.ownMessage
+                  )}
+                  key={message.id}
+                >
+                  <h4
+                    className={styles.messageHeader}
+                    style={{
+											flexDirection: message.user.id === user?.id ? "row" : "row-reverse",
+                    }}
+                  >
+                    <div>{formatTimeAgo(message.inserted_at)}</div>
+                    <span>{message.username}</span>
+                  </h4>
+                  <div
+                    className={clsx(
+                      styles.messageContent,
+                      message.user.id === user?.id && styles.selfMessageContent
+                    )}
+                  >
                     <p>{message.content}</p>
                   </div>
                 </div>

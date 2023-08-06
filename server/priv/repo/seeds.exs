@@ -120,11 +120,22 @@ end)
 
 houses = Repo.all(House)
 
-dbg Accounts.register(
+Accounts.register(
   %{
     first_name: "John",
     last_name: "Doe",
     email: "test@test.com",
+    password: "Password123",
+    house_id: 1
+  },
+  :default
+)
+
+Accounts.register(
+  %{
+    first_name: "Sally",
+    last_name: "Mae",
+    email: "test@test1.com",
     password: "Password123",
     house_id: 1
   },
@@ -145,7 +156,7 @@ Repo.insert(%Room{
   description: "General chat room",
   creator_id: 1,
   houses: [Repo.get_by!(House, name: "Casa Zimbabwe")],
-  users: [Repo.get!(User, 1)],
+  users: [Repo.get!(User, 1), Repo.get!(User, 2)],
   messages: []
 })
 
