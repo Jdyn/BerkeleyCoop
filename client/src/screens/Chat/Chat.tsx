@@ -17,13 +17,19 @@ import { useChannel } from "../../hooks/socket/useChannel";
 import useEvent from "../../hooks/socket/useEvent";
 import { useUser } from "../../hooks/useUser";
 import { formatTimeAgo } from "../../util/dates";
+import Modal from "../../components/Modal/Modal";
+import { useGetHousesQuery } from "../../api/chat/chat";
+import Select, { SelectItem } from "../../components/Select/Select";
 
 const Chat = () => {
   const { id } = useParams<{ id: string }>();
   const { observe, height } = useDimensions();
+  const modal = useState(false);
   const [messages, setMessages] = useState<any[]>([]);
   const [rooms, setRooms] = useState<any[]>([]);
   const channel = useChannel(id ? `chat:${id}` : `chat:lobby`);
+  const { data } = useGetHousesQuery();
+
   const user = useUser();
 
   useEvent(channel, "shout", (message) => {
@@ -49,9 +55,21 @@ const Chat = () => {
             <h2>
               <BuildingStorefrontIcon width="32px" /> <span>Rooms</span>
             </h2>
-            <PlusCircleIcon width="32px" />
+            <Modal
+              modal={modal}
+              title="Create a new room?"
+              description="Publish an event for others to join and participate!"
+            >
+              <PlusCircleIcon width="32px" />
+              <form>
+                <Select>
+                  {data?.houses.map((house) => (
+                    <SelectItem value={house.id}>{house.title}</SelectItem>
+                  ))}
+                </Select>
+              </form>
+            </Modal>
           </div>
-
           {rooms.map((room) => (
             <Link
               to={`${room.id}`}

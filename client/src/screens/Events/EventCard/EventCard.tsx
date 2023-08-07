@@ -36,7 +36,7 @@ const EventCard = ({ event }: Props) => {
           title="Are you sure you want to delete this event?"
           description="This will permanently delete your event and the associated chat room. This cannot be undone."
           submitText="Delete"
-          onSubmit={(e) => {
+          onSubmit={() => {
             deleteEvent(event.id);
           }}
         >

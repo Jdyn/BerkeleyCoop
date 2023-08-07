@@ -31,6 +31,7 @@ defmodule Berkeley.Router do
     pipe_through([:api, :ensure_auth])
 
     resources("/events", EventController)
+    get("/houses", HouseController, :index)
 
     resources("/account", UserController, singleton: true, only: [:show]) do
       get("/sessions", UserController, :show_sessions)

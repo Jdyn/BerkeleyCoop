@@ -1,9 +1,11 @@
 import { memo, useEffect, useState } from "react";
 import styles from "./Events.module.css";
 import EventCard from "./EventCard/EventCard";
-import DialogForm from "../../components/DialogForm/DialogForm";
-import { FormTemplate } from "../../components/Form";
+import DialogForm from "../../components/Modal/Modal";
+import Form, { FormTemplate } from "../../components/Form";
 import { useCreateEventMutation, useGetEventsQuery } from "../../api/event/event";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import Button from "../../components/Button/Button";
 
 const template: FormTemplate = {
   type: "event",
@@ -56,12 +58,18 @@ const Events = memo(() => {
           modal={modal}
           title="Create an event"
           description="Publish an event for others to join and participate!"
-          template={template}
-          errors={(error as any)?.data?.errors || {}}
-          onSubmit={(_type, payload) => {
-            createEvent({ event: payload });
-          }}
-        />
+        >
+          <Button green>
+            <PlusCircleIcon width="20px" /> Create
+          </Button>
+          <Form
+            template={template}
+						errors={(error as any)?.data?.errors || {}}
+            onSubmit={(_, form) => {
+              createEvent({ event: form });
+            }}
+          />
+        </DialogForm>
       </h1>
       <div className={styles.root}>
         {data?.events && data.events.map((item) => <EventCard key={item.id} event={item} />)}

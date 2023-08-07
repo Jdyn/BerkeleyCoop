@@ -4,7 +4,7 @@
 	justify-content: center;
 	background: var(--indigo-9);
 	border: 2px solid var(--indigo-11);
-	padding: 8px 10px;
+	padding: 6px 20px;
 	border-radius: 12px;
 	gap: 5px;
 	cursor: pointer;
@@ -17,10 +17,32 @@
 }
 
 .root:hover {
-	background: var(--indigo-10);
+	background: var(--green-10);
 	transform: translateY(-2px);
 }
 
 .root:active {
 	transform: translateY(2px);
+}
+
+.green {
+	background: var(--green-9);
+	border: 2px solid var(--green-11);
+}
+
+.green:hover {
+	background: var(--green-10);
+}
+
+
+.secondary {
+	color: var(--text);
+	background: var(--white);
+	border: 2px solid var(--border);
+}
+
+.secondary:hover {
+	color: var(--text);
+	background: var(--primary-bg);
+	border: 2px solid var(--border);
 }

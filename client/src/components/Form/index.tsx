@@ -18,10 +18,11 @@ interface Props {
   onSubmit: (type: string, form: Record<string, unknown>) => void;
   isPending?: boolean;
   template: FormTemplate;
+	errors?: any;
 }
 
 const Form = (props: Props): JSX.Element => {
-  const { onSubmit, template } = props;
+  const { onSubmit, template, errors } = props;
 
   const [form, setForm] = useState<Record<string, any>>({});
 
@@ -29,7 +30,7 @@ const Form = (props: Props): JSX.Element => {
     event.preventDefault();
     onSubmit(template.type, form);
   };
-	console.log(formatDate(new Date(Date.now())))
+  console.log(formatDate(new Date(Date.now())));
 
   return (
     <form className={styles.form} onSubmit={submitForm}>
@@ -43,7 +44,7 @@ const Form = (props: Props): JSX.Element => {
             value={form[field.key || field.name] || ""}
             type={field.type || field.key}
             placeholder={field.placeholder}
-						min={formatDate(new Date(Date.now()))}
+            min={formatDate(new Date(Date.now()))}
             onChange={(event: ChangeEvent<HTMLInputElement>): void =>
               setForm({
                 ...form,
@@ -51,6 +52,9 @@ const Form = (props: Props): JSX.Element => {
               })
             }
           />
+          {errors[field.key || field.name] && (
+            <span className={styles.error}>{errors[field.key || field.name]}</span>
+          )}
         </fieldset>
       ))}
       <Button>{template.submit}</Button>
