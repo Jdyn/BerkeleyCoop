@@ -54,3 +54,14 @@
 	font-weight: 700;
 	text-transform: uppercase;
 }
+
+.logout {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	justify-content: flex-end;
+}
+.logout > a {
+	border: 2px solid #e3e3e3;
+	border-left: none;
+}

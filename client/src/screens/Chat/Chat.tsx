@@ -6,8 +6,8 @@ import clsx from "clsx";
 import {
   ArrowLongRightIcon,
   ArrowSmallRightIcon,
+  BuildingStorefrontIcon,
   ChatBubbleLeftRightIcon,
-  HomeIcon,
   PaperAirplaneIcon,
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
@@ -45,12 +45,13 @@ const Chat = () => {
       <h1 className={styles.header}>Chat</h1>
       <main className={styles.root}>
         <div className={styles.rooms}>
-          <h2 className={styles.roomHeader}>
-            <div>
-              <HomeIcon width="32px" /> <span>Rooms</span>
-            </div>
+          <div className={styles.roomHeader}>
+            <h2>
+              <BuildingStorefrontIcon width="32px" /> <span>Rooms</span>
+            </h2>
             <PlusCircleIcon width="32px" />
-          </h2>
+          </div>
+
           {rooms.map((room) => (
             <Link
               to={`${room.id}`}
@@ -67,17 +68,17 @@ const Chat = () => {
         </div>
         <div className={styles.window}>
           {currentRoom?.name && (
-            <h2 className={styles.windowHeader}>
-              <div>
+            <div className={styles.windowHeader}>
+              <h2>
                 <ChatBubbleLeftRightIcon width="32px" /> {currentRoom.name}
-              </div>
+              </h2>
               {currentRoom.event && (
                 <Link to={`/events/${currentRoom.event?.id}`}>
-                  {`This chat is linked to an Event: ${currentRoom.event.title} `}
+                  {`This chat has an event: ${currentRoom.event.title}!`}
                   <ArrowLongRightIcon width="24px" />
                 </Link>
               )}
-            </h2>
+            </div>
           )}
           <div ref={observe} className={styles.chatList} style={{ height: height }}>
             <div className={styles.chatContent}>
@@ -92,7 +93,7 @@ const Chat = () => {
                   <h4
                     className={styles.messageHeader}
                     style={{
-											flexDirection: message.user.id === user?.id ? "row" : "row-reverse",
+                      flexDirection: message.user.id === user?.id ? "row" : "row-reverse",
                     }}
                   >
                     <div>{formatTimeAgo(message.inserted_at)}</div>

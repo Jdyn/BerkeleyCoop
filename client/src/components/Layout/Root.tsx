@@ -3,9 +3,13 @@ import SideNavigation, { SideNavigationLink } from "../SideNavigation/SideNaviga
 import Header from "../Header/Header";
 import { Outlet } from "react-router-dom";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
-import { ArrowRightOnRectangleIcon, ChatBubbleBottomCenterIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightOnRectangleIcon,
+  ChatBubbleBottomCenterIcon,
+  HomeIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
 import UserListCard from "../UserListCard/UserListCard";
-import clsx from "clsx";
 import { useChannel } from "../../hooks/socket/useChannel";
 import useEvent from "../../hooks/socket/useEvent";
 import { useEffect, useState } from "react";
@@ -17,7 +21,7 @@ const RootLayout = () => {
 
   const [{ presence, userList }, setState] = useState<Record<string, any>>({
     presence: {},
-    userList: []
+    userList: [],
   });
 
   useEvent(channel, "presence_diff", (message) => {
@@ -41,12 +45,12 @@ const RootLayout = () => {
     // setState({ presence: message, onlineList, offlineList });
   });
 
-	useEffect(() => {
-		if (members.length > 0 && Object.keys(presence).length > 0) {
-			const userList = consolidate(presence);
-			setState({ presence, userList });
-		}
-	}, [members, presence])
+  useEffect(() => {
+    if (members.length > 0 && Object.keys(presence).length > 0) {
+      const userList = consolidate(presence);
+      setState({ presence, userList });
+    }
+  }, [members, presence]);
 
   const consolidate = (newPresence: any): any[] => {
     const result: any[] = [];
@@ -67,6 +71,10 @@ const RootLayout = () => {
   return (
     <main className={styles.root}>
       <SideNavigation expand="right" style={{ gridArea: "left" }}>
+        <SideNavigationLink to="/">
+          <HomeIcon width="24px" />
+          Home
+        </SideNavigationLink>
         <SideNavigationLink to="events">
           <CalendarDaysIcon width="24px" />
           Events
@@ -75,18 +83,20 @@ const RootLayout = () => {
           <ChatBubbleBottomCenterIcon width="24px" />
           Chats
         </SideNavigationLink>
-        <SideNavigationLink
-          to="/signin"
-          replace
-          onClick={() => {
-            // signOut();
-          }}
-          className={clsx(styles.listItem, styles.logout)}
-          style={{ justifySelf: "flex-end" }}
-        >
-          <ArrowRightOnRectangleIcon width="24px" />
-          Log out
-        </SideNavigationLink>
+        <div className={styles.logout}>
+          <SideNavigationLink
+            to="/signin"
+            replace
+            onClick={() => {
+              // signOut();
+            }}
+            className={styles.listItem}
+            style={{ justifySelf: "flex-end" }}
+          >
+            <ArrowRightOnRectangleIcon width="24px" />
+            Log out
+          </SideNavigationLink>
+        </div>
       </SideNavigation>
       <Header />
       <div className={styles.main}>
@@ -98,7 +108,10 @@ const RootLayout = () => {
       </div>
       <SideNavigation expand="left">
         <div className={styles.userList} style={{ flexGrow: 1 }}>
-          <h3> <UserCircleIcon width="24px" style={{ overflow: 'visible'}} /> Members</h3>
+          <h3>
+            {" "}
+            <UserCircleIcon width="24px" style={{ overflow: "visible" }} /> Members
+          </h3>
           {userList.map((user: any) => (
             <UserListCard key={user.id} user={user} online={user.onlineAt} />
           ))}

@@ -161,14 +161,14 @@ defmodule Berkeley.Chat do
 
   def publish_message_created(message = %Chat.Message{}) do
     message = Chat.MessageView.render("message.json", %{message: message})
-    Endpoint.broadcast("room:#{message.room_id}", "shout", message)
+    Endpoint.broadcast("chat:#{message.room_id}", "shout", message)
     {:ok, message}
   end
 
   def publish_message_created(result), do: result
 
   def publish_message_updated({:ok, message} = result) do
-    Endpoint.broadcast("room:#{message.room_id}", "updated_message", %{message: message})
+    Endpoint.broadcast("chat:#{message.room_id}", "updated_message", %{message: message})
     result
   end
 

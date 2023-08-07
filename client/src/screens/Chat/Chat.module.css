@@ -79,14 +79,20 @@
 	flex-direction: column;
   margin: 20px 0px;
   justify-self: flex-start;
-  border-bottom: 2px solid var(--tertiary-bg);
+	font-weight: 700;
+	gap: 10px;
+  /* border-bottom: 2px solid var(--tertiary-bg); */
 }
 
 .windowHeader > a {
 	display: flex;
 	align-items: center;
 	font-size: 1rem;
-	color: var(--accent-bg);
+	color: var(--white);
+	background: var(--accent-bg);
+	border-radius: 6px;
+	justify-content: center;
+	padding: 2px;
 }
 
 .chatList {
@@ -127,7 +133,7 @@
 	margin: 20px 0px;
 }
 
-.roomHeader > div {
+.roomHeader > h2 {
 	display: flex;
 	align-items: center;
 	gap: 10px;

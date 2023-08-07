@@ -8,6 +8,7 @@ import { accountApi } from "./api";
 import { AnyAction, Dispatch, Store } from "@reduxjs/toolkit";
 import Event from "./screens/Events/Event/Event";
 import Cookies from "js-cookie";
+import Home from "./screens/Home/Home";
 
 const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (_request) => {
   const result = dispatch(accountApi.endpoints.getAccount.initiate() as unknown as AnyAction);
@@ -52,6 +53,10 @@ const router = (store: Store) =>
         {
           path: "events",
           element: <Events />,
+        },
+				{
+          path: "/",
+          element: <Home />,
         },
       ],
     },
