@@ -20,10 +20,10 @@
   display: flex;
   flex-direction: column;
   color: var(--primary-bg);
-	gap: 5px;
-	width: 100%;
-	font-weight: 700;
-	justify-self: flex-start;
+  gap: 5px;
+  width: 100%;
+  font-weight: 700;
+  justify-self: flex-start;
 }
 
 .messageContent {
@@ -37,8 +37,8 @@
 }
 
 .selfMessageContent {
-	background: var(--accent-bg);
-	border: 2px solid var(--accent-b);
+  background: var(--accent-bg);
+  border: 2px solid var(--accent-b);
 }
 
 .message > h4 {
@@ -51,18 +51,18 @@
 }
 
 .messageHeader {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	gap: 10px;
-	width: 100%;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
 }
 
 .messageHeader > div {
-	font-weight: 500;
-	font-size: 0.8rem;
-	color: var(--secondary-text);
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--secondary-text);
 }
 
 .window {
@@ -76,23 +76,23 @@
 
 .windowHeader {
   display: flex;
-	flex-direction: column;
+  flex-direction: column;
   margin: 20px 0px;
   justify-self: flex-start;
-	font-weight: 700;
-	gap: 10px;
-  /* border-bottom: 2px solid var(--tertiary-bg); */
+  font-weight: 700;
+  gap: 10px;
+  border-bottom: 2px solid var(--tertiary-bg);
 }
 
 .windowHeader > a {
-	display: flex;
-	align-items: center;
-	font-size: 1rem;
-	color: var(--white);
-	background: var(--accent-bg);
-	border-radius: 6px;
-	justify-content: center;
-	padding: 2px;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--white);
+  background: var(--accent-bg);
+  border-radius: 6px;
+  justify-content: center;
+  padding: 2px;
 }
 
 .chatList {
@@ -110,11 +110,10 @@
 }
 
 .ownMessage {
-	display: flex;
-	align-items: flex-end;
-	justify-self: flex-end;
+  display: flex;
+  align-items: flex-end;
+  justify-self: flex-end;
 }
-
 
 .rooms {
   display: flex;
@@ -126,17 +125,17 @@
 }
 
 .roomHeader {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0px;
 }
 
 .roomHeader > h2 {
-	display: flex;
-	align-items: center;
-	gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .roomItem {
@@ -147,40 +146,42 @@
   color: var(--text);
   gap: 10px;
   text-decoration: none;
-  transition-duration: 0.1s;
+  transition-duration: 0.3s;
   border-radius: 16px;
 }
 
 .roomItem:hover {
   background: var(--accent-bg);
   border: 2px solid var(--accent-b);
-	color: white;
+	transform: translateY(-2px);
+	box-shadow: var(--card-small);
+  color: white;
 }
 
 .roomItem:hover > p {
-	color: #e6ebf1 !important;
+  color: #e6ebf1 !important;
 }
 
 .active {
   background: var(--accent-bg);
-	border: 2px solid var(--accent-b);
-	color: white;
+  border: 2px solid var(--accent-b);
+  color: white;
 }
 
 .roomItem > h3 {
   display: flex;
   align-items: center;
-	gap: 5px;
+  gap: 5px;
   justify-content: flex-start;
   margin: 0;
 }
 
 .active > p {
-	color: #e6ebf1 !important;
+  color: rgb(245, 245, 245) !important;
 }
 
 .roomItem > p {
-	color: var(--secondary-text);
+  color: var(--secondary-text);
 }
 
 .inputForm {
@@ -221,4 +222,30 @@
   border: 2px solid var(--primary-bg);
   border: none;
   padding: 0;
+}
+
+.houseList {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 5px;
+  overflow: hidden;
+	margin: 5px 0px;
+	overflow-x: auto;
+}
+
+.housePill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--accent-bg);
+	border: 2px solid var(--accent-b);
+	border-radius: 16px;
+	padding: 2px 5px;
+	white-space: nowrap;
+	color: var(--white);
+	font-weight: 500;
+	font-size: 0.8rem;
+	margin: 0;
+	gap: 5px;
 }

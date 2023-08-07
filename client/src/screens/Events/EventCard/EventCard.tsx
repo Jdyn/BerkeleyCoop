@@ -13,7 +13,7 @@ interface Props {
 const EventCard = ({ event }: Props) => {
   const [deleteEvent] = useDeleteEventMutation();
   const user = useUser();
-	console.log(event)
+
   return (
     <div className={styles.root}>
       <EventImage />

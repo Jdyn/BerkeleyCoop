@@ -34,7 +34,7 @@ defmodule Berkeley.ChatChannel do
   def handle_info(:send_messages, socket) do
     room_id = socket.assigns.room_id
 
-    with true <- is_binary(room_id) do
+    with true <- is_number(room_id) do
       messages =
         Repo.all(
           from(m in Chat.Message,

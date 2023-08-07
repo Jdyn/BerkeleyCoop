@@ -18,7 +18,7 @@ const UserListCard = ({ user, online }: Props) => {
 				<div>
 					{user.house && (
 						<div className={styles.house}>
-							{user.house.title}
+							{user.house.name}
 						</div>
 					)}
 				</div>

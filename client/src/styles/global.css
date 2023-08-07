@@ -2,6 +2,8 @@
 @import '@radix-ui/colors/blue.css';
 @import '@radix-ui/colors/green.css';
 @import '@radix-ui/colors/red.css';
+@import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/orange-alpha.css';
 @import '@radix-ui/colors/gray-dark.css';
 @import '@radix-ui/colors/blue-dark.css';
 @import '@radix-ui/colors/green-dark.css';
@@ -10,6 +12,7 @@
 @import '@radix-ui/colors/slate.css';
 @import '@radix-ui/colors/indigo.css';
 @import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/lime-alpha.css';
 
 @font-face {
   font-display: swap;
@@ -48,7 +51,7 @@
 
 	--text: #4B4B4B;
 	--white: #fff;
-	--secondary-text: rgb(119, 119, 119);
+	--secondary-text: rgb(100, 100, 100);
 	--primary-bg: #f2f6fc;
 	/* var(--mauve-8); */
 	--secondary-bg: rgb(255,255,255);

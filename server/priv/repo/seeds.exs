@@ -167,7 +167,7 @@ Repo.insert(%Room{
   description: "General chat room",
   creator_id: 1,
   houses: [Repo.get_by!(House, name: "Casa Zimbabwe")],
-  users: [Repo.get!(User, 1), Repo.get!(User, 2)],
+  users: [],
   messages: []
 })
 

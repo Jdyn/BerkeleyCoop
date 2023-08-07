@@ -59,7 +59,7 @@ const Events = memo(() => {
           title="Create an event"
           description="Publish an event for others to join and participate!"
         >
-          <Button green>
+          <Button>
             <PlusCircleIcon width="20px" /> Create
           </Button>
           <Form

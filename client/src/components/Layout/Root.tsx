@@ -18,6 +18,7 @@ import { Presence } from "phoenix";
 const RootLayout = () => {
   const channel = useChannel("room:lobby");
   const [members, setMembers] = useState<any[]>([]);
+	const [current, setCurrent] = useState<string | undefined>(undefined);
 
   const [{ presence, userList }, setState] = useState<Record<string, any>>({
     presence: {},
@@ -70,16 +71,16 @@ const RootLayout = () => {
 
   return (
     <main className={styles.root}>
-      <SideNavigation expand="right" style={{ gridArea: "left" }}>
-        <SideNavigationLink to="/">
+      <SideNavigation expand="right" style={{ gridArea: "left" }} current={current}>
+        <SideNavigationLink to="/" onClick={() => setCurrent('0')}>
           <HomeIcon width="24px" />
           Home
         </SideNavigationLink>
-        <SideNavigationLink to="events">
+        <SideNavigationLink to="/events" onClick={() => setCurrent('1')}>
           <CalendarDaysIcon width="24px" />
           Events
         </SideNavigationLink>
-        <SideNavigationLink to="chats">
+        <SideNavigationLink to="/chats" onClick={() => setCurrent('2')}>
           <ChatBubbleBottomCenterIcon width="24px" />
           Chats
         </SideNavigationLink>
@@ -109,7 +110,6 @@ const RootLayout = () => {
       <SideNavigation expand="left">
         <div className={styles.userList} style={{ flexGrow: 1 }}>
           <h3>
-            {" "}
             <UserCircleIcon width="24px" style={{ overflow: "visible" }} /> Members
           </h3>
           {userList.map((user: any) => (

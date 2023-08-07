@@ -32,6 +32,7 @@ defmodule Berkeley.Router do
 
     resources("/events", EventController)
     get("/houses", HouseController, :index)
+    post("/rooms", RoomController, :create)
 
     resources("/account", UserController, singleton: true, only: [:show]) do
       get("/sessions", UserController, :show_sessions)

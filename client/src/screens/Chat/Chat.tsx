@@ -1,7 +1,6 @@
 import styles from "./Chat.module.css";
-// import { useChannel } from "../../hooks/useWebsocket";
-import { useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import clsx from "clsx";
 import {
   ArrowLongRightIcon,
@@ -18,19 +17,35 @@ import useEvent from "../../hooks/socket/useEvent";
 import { useUser } from "../../hooks/useUser";
 import { formatTimeAgo } from "../../util/dates";
 import Modal from "../../components/Modal/Modal";
-import { useGetHousesQuery } from "../../api/chat/chat";
-import Select, { SelectItem } from "../../components/Select/Select";
+import { useCreateRoomMutation, useGetHousesQuery } from "../../api/chat/chat";
+import Select from "../../components/Select/Select";
+import { Controller, useForm } from "react-hook-form";
+import Button from "../../components/Button/Button";
+import formStyles from "../../components/Form/index.module.css";
 
 const Chat = () => {
   const { id } = useParams<{ id: string }>();
   const { observe, height } = useDimensions();
+  const navigate = useNavigate();
   const modal = useState(false);
   const [messages, setMessages] = useState<any[]>([]);
   const [rooms, setRooms] = useState<any[]>([]);
   const channel = useChannel(id ? `chat:${id}` : `chat:lobby`);
   const { data } = useGetHousesQuery();
+  const [createRoom, { isSuccess }] = useCreateRoomMutation();
+
+  const { control, register, handleSubmit } = useForm<any>();
+
+  const houses = useMemo(
+    () => data?.houses?.map((house) => ({ label: house.name, value: house })) ?? [],
+    [data]
+  );
 
   const user = useUser();
+
+  useEffect(() => {
+    if (isSuccess) navigate("chats");
+  }, [isSuccess, navigate]);
 
   useEvent(channel, "shout", (message) => {
     setMessages((prev) => [...prev, message]);
@@ -46,29 +61,77 @@ const Chat = () => {
 
   const currentRoom = useMemo(() => rooms.find((room) => room.id == id), [rooms, id]);
 
+  const onSubmit = handleSubmit((data) => {
+    const payload = {
+      room: { ...data, houses: data.houses.map((option: any) => option.value.name) },
+    };
+    createRoom(payload);
+  });
+
   return (
     <>
-      <h1 className={styles.header}>Chat</h1>
+      <h1 className={styles.header}>
+        Chat
+        <Modal
+          modal={modal}
+          title="Create a new room?"
+          description="Publish an event for others to join and participate!"
+        >
+          <Button>
+            <PlusCircleIcon width="20px" /> Create
+          </Button>
+          <form className={formStyles.form} onSubmit={onSubmit}>
+            <fieldset className={formStyles.container}>
+              <label>Room name</label>
+              <input
+                {...register("name")}
+                className={formStyles.input}
+                type="input"
+                placeholder="Enter a name..."
+              />
+            </fieldset>
+            <fieldset className={formStyles.container}>
+              <label className={formStyles.label}>Room description</label>
+              <input
+                {...register("description")}
+                className={formStyles.input}
+                type="input"
+                placeholder="Enter a description..."
+              />
+            </fieldset>
+            <fieldset className={formStyles.container}>
+              <label className={formStyles.label}>Invite houses</label>
+              <Controller
+                control={control}
+                defaultValue={[]}
+                name="houses"
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    value={value}
+                    onChange={(newValue) => {
+                      onChange(
+                        newValue.filter(
+                          (obj, index) =>
+                            newValue.findIndex((item) => item.value.id === obj.value.id) === index
+                        )
+                      );
+                    }}
+                    options={houses}
+                    isMulti
+                  />
+                )}
+              />
+            </fieldset>
+            <Button type="submit">Create</Button>
+          </form>
+        </Modal>
+      </h1>
       <main className={styles.root}>
         <div className={styles.rooms}>
           <div className={styles.roomHeader}>
             <h2>
               <BuildingStorefrontIcon width="32px" /> <span>Rooms</span>
             </h2>
-            <Modal
-              modal={modal}
-              title="Create a new room?"
-              description="Publish an event for others to join and participate!"
-            >
-              <PlusCircleIcon width="32px" />
-              <form>
-                <Select>
-                  {data?.houses.map((house) => (
-                    <SelectItem value={house.id}>{house.title}</SelectItem>
-                  ))}
-                </Select>
-              </form>
-            </Modal>
           </div>
           {rooms.map((room) => (
             <Link
@@ -81,6 +144,13 @@ const Chat = () => {
                 <ArrowSmallRightIcon width="24px" />
               </h3>
               <p>{room.description}</p>
+              <div className={styles.houseList} style={{ maxHeight: "50px" }}>
+                {room.houses.map((house: any) => (
+                  <span className={styles.housePill} key={house.name}>
+                    {house.name}
+                  </span>
+                ))}
+              </div>
             </Link>
           ))}
         </div>
@@ -90,6 +160,15 @@ const Chat = () => {
               <h2>
                 <ChatBubbleLeftRightIcon width="32px" /> {currentRoom.name}
               </h2>
+              {
+                <div className={clsx(styles.houseList, styles.text)}>
+                  {currentRoom.houses?.map((house: any) => (
+                    <span className={styles.housePill} key={house.name}>
+                      {house.name}
+                    </span>
+                  ))}
+                </div>
+              }
               {currentRoom.event && (
                 <Link to={`/events/${currentRoom.event?.id}`}>
                   {`This chat has an event: ${currentRoom.event.title}!`}

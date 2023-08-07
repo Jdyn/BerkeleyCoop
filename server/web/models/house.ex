@@ -23,5 +23,10 @@ defmodule Berkeley.House do
     room
     |> cast(attrs, [:name, :description])
     |> validate_required([:name, :description])
+    |> unique_constraint(:name)
+  end
+
+  def get_house(house_attrs) do
+    Repo.get_by(House, id: house_attrs["id"])
   end
 end

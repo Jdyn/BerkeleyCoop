@@ -12,7 +12,7 @@ export const chatApi = createApi({
     //   query: () => `/events`,
     //   providesTags: ["rooms"],
     // }),
-    createRoom: mutation<{ event: any }, { event: any }>({
+    createRoom: mutation<void, { room: any }>({
       query: (body) => ({
         url: "/rooms",
         method: "POST",

@@ -5,6 +5,7 @@ defmodule Berkeley.Chat.Room do
   alias Berkeley.Chat.Message
   alias Berkeley.House
   alias Berkeley.User
+  alias Berkeley.Repo
 
   schema "rooms" do
     field(:name, :string)
@@ -22,6 +23,16 @@ defmodule Berkeley.Chat.Room do
   end
 
   @doc false
+  def create_changeset(room, attrs) do
+    houses = Repo.all(from h in House, where: h.name in ^attrs["houses"])
+
+    room
+    |> cast(attrs, [:name, :description, :creator_id, :event_id])
+    |> validate_required([:name, :description, :creator_id, :houses])
+    |> put_assoc(:houses, houses)
+    |> foreign_key_constraint(:creator_id)
+  end
+
   def changeset(room, attrs) do
     room
     |> cast(attrs, [:name, :description, :creator_id, :event_id])

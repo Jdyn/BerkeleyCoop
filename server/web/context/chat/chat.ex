@@ -23,7 +23,19 @@ defmodule Berkeley.Chat do
 
   """
   def list_rooms(%User{} = user) do
-    Repo.all(assoc(user, :rooms)) |> Repo.preload([:creator, :users, :event])
+    house_rooms =
+      from(
+        r in Room,
+        left_join: h in assoc(r, :houses),
+        where: h.id == ^user.house_id,
+        select: r
+      )
+      |> Repo.all()
+      |> Repo.preload([:creator, :users, :event, :houses])
+
+    user_rooms = user |> assoc(:rooms) |> Repo.all() |> Repo.preload([:creator, :users, :event, :houses])
+
+    house_rooms ++ user_rooms
   end
 
   @doc """
@@ -75,13 +87,13 @@ defmodule Berkeley.Chat do
   """
   def create_room(attrs \\ %{}) do
     %Room{}
-    |> Room.changeset(attrs)
+    |> Room.create_changeset(attrs)
     |> Repo.insert()
   end
 
   def create_room!(attrs \\ %{}) do
     %Room{}
-    |> Room.changeset(attrs)
+    |> Room.create_changeset(attrs)
     |> Repo.insert!()
   end
 
@@ -155,11 +167,11 @@ defmodule Berkeley.Chat do
     |> publish_message_updated()
   end
 
-  def preload_message_creator(message = %Message{}) do
+  def preload_message_creator(%Message{} = message) do
     Repo.preload(message, :creator)
   end
 
-  def publish_message_created(message = %Chat.Message{}) do
+  def publish_message_created(%Chat.Message{} = message) do
     message = Chat.MessageView.render("message.json", %{message: message})
     Endpoint.broadcast("chat:#{message.room_id}", "shout", message)
     {:ok, message}

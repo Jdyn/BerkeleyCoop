@@ -10,7 +10,8 @@ defmodule Berkeley.HouseView do
   def render("house.json", %{house: house}) do
     %{
       id: house.id,
-      title: house.name
+      name: house.name,
+      description: house.description,
     }
   end
 end

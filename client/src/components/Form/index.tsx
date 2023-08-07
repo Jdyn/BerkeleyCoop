@@ -30,7 +30,6 @@ const Form = (props: Props): JSX.Element => {
     event.preventDefault();
     onSubmit(template.type, form);
   };
-  console.log(formatDate(new Date(Date.now())));
 
   return (
     <form className={styles.form} onSubmit={submitForm}>
