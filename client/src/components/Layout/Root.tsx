@@ -3,7 +3,7 @@ import SideNavigation, { SideNavigationLink } from "../SideNavigation/SideNaviga
 import Header from "../Header/Header";
 import { Outlet } from "react-router-dom";
 import { CalendarDaysIcon } from "@heroicons/react/20/solid";
-import { ArrowRightOnRectangleIcon, ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
+import { ArrowRightOnRectangleIcon, ChatBubbleBottomCenterIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import UserListCard from "../UserListCard/UserListCard";
 import clsx from "clsx";
 import { useChannel } from "../../hooks/socket/useChannel";
@@ -15,10 +15,9 @@ const RootLayout = () => {
   const channel = useChannel("room:lobby");
   const [members, setMembers] = useState<any[]>([]);
 
-  const [{ presence, onlineList, offlineList }, setState] = useState<Record<string, any>>({
+  const [{ presence, userList }, setState] = useState<Record<string, any>>({
     presence: {},
-    onlineList: [],
-    offlineList: [],
+    userList: []
   });
 
   useEvent(channel, "presence_diff", (message) => {
@@ -31,10 +30,8 @@ const RootLayout = () => {
   });
 
   useEvent(channel, "presence_state", (message) => {
-    // const newPresence = Presence.syncState(presence, message);
-    const [onlineList, offlineList] = consolidate(message);
-
-    setState({ presence: message, onlineList, offlineList });
+    const userList = consolidate(message);
+    setState({ presence: message, userList });
   });
 
   useEvent(channel, "members", (message) => {
@@ -44,26 +41,21 @@ const RootLayout = () => {
     // setState({ presence: message, onlineList, offlineList });
   });
 
-  const consolidate = (newPresence: any): [any[], any[]] => {
-    const online: any[] = [];
-    const offline: any[] = [];
+  const consolidate = (newPresence: any): any[] => {
+    const result: any[] = [];
 
-    if (members.length === 0) {
-			console.log('recurse')
-			return consolidate(newPresence);
-		}
+    if (members.length === 0) return [];
+
     members.forEach((member) => {
       if (member.id in newPresence) {
-        online.push({ ...member, onlineAt: newPresence[member.id].metas[0].onlineAt });
+        result.push({ ...member, onlineAt: newPresence[member.id].metas[0].onlineAt });
       } else {
-        offline.push(member);
+        result.push(member);
       }
     });
 
-    return [online, offline];
+    return result;
   };
-
-  // console.log(onlineList, offlineList);
 
   return (
     <main className={styles.root}>
@@ -97,17 +89,11 @@ const RootLayout = () => {
           </div>
         </div>
       </div>
-      <SideNavigation expand="left" style={{ gridArea: "right" }}>
+      <SideNavigation expand="left">
         <div className={styles.userList} style={{ flexGrow: 1 }}>
-          <h3>Online</h3>
-          {onlineList.map((user: any) => (
-            <UserListCard key={user.id} user={user} online />
-          ))}
-        </div>
-        <div className={styles.userList}>
-          <h3>Offline</h3>
-          {offlineList.map((user: any) => (
-            <UserListCard key={user.id} user={user} />
+          <h3> <UserCircleIcon width="24px" style={{ overflow: 'visible'}} /> Members</h3>
+          {userList.map((user: any) => (
+            <UserListCard key={user.id} user={user} online={user.onlineAt} />
           ))}
         </div>
       </SideNavigation>
