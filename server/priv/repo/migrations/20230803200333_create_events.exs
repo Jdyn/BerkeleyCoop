@@ -13,7 +13,7 @@ defmodule Berkeley.Repo.Migrations.CreateEvents do
       timestamps()
     end
 
-    create table(:events_participants, primary_key: false) do
+    create table(:participants_events, primary_key: false) do
       add :participant_id, references(:users)
       add :event_id, references(:events)
     end

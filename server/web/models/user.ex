@@ -34,9 +34,14 @@ defmodule Berkeley.User do
 
     belongs_to(:house, House)
 
+    # To implement joining a room as a user.
     many_to_many(:rooms, Room, join_through: "users_rooms")
-    many_to_many(:events, Event, join_through: "events_users")
+      
+    # To implement joining an event as a user.
+    many_to_many(:events, Event, join_through: "participants_events")
+
     has_many(:created_events, Event, foreign_key: :creator_id)
+
     timestamps()
   end
 

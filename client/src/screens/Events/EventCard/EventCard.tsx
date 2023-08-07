@@ -1,12 +1,19 @@
 import styles from "./EventCard.module.css";
 import { ReactComponent as EventImage } from "../../../images/event.svg";
 import { dateRange, formatEventStatus, isStarted } from "../../../util/dates";
+import AlertDialog from "../../../components/AlertDialog/AlertDialog";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { useDeleteEventMutation } from "../../../api/event/event";
+import { useUser } from "../../../hooks/useUser";
 
 interface Props {
   event: any;
 }
 
 const EventCard = ({ event }: Props) => {
+  const [deleteEvent] = useDeleteEventMutation();
+  const user = useUser();
+	console.log(event)
   return (
     <div className={styles.root}>
       <EventImage />
@@ -23,6 +30,19 @@ const EventCard = ({ event }: Props) => {
           <span>{formatEventStatus(event.startDate, event.endDate)}</span>
         </div>
       </div>
+      {user?.id === event?.creator?.id && (
+        <AlertDialog
+          className={styles.alert}
+          title="Are you sure you want to delete this event?"
+          description="This will permanently delete your event. This cannot be undone."
+          submitText="Delete"
+          onSubmit={(e) => {
+            deleteEvent(event.id);
+          }}
+        >
+          <TrashIcon width="24px" />
+        </AlertDialog>
+      )}
     </div>
   );
 };

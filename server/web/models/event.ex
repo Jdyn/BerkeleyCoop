@@ -13,8 +13,8 @@ defmodule Berkeley.Event do
 
     belongs_to(:creator, User, foreign_key: :creator_id)
 
-    # you have to basically join the event...
-    many_to_many(:participants, User, join_through: "events_participants")
+    # To implement joining an event as a user.
+    many_to_many(:participants, User, join_through: "participants_events")
 
     has_one(:room, Room)
 

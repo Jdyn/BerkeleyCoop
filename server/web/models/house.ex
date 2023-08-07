@@ -12,6 +12,7 @@ defmodule Berkeley.House do
 
     has_many(:occupants, User)
 
+    # To implement joining a user to a room by their house
     many_to_many(:rooms, Room, join_through: "houses_rooms")
 
     timestamps()

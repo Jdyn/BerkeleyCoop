@@ -1,5 +1,6 @@
 .root {
 	display: flex;
+	position: relative;
 	flex-direction: column;
   background: var(--primary-bg);
   border-radius: 15px;
@@ -55,4 +56,19 @@
 
 .wrapper > span {
 	color: var(--secondary-text);
+}
+
+.alert {
+	position: absolute !important;
+	color: var(--red-9);
+	right: 0;
+	padding: 5px;
+	margin: 5px;
+	cursor: pointer;
+	border-radius: 50%;
+	transition-duration: 0.2s;
+}
+
+.alert:hover {
+	background: var(--secondary-bg)
 }

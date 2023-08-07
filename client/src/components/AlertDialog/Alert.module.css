@@ -1,0 +1,71 @@
+.modalRoot {
+  display: flex;
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+}
+
+.dialog {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.5);
+}
+
+.content {
+  display: flex;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 16px;
+  outline: 2px solid var(--border);
+  max-width: 400px;
+  margin: 10px;
+  flex-direction: column;
+  opacity: 1;
+  background: var(--secondary-bg);
+	text-align: center;
+}
+
+.content > p {
+	display: flex;
+	flex: 1;
+	padding: 20px;
+}
+
+.buttons {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  margin: 10px 0;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  outline: none;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-bg);
+  box-shadow: 0 0 0 1px var(--border);
+  color: var(--text);
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+
+.danger {
+	background: var(--red-9);
+	color: var(--white);
+}

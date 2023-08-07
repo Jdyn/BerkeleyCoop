@@ -8,7 +8,7 @@ export const eventApi = createApi({
   baseQuery,
   tagTypes: ["events"],
   endpoints: ({ query, mutation }) => ({
-    getEvents: query<{events: any[]}, void>({
+    getEvents: query<{ events: any[] }, void>({
       query: () => `/events`,
       providesTags: ["events"],
     }),
@@ -16,11 +16,18 @@ export const eventApi = createApi({
       query: (body) => ({
         url: "/events",
         method: "POST",
-				body
+        body,
       }),
-			invalidatesTags: ["events"],
+      invalidatesTags: ["events"],
+    }),
+    deleteEvent: mutation<void, number>({
+      query: (id) => ({
+        url: `/events/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["events"],
     }),
   }),
 });
 
-export const { useCreateEventMutation, useGetEventsQuery } = eventApi;
+export const { useCreateEventMutation, useGetEventsQuery, useDeleteEventMutation } = eventApi;
