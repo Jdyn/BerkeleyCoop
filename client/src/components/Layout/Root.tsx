@@ -8,7 +8,7 @@ import UserListCard from "../UserListCard/UserListCard";
 import clsx from "clsx";
 import { useChannel } from "../../hooks/socket/useChannel";
 import useEvent from "../../hooks/socket/useEvent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Presence } from "phoenix";
 
 const RootLayout = () => {
@@ -24,9 +24,9 @@ const RootLayout = () => {
     if (Object.keys(presence).length === 0) return;
 
     const newPresence = Presence.syncDiff(presence, message);
-    const [onlineList, offlineList] = consolidate(newPresence);
+    const userList = consolidate(newPresence);
 
-    setState({ presence: newPresence, onlineList, offlineList });
+    setState({ presence: newPresence, userList });
   });
 
   useEvent(channel, "presence_state", (message) => {
@@ -40,6 +40,13 @@ const RootLayout = () => {
 
     // setState({ presence: message, onlineList, offlineList });
   });
+
+	useEffect(() => {
+		if (members.length > 0 && Object.keys(presence).length > 0) {
+			const userList = consolidate(presence);
+			setState({ presence, userList });
+		}
+	}, [members, presence])
 
   const consolidate = (newPresence: any): any[] => {
     const result: any[] = [];
