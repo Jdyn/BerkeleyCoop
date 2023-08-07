@@ -3,7 +3,7 @@ defmodule Berkeley.EventView do
 
   def render("index.json", %{events: events}) do
     %{
-      events: render_many(events, __MODULE__, "event.json", as: :event)
+      events: render_many(events, __MODULE__, "event_with_creator.json", as: :event)
     }
   end
 
@@ -22,6 +22,18 @@ defmodule Berkeley.EventView do
       startDate: event.start_date,
       endDate: event.end_date,
       insertedAt: event.inserted_at,
+    }
+  end
+
+  def render("event_with_creator.json", %{event: event}) do
+    %{
+      id: event.id,
+      title: event.title,
+      description: event.description,
+      startDate: event.start_date,
+      endDate: event.end_date,
+      insertedAt: event.inserted_at,
+      creator: render_one(event.creator, Berkeley.UserView, "user.json", as: :user),
     }
   end
 end

@@ -31,9 +31,10 @@ defmodule Berkeley.EventController do
 
   def delete(conn, %{"id" => id}) do
     event = Events.get_event!(id)
-
-    with {:ok, %Event{}} <- Events.delete_event(event) do
-      send_resp(conn, :no_content, "")
-    end
+    Events.delete_event(event)
+    send_resp(conn, :no_content, "")
+    # with {:ok, _} <- Events.delete_event(event) do
+    #   send_resp(conn, :no_content, "")
+    # end
   end
 end

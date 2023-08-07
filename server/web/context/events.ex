@@ -20,7 +20,7 @@ defmodule Berkeley.Events do
 
   """
   def list_events do
-    Repo.all(Event)
+    Event |> Repo.all() |> Repo.preload(:creator)
   end
 
   @doc """
@@ -124,7 +124,32 @@ defmodule Berkeley.Events do
 
   """
   def delete_event(%Event{} = event) do
-    Repo.delete(event)
+    Multi.new()
+    |> Multi.delete_all(:delete_user_rooms, fn _ ->
+      room = Repo.get_by(Chat.Room, event_id: event.id)
+
+      from(ur in "users_rooms",
+        where: ur.room_id == ^room.id,
+        select: [:room_id]
+      )
+    end)
+    |> Multi.delete(:delete_room, fn _ ->
+      Repo.one(
+        from(r in Chat.Room,
+          where: r.event_id == ^event.id,
+          select: r
+        )
+      )
+    end)
+    |> Multi.delete(:delete_event, fn _ ->
+      Repo.one(
+        from(e in Event,
+          where: e.id == ^event.id,
+          select: e
+        )
+      )
+    end)
+    |> Repo.transaction()
   end
 
   @doc """

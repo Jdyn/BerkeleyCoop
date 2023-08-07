@@ -34,7 +34,7 @@ const EventCard = ({ event }: Props) => {
         <AlertDialog
           className={styles.alert}
           title="Are you sure you want to delete this event?"
-          description="This will permanently delete your event. This cannot be undone."
+          description="This will permanently delete your event and the associated chat room. This cannot be undone."
           submitText="Delete"
           onSubmit={(e) => {
             deleteEvent(event.id);
