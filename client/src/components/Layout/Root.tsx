@@ -107,7 +107,7 @@ const RootLayout = () => {
           </div>
         </div>
       </div>
-      <SideNavigation expand="left">
+      <SideNavigation expand="left" style={{ gridArea: "right" }}>
         <div className={styles.userList} style={{ flexGrow: 1 }}>
           <h3>
             <UserCircleIcon width="24px" style={{ overflow: "visible" }} /> Members

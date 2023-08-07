@@ -1,10 +1,8 @@
 .root {
   display: flex;
-  position: relative;
   height: 100%;
-  flex-grow: 1;
   --left-nav-width-collapsed: 75px;
-  --left-nav-width-expanded: 240px;
+  --left-nav-width-expanded: 225px;
   --left-nav-width: var(--left-nav-width-collapsed);
   width: var(--left-nav-width-collapsed);
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -23,6 +21,7 @@
 }
 
 .wrapper {
+	position: absolute !important;
   width: var(--left-nav-width);
   height: 100%;
 	padding: 0;
@@ -48,8 +47,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  flex: 1;
-	/* gap: 10px; */
+  flex-grow: 1;
+	height: 100%;
   list-style: none;
   padding: 30px 10px 20px 0px;
 }
@@ -77,18 +76,6 @@
 .collapse > span {
 	overflow: hidden;
 }
-
-/* .collapse:hover {
-  background: var(--mauve-11);
-} */
-
-/* .wrapper[data-expand="left"] > .collapse {
-  border-bottom-left-radius: 16px;
-}
-
-.wrapper[data-expand="right"] > .collapse {
-  border-bottom-right-radius: 16px;
-} */
 
 .listItem {
   display: flex;
@@ -123,28 +110,11 @@
 	color: white;
 }
 
-/* .listItem:hover {
-  background: var(--accent-bg);
-	border: 2px solid var(--accent-b);
-	border-left: none;
-	color: white;
-}
-*/
-
-/* .active {
-	background: var(--accent-bg);
-	border: 2px solid var(--accent-b);
-	color: white;
-	border-left: none;
-} */
-
 .indicator {
   display: flex;
 	position: relative;
   justify-content: center;
-	width: 100%;
   overflow: hidden;
-	width: 200px;
 	pointer-events: none;
 	z-index: 1;
 	background: var(--accent-bg);

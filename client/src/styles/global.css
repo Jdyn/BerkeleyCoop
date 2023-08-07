@@ -13,6 +13,7 @@
 @import '@radix-ui/colors/indigo.css';
 @import '@radix-ui/colors/black-alpha.css';
 @import '@radix-ui/colors/lime-alpha.css';
+@import '@radix-ui/colors/indigo-alpha.css';
 
 @font-face {
   font-display: swap;
