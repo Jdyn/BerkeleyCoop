@@ -31,22 +31,32 @@
 
     <style>
 
+p{
+  color: white;
+}
 
 .wrapper {
   display: flex;
   width: 100vw;
-  background-color: antiquewhite;
+  background-color: rgb(75, 75, 75);
   text-decoration: none;
   transition: all 0.4s;
 }
+.display-4 {
+  color: white;
+}
+.display-6 {
+  color: white;
 
+}
 #sidebar {
   min-width: 250px;
   max-width: 250px;
   background: #262933;
   color: #fff;
   transition: all 0.4s;
-  height: 100vh;
+  height: 200vh;
+  padding: 7px
 }
 
 #sidebar.active {
@@ -90,8 +100,9 @@ a[data-toggle="collapse"] {
   position: relative;
 }
 #profile-pic {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
+  margin: 7px;
 }
 .dropdown-toggle::after {
   display: block;
@@ -101,8 +112,8 @@ a[data-toggle="collapse"] {
   transform: translateY(-50%);
 }
 .jumbotron {
-  background-color: antiquewhite;
-  width: 80vw;
+  background-color: rgb(75, 75, 75);
+  width: 75vw;
 }
 ul ul a {
   font-size: 0.9em !important;
@@ -121,32 +132,44 @@ ul ul a {
   #sidebarCollapse span {
     display: none;
   }
+  .btn-secondary {
+    background-color: rgb(47, 47, 47);
+
+
+  }
+
 }
     </style>
   </head>
   <body>
     
     <div class="wrapper">
-        <nav id="sidebar">
-          <div class="sidebar-header">
-            <h3>Berkeley Housing Coop</h3>
-          </div>
-          <ul class="lisst-unstyled components">
-            <p>My Nav</p>
-            <li class="active">
-              
-              <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="events.html">Event</a> </button></li>
-              <br>
-                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="login.html">Channel</a></button></li>
-                <br>
-                <li><button type = "button" class = "btn btn-light btn-secondary btn-block"><a href="settings.html">Settings</a></button></li>
-            
+              <!--Beginning of Nav Bar-->
+              <nav id="sidebar">
+                <div class="sidebar-header">
+                  <h3>Berkeley Housing Coop</h3>
+                  
+                </div>
+                <ul class="lisst-unstyled components">
+                  <p>My Nav</p>
+                  <li class="active">
+                    
+                    <li id = "menu"><button type = "button" class = "btn btn-secondary btn-block" id = "menu" style = "background-color: rgb(47, 47, 47);" > <a id = "menu" href="events.html">Event</a> </button></li>
+                    <br>
+                      <li><button type = "button" class = "btn btn-secondary btn-block" id = "menu"> <a class = "menu"  href="login.html">Channel</a></button></li>
+                      <br>
+                      <li><button type = "button" class = "btn btn-secondary btn-block" id = "menu-button"> <a href="settings.html">Settings</a></button></li>
+                  
+      
+                  <li>
+                    <a href="index.html">Log Out</a>
+                  </li>
+                </ul>
+              </nav>
+              <!--End of Nav Bar-->
 
-            <li>
-              <a href="index.html">Log Out</a>
-            </li>
-          </ul>
-        </nav>
+
+
         <div id="content">
           <!-- Toggler -->
           <nav class="navbar navbar-expand-lg">
@@ -158,63 +181,191 @@ ul ul a {
               </button>
             </div>
           </nav>
+
+
           <!-- Main Content Here -->
-          <div class="jumbotron">
+          
 
-            <h1 class="display-4">Settings</h1>
+            <div class="d-flex flex-column flex-sm-row align-items-center p-2 px-md-2 mb-2 bg-grey  border-bottom shadow-sm">
+              <h1 class="my-0 mr-md-auto font-weight-normal display-6">Settings</h5>
+              <nav class="my-2 my-md-0 mr-md-3">
+                
+                <img id = "profile-pic" alt = "Student profile picture" src = "depositphotos_68789187-stock-photo-students.jpg">
+              </nav>
+            </div>
 
-            <div class = "wrapper">
-              <img id = "profile-pic" alt = "Student profile picture" src = "depositphotos_68789187-stock-photo-students.jpg">
-              </div>
-              <br>
+            <div class="container-fluid">
+              <div class="px-lg-5">
+  
+                <div class="d-flex flex-row flex-md-row align-items-left p-1 px-md-2 mb-2 bg-grey  border-bottom shadow-sm">
 
-            <p class="lead">Name</p>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">@</span>
+                  <h1 class="my-2 mr-md-auto font-weight-normal display-6">Account Settings</h1>
+
+                    <p class = "text-left" style = "color: white">Edit your profile and see who can see it.</p>
+  
                 </div>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-              </div>
 
-            <p>Email</p>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">@</span>
+
+
+                <!--Settings-->
+
+                <div class="jumbotron">
+                  <div class="col-md-8 order-md-1">
+                    
+                    <form class="needs-validation" novalidate="">
+                      <div class = "col-md-6 mb-3">
+                        <img style = "width: 140px; height: 140px;" id = "profile-pic" alt = "Student profile picture" src = "depositphotos_68789187-stock-photo-students.jpg">
+                        </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                          <label for="firstName"><p>First name</p></label>
+                          <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                          
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="lastName"><p>Last name</p></label>
+                          <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                          
+                        </div>
+                        
+                      </div>
+              
+                      
+              
+                      
+              
+                      <div class="mb-3">
+                        <label for="address">Email</label>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                        
+                      </div>
+              
+                      
+              
+                      <div class="row">
+                        <div class="col-md-5 mb-3">
+                          <label for="country">Country</label>
+                          <select class="custom-select d-block w-100" id="country" required="">
+                            <option value="">Choose...</option>
+                            <option>United States</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            Please select a valid country.
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <label for="state">State</label>
+                          <select class="custom-select d-block w-100" id="state" required="">
+                            <option value="">Choose...</option>
+                            <option>California</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            Please provide a valid state.
+                          </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="zip">Zip</label>
+                          <input type="text" class="form-control" id="zip" placeholder="" required="">
+                          <div class="invalid-feedback">
+                            Zip code required.
+                          </div>
+                        </div>
+                      </div>
+                      <hr class="mb-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="same-address">
+                        <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="save-info">
+                        <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                      </div>
+                      <hr class="mb-4">
+              
+                      <h4 class="mb-3">Who can see you?</h4>
+              
+                      <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                          <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                          <label class="custom-control-label" for="credit"><p>Everyone</p></label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                          <label class="custom-control-label" for="debit"><p>Friends</p></label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                          <label class="custom-control-label" for="paypal"><p>Only You</p> </label>
+                        </div>
+                      </div>
+                      
+                      
+                      </div>
+                      <hr class="mb-4">
+                      <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    </form>
+                  </div>
+
+
+
+
+                <!--End Settings-->
+                
                 </div>
-                <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+            
+            
+  
+              <!-- Gallery goes here -->
+            
+              
+                  <!-- Row starts here -->
+  
+  
+                                    <!-- End -->
+              
+                
+                  
+                
+                </div>
+              
+        
+  
+                </div>
+                
+                  <!-- End -->
+  
+                </div>
+  
+  
+                
+                
               </div>
             
-              <p>Password</p>
-              <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
-                </div>
-
-                
-                
-          </div>
+            <!-- Gallery ends -->
+              
+                  
+                  
+            </div>
+            
           
-        
+          </div>
+              <!-- Image and text -->
+  
         </div>
-            <!-- Image and text -->
-
-      </div>
-
+  
+        
+        
+        
+  
       
       
+      <script type="module" src="/src/main.tsx"></script>
+      <!--Bootstrap stuff-->
       
-
-    
-    
-    <script type="module" src="/src/main.tsx"></script>
-    <!--Bootstrap stuff-->
-    
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
-
-  </body>
-</html>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  
+  
+  
+    </body>
+  </html>
