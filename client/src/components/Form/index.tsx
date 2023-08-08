@@ -17,13 +17,13 @@ export interface FormTemplate {
 
 interface Props {
 	onSubmit: (type: string, form: Record<string, unknown>) => void;
-	isPending?: boolean;
+	isLoading?: boolean;
 	template: FormTemplate;
 	errors?: any;
 }
 
 function Form(props: Props) {
-	const { onSubmit, template, errors } = props;
+	const { onSubmit, template, errors, isLoading} = props;
 
 	const [form, setForm] = useState<Record<string, any>>({});
 
@@ -57,13 +57,13 @@ function Form(props: Props) {
 					)}
 				</fieldset>
 			))}
-			<Button type="submit">{template.submit}</Button>
+			<Button type="submit" isLoading={isLoading}>{template.submit}</Button>
 		</form>
 	);
 }
 
 Form.defaultProps = {
-	isPending: false,
+	isLoading: false,
 	errors: null
 };
 

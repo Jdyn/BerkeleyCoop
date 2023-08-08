@@ -96,19 +96,15 @@
   display: flex;
   width: 100%;
   width: 300px;
-	gap: 10px;
+	gap: 20px;
   flex-direction: column;
-}
-
-.form > div {
-  margin: 15px 0px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  margin: 0px 0px 10px 0px;
   padding: 0;
+	gap: 10px;
   outline: none;
   border: none;
 }
@@ -130,7 +126,6 @@
 	font-size: 0.8rem;
 	padding: 2px 10px;
 	color: white;
-	margin-top: 10px;
 	border: 2px solid var(--red-11)
 }
 .error > div {

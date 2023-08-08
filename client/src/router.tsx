@@ -2,7 +2,7 @@ import './styles/global.css';
 import { LoaderFunction, createBrowserRouter, redirect } from 'react-router-dom';
 import { AnyAction, Dispatch, Store } from '@reduxjs/toolkit';
 import RootLayout from './components/Layout/Root';
-import Auth from './screens/Auth/Auth';
+import Auth from './screens/Auth/login';
 import Chat from './screens/Chat/Chat';
 import Events from './screens/Events/Events';
 import { accountApi } from './api';

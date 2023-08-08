@@ -45,7 +45,6 @@ const Events = memo(() => {
 
 	useEffect(() => {
 		if (isSuccess) {
-			console.log('success');
 			modal[1](false);
 			reset();
 		}
@@ -88,6 +87,7 @@ const Events = memo(() => {
 					<Form
 						template={template}
 						errors={(error as any)?.data?.errors || {}}
+						isLoading={isLoading}
 						onSubmit={(_, form) => {
 							createEvent({ event: form });
 						}}

@@ -7,7 +7,7 @@ import styles from './Button.module.css';
 interface Props {
 	secondary?: boolean;
 	green?: boolean;
-	isPending?: boolean;
+	isLoading?: boolean;
 }
 
 const Button = forwardRef<
@@ -21,7 +21,7 @@ const Button = forwardRef<
 		disabled={isLoading}
 		className={clsx(styles.root, secondary && styles.secondary, green && styles.green)}
 	>
-		{isLoading ? <Loader />: children}
+		{isLoading ? <Loader className={styles.spin} width="14px" />: children}
 		{/* <Loader className={styles.spin} width="24px" /> */}
 	</button>
 ));

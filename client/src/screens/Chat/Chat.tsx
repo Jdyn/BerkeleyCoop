@@ -7,6 +7,7 @@ import {
 	ArrowLongRightIcon,
 	BuildingStorefrontIcon,
 	ChatBubbleLeftRightIcon,
+	ExclamationCircleIcon,
 	PaperAirplaneIcon,
 	PlusCircleIcon
 } from '@heroicons/react/24/outline';
@@ -32,7 +33,7 @@ function Chat() {
 	const [rooms, setRooms] = useState<any[]>([]);
 	const channel = useChannel(id ? `chat:${id}` : `chat:lobby`);
 	const { data } = useGetHousesQuery();
-	const [createRoom, { isSuccess }] = useCreateRoomMutation();
+	const [createRoom, { isSuccess, error, isLoading, reset }] = useCreateRoomMutation();
 
 	const { control, register, handleSubmit } = useForm<any>();
 
@@ -44,8 +45,12 @@ function Chat() {
 	const user = useUser();
 
 	useEffect(() => {
-		if (isSuccess) navigate('chats');
-	}, [isSuccess, navigate]);
+		if (isSuccess) {
+			modal[1](false);
+			reset();
+			navigate('/chats', { replace: true });
+		}
+	}, [isSuccess, modal, navigate, reset]);
 
 	useEvent(channel, 'shout', (message) => {
 		setMessages((prev) => [...prev, message]);
@@ -83,52 +88,82 @@ function Chat() {
 					<Button>
 						<PlusCircleIcon width="20px" /> Create
 					</Button>
-					<form className={formStyles.form} onSubmit={onSubmit}>
-						<label htmlFor="name input" className={formStyles.container}>
-							Room name
-							<input
-								{...register('name')}
-								className={formStyles.input}
-								type="input"
-								id="name input"
-								placeholder="Enter a name..."
-							/>
-						</label>
-						<label htmlFor="input" className={formStyles.container}>
-							Room description
-							<Input
-								{...register('description')}
-								type="input"
-								placeholder="Enter a description..."
-							/>
-						</label>
-						<label className={formStyles.container} htmlFor="house input">
-							Invite houses
-							<Controller
-								control={control}
-								defaultValue={[]}
-								name="houses"
-								render={({ field: { onChange, value, ref} }) => (
-									<Select
-										id="house input"
-										ref={ref}
-										value={value}
-										onChange={(newValue) => {
-											onChange(
-												newValue.filter(
-													(obj, index) =>
-														newValue.findIndex((item) => item.value.id === obj.value.id) === index
-												)
-											);
-										}}
-										options={houses}
-										isMulti
-									/>
-								)}
-							/>
-						</label>
-						<Button type="submit">Create</Button>
-					</form>
+					<div className={styles.formContent}>
+						<form className={formStyles.form} onSubmit={onSubmit}>
+							<label htmlFor="name input" className={formStyles.container}>
+								Room name
+								<Input
+									register={register}
+									name="name"
+									type="input"
+									id="name input"
+									placeholder="Enter a name..."
+								/>
+							</label>
+							<label htmlFor="description input" className={formStyles.container}>
+								Room description
+								<Input
+									register={register}
+									name="description"
+									type="input"
+									placeholder="Enter a description..."
+								/>
+							</label>
+							<label className={formStyles.container} htmlFor="house input">
+								Invite houses
+								<Controller
+									control={control}
+									defaultValue={[]}
+									name="houses"
+									render={({ field: { onChange, value, ref } }) => (
+										<div ref={ref}>
+											<Select
+												id="house input"
+												value={value}
+												onChange={(newValue) => {
+													onChange(
+														newValue.filter(
+															(obj, index) =>
+																newValue.findIndex((item) => item.value.id === obj.value.id) ===
+																index
+														)
+													);
+												}}
+												options={houses}
+												isMulti
+											/>
+										</div>
+									)}
+								/>
+							</label>
+							{(error as any)?.data?.error && (
+								<div className={styles.error}>
+									<ExclamationCircleIcon />
+									<div>{(error as any).data.error}</div>
+								</div>
+							)}
+							{(error as any)?.data?.errors && (
+								<div className={styles.error}>
+									<ExclamationCircleIcon />
+									<div>
+										{Object.entries((error as any).data.errors).map(([key, value]: [any, any]) => (
+											<>
+												<h4>{key}</h4>
+												<ul key={key}>
+													{value.map((v: string) => (
+														<li key={v}>{v}</li>
+													))}
+												</ul>
+											</>
+										))}
+									</div>
+								</div>
+							)}
+							<Button isLoading={isLoading} type="submit">
+								Create
+							</Button>
+						</form>
+					</div>
 				</Modal>
 			</h1>
 			<main className={styles.wrapper}>
@@ -150,7 +185,10 @@ function Chat() {
 							<p>{room.description}</p>
 							<div className={styles.houseList} style={{ maxHeight: '50px' }}>
 								{room.houses.map((house: any) => (
-									<span className={clsx(styles.housePill, room.id == id && styles.activePill)} key={house.name}>
+									<span
+										className={clsx(styles.housePill, room.id == id && styles.activePill)}
+										key={house.name}
+									>
 										{house.name}
 									</span>
 								))}

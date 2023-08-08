@@ -54,8 +54,7 @@
 
 .spin {
 	animation: spin 1s linear infinite;
-	color: rgba(255,  255, 255, 0.7);
-	opacity: 1;
+	color: rgba(255,  255, 255, 0.8);
 	fill: transparent;
 }
 

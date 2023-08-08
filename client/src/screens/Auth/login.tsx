@@ -24,7 +24,7 @@ type Props = {
 };
 
 function LogIn(_props: Props) {
-	const [signIn, { isSuccess, error }] = useAccountSignInMutation();
+	const [signIn, { isSuccess, error, isLoading }] = useAccountSignInMutation();
 
 	const navigate = useNavigate();
 	const {
@@ -83,7 +83,7 @@ function LogIn(_props: Props) {
 								<div>{(error as any).data.error}</div>
 							</div>
 						)}
-						<Button type="submit">Sign In</Button>
+						<Button type="submit" isLoading={isLoading}>Sign In</Button>
 					</form>
 					<Link className={styles.link} to="/signup">
 						Don't have an account yet? Sign up
