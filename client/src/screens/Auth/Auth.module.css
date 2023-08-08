@@ -102,7 +102,6 @@
 
 .form > div {
   margin: 15px 0px;
-  text-align: center;
 }
 
 .field {
@@ -133,6 +132,15 @@
 	color: white;
 	margin-top: 10px;
 	border: 2px solid var(--red-11)
+}
+.error > div {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.error > div > ul {
+	padding-left: 15px;
 }
 
 .error > svg {

@@ -15,10 +15,10 @@ export interface Session {
 
 export interface SignUpPayload {
 	email: string;
-	username: string;
 	first_name: string;
 	last_name: string;
 	password: string;
+	house_id: number;
 }
 
 export interface SignInPayload {

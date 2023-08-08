@@ -78,7 +78,7 @@ export const accountApi = createApi({
 			onQueryStarted: async (_payload, _) => {
 				Cookies.remove('user');
 			},
-			invalidatesTags: ['sessions']
+			invalidatesTags: ['sessions', 'user']
 		})
 	})
 });
@@ -89,5 +89,5 @@ const updateSession = (user: User, token: string): void => {
 	}
 };
 
-export const { useAccountSignInMutation, useAccountSignOutMutation, useGetAccountQuery } =
+export const { useAccountSignInMutation, useAccountSignOutMutation, useGetAccountQuery, useAccountSignUpMutation } =
 	accountApi;

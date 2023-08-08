@@ -9,6 +9,7 @@ import { accountApi } from './api';
 import Event from './screens/Events/Event/Event';
 import Home from './screens/Home/Home';
 import { SocketProvider } from './hooks/socket/SocketContext';
+import SignUp from './screens/Auth/signup';
 
 const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (_request) => {
 	const result = dispatch(accountApi.endpoints.getAccount.initiate() as unknown as AnyAction);
@@ -69,6 +70,10 @@ const router = (store: Store) =>
 				{
 					path: 'signin',
 					element: <Auth type="signin" />
+				},
+				{
+					path: 'signup',
+					element: <SignUp type="signup" />
 				}
 			]
 		}
