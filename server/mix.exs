@@ -25,7 +25,7 @@ defmodule Berkeley.MixProject do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/*"]
-  defp elixirc_paths(_), do: ["lib", "web", "config"]
+  defp elixirc_paths(_), do: ["lib", "web", "priv/repo"]
 
   # Specifies your project dependencies.
   # Type `mix help deps` for examples and options.
@@ -58,7 +58,7 @@ defmodule Berkeley.MixProject do
     [
       setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate"],
-      "ecto.reset": ["ecto.drop", "ecto.setup", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup", "run -e \"Berkeley.Seed.run\""],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
