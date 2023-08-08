@@ -1,7 +1,7 @@
 import { HomeModernIcon } from "@heroicons/react/24/outline";
 import styles from "./Header.module.css";
 
-const Headers = () => {
+function Headers() {
   return (
     <nav className={styles.root}>
       <h1>

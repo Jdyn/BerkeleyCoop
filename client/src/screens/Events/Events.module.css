@@ -1,4 +1,11 @@
 .root {
+	display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.wrapper {
   display: grid;
   gap: 15px;
   grid-template-columns: repeat(auto-fit, minmax(100px, 300px) );

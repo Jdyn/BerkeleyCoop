@@ -1,10 +1,10 @@
 import { memo, useEffect, useState } from "react";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import styles from "./Events.module.css";
 import EventCard from "./EventCard/EventCard";
 import DialogForm from "../../components/Modal/Modal";
 import Form, { FormTemplate } from "../../components/Form";
 import { useCreateEventMutation, useGetEventsQuery } from "../../api/event/event";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import Button from "../../components/Button/Button";
 
 const template: FormTemplate = {
@@ -51,7 +51,7 @@ const Events = memo(() => {
   }, [isSuccess, modal, reset]);
 
   return (
-    <>
+    <div className={styles.root}>
       <h1 className={styles.header}>
         Events
         <DialogForm
@@ -71,10 +71,10 @@ const Events = memo(() => {
           />
         </DialogForm>
       </h1>
-      <div className={styles.root}>
+      <div className={styles.wrapper}>
         {data?.events && data.events.map((item) => <EventCard key={item.id} event={item} />)}
       </div>
-    </>
+    </div>
   );
 });
 

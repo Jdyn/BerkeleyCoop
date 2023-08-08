@@ -23,7 +23,7 @@
 .wrapper {
 	position: absolute !important;
   width: var(--left-nav-width);
-  height: 100%;
+  height: calc(100vh - 70px);
 	padding: 0;
   background: var(--primary-bg);
   /* border-radius: 16px; */

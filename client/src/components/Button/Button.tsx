@@ -1,25 +1,26 @@
-import { DetailedHTMLProps, forwardRef } from "react";
-import styles from "./Button.module.css";
-import clsx from "clsx";
+/* eslint-disable react/button-has-type */
+import { DetailedHTMLProps, forwardRef, ButtonHTMLAttributes } from 'react';
+import clsx from 'clsx';
+
+import styles from './Button.module.css';
 
 interface Props {
-  secondary?: boolean;
-  green?: boolean;
+	secondary?: boolean;
+	green?: boolean;
 }
 
 const Button = forwardRef<
-  HTMLButtonElement,
-  DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement> & Props, HTMLButtonElement>
->(({ children, secondary, green, ...rest }, ref) => {
-  return (
-    <button
-      {...rest}
-      ref={ref}
-      className={clsx(styles.root, secondary && styles.secondary, green && styles.green)}
-    >
-      {children}
-    </button>
-  );
-});
+	HTMLButtonElement,
+	DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement> & Props, HTMLButtonElement>
+>(({ children, secondary, green, type, ...rest }, ref) => (
+	<button
+		{...rest}
+		type={type}
+		ref={ref}
+		className={clsx(styles.root, secondary && styles.secondary, green && styles.green)}
+	>
+		{children}
+	</button>
+));
 
 export default Button;
