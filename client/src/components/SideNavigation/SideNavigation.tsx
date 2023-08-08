@@ -1,12 +1,13 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-nested-ternary */
+import { AnchorHTMLAttributes, forwardRef, useEffect, useState } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import type { DetailedHTMLProps, ReactNode } from 'react';
-import { forwardRef, useState } from 'react';
-import { Link, LinkProps } from 'react-router-dom';
-import styles from './SideNavigation.module.css';
+import { Link, LinkProps, useMatches } from 'react-router-dom';
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React from 'react';
 import useDimensions from 'react-cool-dimensions';
+import styles from './SideNavigation.module.css';
 
 interface SideNavigationProps {
 	expand: 'left' | 'right';
@@ -15,23 +16,36 @@ interface SideNavigationProps {
 	current?: string;
 }
 
+const navMap: Record<string, number> = {
+	'/': 0,
+	'/events': 1,
+	'/chats': 2
+};
+
 function SideNavigation({ style, expand, children, current }: SideNavigationProps) {
 	const [expanded, setExpanded] = useState(true);
+	const matches = useMatches();
 	const [value, setValue] = useState<string | undefined>(undefined);
 	const { observe, width } = useDimensions();
+
+	useEffect(() => {
+		if (matches && matches.length > 0) {
+			const index = navMap[matches[1].pathname];
+			setValue(index.toString());
+		}
+	}, [matches]);
 
 	return (
 		<NavigationMenu.Root
 			className={styles.root}
 			style={style}
 			orientation="vertical"
-			data-hover-expand={true}
+			data-hover-expand
 			data-expanded={expanded}
 			value={value}
-			onValueChange={(value) => {
+			onValueChange={(newValue) => {
 				setValue(() => {
-					if (value) return value;
-
+					if (newValue) return newValue;
 					return current;
 				});
 			}}
@@ -68,26 +82,27 @@ function SideNavigation({ style, expand, children, current }: SideNavigationProp
 								</NavigationMenu.Item>
 						  ))
 						: children}
-					<NavigationMenu.Indicator className={styles.indicator} style={{ width: width - 20 }}>
-						{/* <ChevronRightIcon width="24px" /> */}
-					</NavigationMenu.Indicator>
+					<NavigationMenu.Indicator className={styles.indicator} style={{ width: width - 20 }} />
 				</NavigationMenu.List>
 			</div>
 		</NavigationMenu.Root>
 	);
 }
 
+SideNavigation.defaultProps = {
+	current: undefined,
+	style: ''
+};
+
 export const SideNavigationLink = forwardRef<
 	HTMLButtonElement,
-	DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps, HTMLAnchorElement>
->(({ children, to, onClick }, ref) => {
-	return (
-		<NavigationMenu.Trigger ref={ref} asChild>
-			<Link onClick={onClick} id={to.toString()} className={clsx(styles.listItem)} to={to}>
-				{children}
-			</Link>
-		</NavigationMenu.Trigger>
-	);
-});
+	DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps, HTMLAnchorElement>
+>(({ children, to, onClick }, ref) => (
+	<NavigationMenu.Trigger ref={ref} asChild>
+		<Link onClick={onClick} id={to.toString()} className={clsx(styles.listItem)} to={to}>
+			{children}
+		</Link>
+	</NavigationMenu.Trigger>
+));
 
 export default SideNavigation;
