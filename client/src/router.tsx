@@ -20,12 +20,12 @@ const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (
       return null;
     }
   } catch (error) {
-    dispatch(accountApi.endpoints.accountSignOut.initiate() as unknown as AnyAction);
-    Cookies.remove("user");
+    // dispatch(accountApi.endpoints.accountSignOut.initiate() as unknown as AnyAction);
+    // Cookies.remove("user");
     return redirect("/signin");
   }
 
-  Cookies.remove("user");
+  // Cookies.remove("user");
   return redirect("/signin");
 };
 
