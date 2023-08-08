@@ -1,0 +1,17 @@
+.input {
+  display: flex;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  margin: 0;
+  padding: 10px;
+  background: var(--secondary-bg);
+  color: var(--text);
+  transition: all 0.2s ease;
+  border: 2px solid var(--border);
+}
+
+.input:focus {
+  box-shadow: 0px 0 0px 1px var(--accent-bg);
+}

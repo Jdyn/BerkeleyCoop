@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -21,6 +22,7 @@ import Select from '../../components/Select/Select';
 import Button from '../../components/Button';
 import formStyles from '../../components/Form/index.module.css';
 import styles from './Chat.module.css';
+import Input from '../../components/Input';
 
 function Chat() {
 	const { id } = useParams<{ id: string }>();
@@ -94,9 +96,8 @@ function Chat() {
 						</label>
 						<label htmlFor="input" className={formStyles.container}>
 							Room description
-							<input
+							<Input
 								{...register('description')}
-								className={formStyles.input}
 								type="input"
 								placeholder="Enter a description..."
 							/>

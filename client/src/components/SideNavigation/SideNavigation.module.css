@@ -66,16 +66,23 @@
 	flex-direction: row;
   padding: 10px 20px;
   border: none;
-  color: var(--text);
   /* border-top: 2px solid var(--tertiary-bg); */
   background: var(--primary-bg);
   cursor: pointer;
+	justify-content: flex-end;
   transition-duration: 0.2s;
 	font-size: 1rem;
 }
 
 .collapse > svg {
+	border-radius: 50%;
+	padding: 5px;
 	overflow: visible;
+	color: var(--text);
+	transition-duration: 0.3s;
+}
+.collapse > svg:hover {
+	box-shadow: var(--card-small)
 }
 
 .collapse > span {
@@ -127,6 +134,7 @@
   transition: width, transform 250ms ease;
 	border: 2px solid var(--accent-b);
 	border-left: none;
+	pointer-events: none;
 }
 
 .indicator[data-state='visible'] {

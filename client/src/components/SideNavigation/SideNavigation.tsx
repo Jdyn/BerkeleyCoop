@@ -55,18 +55,19 @@ function SideNavigation({ style, expand, children, current }: SideNavigationProp
 					<button
 						className={styles.collapse}
 						onClick={() => setExpanded((prev) => !prev)}
+						style={{ justifyContent: expand === 'right' ? 'flex-end' : 'flex-start' }}
 						type="button"
+						title="collapse side menu"
 					>
 						{expanded && expand === 'left' ? (
-							<ArrowLongRightIcon width="24px" />
+							<ArrowLongRightIcon width="30px" />
 						) : expanded && expand === 'right' ? (
-							<ArrowLongLeftIcon width="24px" />
+							<ArrowLongLeftIcon width="30px" />
 						) : expand === 'left' ? (
-							<ArrowLongLeftIcon width="24px" />
+							<ArrowLongLeftIcon width="30px" />
 						) : (
-							<ArrowLongRightIcon width="24px" />
+							<ArrowLongRightIcon width="30px" />
 						)}
-						<span>{expanded ? 'Collapse' : 'Expand'}</span>
 					</button>
 				</NavigationMenu.Item>
 				<NavigationMenu.List className={styles.list}>

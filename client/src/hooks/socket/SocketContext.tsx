@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { Socket, SocketConnectOption } from "phoenix";
+import React, { useEffect, useState } from 'react';
+import { Socket } from 'phoenix';
+import { useGetAccountQuery } from '../../api/account/account';
 
 export const SocketContext = React.createContext<Socket | null>(null);
 
 interface Props {
 	children: React.ReactNode;
-	options?: Partial<SocketConnectOption>;
 	url: string;
 }
 
-export function SocketProvider({ children, options, url }: Props) {
-  const [socket, setSocket] = useState<Socket | null>(null);
+export function SocketProvider({ children, url }: Props) {
+	const [socket, setSocket] = useState<Socket | null>(null);
+	const { data } = useGetAccountQuery();
 
-  useEffect(() => {
-    const s = new Socket(url, options);
-    s.connect();
-    setSocket(s);
+	useEffect(() => {
+		if (data?.token) {
+			const s = new Socket(url, { params: { token: data?.token } });
+			s.connect();
+			setSocket(s);
 
-    return () => {
-      s.disconnect();
-      setSocket(null);
-    };
-  }, [options, url]);
+			return () => {
+				s.disconnect();
+				setSocket(null);
+			};
+		}
 
-  return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
+		return () => {};
+	}, [data?.token, url]);
+
+	return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 }

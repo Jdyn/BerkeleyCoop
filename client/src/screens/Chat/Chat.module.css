@@ -154,6 +154,7 @@
 	padding: 10px;
 	border: 2px solid var(--tertiary-bg);
 	color: var(--text);
+	flex-basis: 100px;
 	gap: 10px;
 	text-decoration: none;
 	transition-duration: 0.3s;
@@ -263,6 +264,12 @@
 }
 
 .activePill {
+	border: 2px solid var(--accent-b);
+	color: var(--white);
+}
+
+
+.roomItem:hover > div > span {
 	border: 2px solid var(--accent-b);
 	color: var(--white);
 }
