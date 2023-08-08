@@ -10,7 +10,7 @@ defmodule Berkeley.Endpoint do
     signing_salt: "AwA3CM4V"
   ]
 
-  plug(CORSPlug, origin: ["http://localhost:3000", "https://berkeley-coop.vercel.app"])
+  plug(CORSPlug, origin: ["http://localhost:3000", "https://berkeley.vercel.app"])
 
   socket("/socket", Berkeley.UserSocket,
     websocket: true,
