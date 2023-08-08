@@ -22,10 +22,6 @@ if config_env() == :prod do
   host = System.get_env("PHX_HOST") || "example.com"
   ecto_ipv6? = System.get_env("ECTO_IPV6") == "true"
 
-  app_name =
-    System.get_env("FLY_APP_NAME") ||
-      raise "FLY_APP_NAME not available"
-
   config :berkeley, Berkeley.Repo,
     # ssl: true,
     socket_options: if(ecto_ipv6?, do: [:inet6], else: []),

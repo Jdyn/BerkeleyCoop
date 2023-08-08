@@ -12,9 +12,9 @@ defmodule Berkeley.Router do
     plug(Berkeley.Auth.EnsureAuth)
   end
 
-  if Mix.env() == :dev do
-    forward("/mailbox", Plug.Swoosh.MailboxPreview)
-  end
+  # if Mix.env() == :dev do
+  #   forward("/mailbox", Plug.Swoosh.MailboxPreview)
+  # end
 
   scope "/api", Berkeley do
     pipe_through(:api)

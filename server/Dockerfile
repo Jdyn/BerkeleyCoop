@@ -48,6 +48,7 @@ RUN mix deps.compile
 COPY priv priv
 
 COPY lib lib
+COPY web web
 
 # Compile the release
 RUN mix compile

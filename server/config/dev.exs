@@ -22,8 +22,8 @@ config :berkeley, Berkeley.Endpoint,
   check_origin: false,
   watchers: []
 
-config :berkeley, Nibmle.Mailer, adapter: Swoosh.Adapters.Local
-config :swoosh, :api_client, false
+# config :berkeley, Nibmle.Mailer, adapter: Swoosh.Adapters.Local
+# config :swoosh, :api_client, false
 
 config :berkeley, :strategies,
   github: [
