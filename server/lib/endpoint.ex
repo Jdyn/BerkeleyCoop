@@ -7,7 +7,9 @@ defmodule Berkeley.Endpoint do
   @session_options [
     store: :cookie,
     key: "session_id",
-    signing_salt: "AwA3CM4V"
+    signing_salt: "AwA3CM4V",
+    same_site: "none",
+    secure: true
   ]
 
   plug(CORSPlug, origin: ["http://localhost:3000", "https://berkeley.vercel.app"])
