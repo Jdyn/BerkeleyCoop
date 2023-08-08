@@ -2,7 +2,7 @@ import { ClockIcon, MapIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import styles from './EventCard.module.css';
 import { ReactComponent as EventImage } from '../../../images/event.svg';
-import { dateRange, formatEventStatus, isStarted } from '../../../util/dates';
+import { dateRange, formatEventStatus } from '../../../util/dates';
 import AlertDialog from '../../../components/AlertDialog/AlertDialog';
 import { useDeleteEventMutation } from '../../../api/event/event';
 import { useUser } from '../../../hooks/useUser';

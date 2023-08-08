@@ -9,7 +9,7 @@ function Home() {
 	const { data } = useGetAccountQuery();
 	const { data: events } = useGetAccountEventsQuery();
 
-	const user = data?.user ?? { firstName: '', lastName: '' };
+	const user = data?.user
 	return (
 		<div className={styles.root}>
 			<h1 className={styles.header}>Home</h1>
@@ -21,8 +21,8 @@ function Home() {
 							<Avatar
 								width="128px"
 								height="128px"
-								firstName={user?.firstName}
-								lastName={user.lastName}
+								firstName={user?.firstName ?? ''}
+								lastName={user?.lastName ?? ''}
 							/>
 						</div>
 						<div className={styles.content}>

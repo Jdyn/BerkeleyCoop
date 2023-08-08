@@ -5,6 +5,10 @@ export interface User {
 	email: string;
 	confirmedAt: string;
 	isAdmin: boolean;
+	bio: string;
+	house?: {
+		name: string;
+	}
 }
 
 export interface Session {

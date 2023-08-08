@@ -57,7 +57,7 @@ function SignUp(_props: Props) {
 			navigate('/');
 		}
 	}, [isSuccess, navigate]);
-	console.log(error);
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.hero}>
