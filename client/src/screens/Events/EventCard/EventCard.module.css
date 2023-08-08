@@ -72,3 +72,9 @@
 .alert:hover {
 	background: var(--secondary-bg)
 }
+
+.link {
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+}

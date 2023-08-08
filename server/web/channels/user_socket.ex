@@ -23,11 +23,7 @@ defmodule Berkeley.UserSocket do
         :error
 
       user ->
-        socket =
-          socket
-          |> assign(:user, user)
-
-        {:ok, socket}
+        {:ok, assign(socket, :user, user)}
     end
   end
 

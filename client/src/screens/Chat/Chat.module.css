@@ -261,6 +261,7 @@
 	font-size: 0.8rem;
 	margin: 0;
 	gap: 5px;
+	transition-duration: 0.3s;
 }
 
 .activePill {
@@ -270,6 +271,7 @@
 
 
 .roomItem:hover > div > span {
+	transition-duration: 0.3s;
 	border: 2px solid var(--accent-b);
 	color: var(--white);
 }

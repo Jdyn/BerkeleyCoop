@@ -15,7 +15,7 @@ const Button = forwardRef<
 >(({ children, secondary, green, type, ...rest }, ref) => (
 	<button
 		{...rest}
-		type={type}
+		type={type ?? 'button'}
 		ref={ref}
 		className={clsx(styles.root, secondary && styles.secondary, green && styles.green)}
 	>

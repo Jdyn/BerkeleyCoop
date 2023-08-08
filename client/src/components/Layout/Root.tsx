@@ -19,7 +19,6 @@ import { useAccountSignOutMutation } from '../../api/account/account';
 function RootLayout() {
 	const channel = useChannel('room:lobby');
 	const [members, setMembers] = useState<any[]>([]);
-	const [current, setCurrent] = useState<string | undefined>(undefined);
 	const [signOut] = useAccountSignOutMutation();
 	const [{ presence, userList }, setState] = useState<Record<string, any>>({
 		presence: {},
@@ -72,16 +71,16 @@ function RootLayout() {
 
 	return (
 		<main className={styles.root}>
-			<SideNavigation expand="right" style={{ gridArea: 'left' }} current={current}>
-				<SideNavigationLink to="/" onClick={() => setCurrent('0')}>
+			<SideNavigation expand="right" style={{ gridArea: 'left' }}>
+				<SideNavigationLink to="/">
 					<HomeIcon width="24px" />
 					Home
 				</SideNavigationLink>
-				<SideNavigationLink to="/events" onClick={() => setCurrent('1')}>
+				<SideNavigationLink to="/events">
 					<CalendarDaysIcon width="24px" />
 					Events
 				</SideNavigationLink>
-				<SideNavigationLink to="/chats" onClick={() => setCurrent('2')}>
+				<SideNavigationLink to="/chats">
 					<ChatBubbleBottomCenterIcon width="24px" />
 					Chats
 				</SideNavigationLink>

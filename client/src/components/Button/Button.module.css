@@ -10,6 +10,7 @@
 	cursor: pointer;
 	color: white;
 	font-size: 0.9rem;
+	text-decoration: none;
 	transition-duration: 0.2s;
 	text-transform: uppercase;
 	font-weight: 700;

@@ -3,7 +3,7 @@
 import { AnchorHTMLAttributes, forwardRef, useEffect, useState } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import type { DetailedHTMLProps, ReactNode } from 'react';
-import { Link, LinkProps, useMatches } from 'react-router-dom';
+import { Link, LinkProps, matchPath, useLocation } from 'react-router-dom';
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import useDimensions from 'react-cool-dimensions';
@@ -13,27 +13,31 @@ interface SideNavigationProps {
 	expand: 'left' | 'right';
 	children: ReactNode;
 	style?: React.CSSProperties;
-	current?: string;
 }
 
 const navMap: Record<string, number> = {
-	'/': 0,
-	'/events': 1,
-	'/chats': 2
+	'/*': 0,
+	'/events/*': 1,
+	'/chats/*': 2
 };
 
-function SideNavigation({ style, expand, children, current }: SideNavigationProps) {
+function SideNavigation({ style, expand, children }: SideNavigationProps) {
 	const [expanded, setExpanded] = useState(true);
-	const matches = useMatches();
 	const [value, setValue] = useState<string | undefined>(undefined);
 	const { observe, width } = useDimensions();
+	const location = useLocation();
+	const [current, setCurrent] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
-		if (matches && matches.length > 0) {
-			const index = navMap[matches[1].pathname];
-			setValue(index.toString());
-		}
-	}, [matches]);
+			Object.keys(navMap).forEach((key) => {
+				const match = matchPath({ path: key, end: false,  caseSensitive: false}, location.pathname);
+				if (match) {
+					const index = navMap[key].toString()
+					setValue(index);
+					setCurrent(index);
+				}
+			});
+	}, [location.pathname]);
 
 	return (
 		<NavigationMenu.Root
@@ -91,7 +95,6 @@ function SideNavigation({ style, expand, children, current }: SideNavigationProp
 }
 
 SideNavigation.defaultProps = {
-	current: undefined,
 	style: ''
 };
 
