@@ -144,7 +144,7 @@ function Chat() {
 							key={room.id}
 						>
 							<h3>
-								<HashtagIcon width="24px" /> {room.name}
+								<HashtagIcon width="18px" /> {room.name}
 							</h3>
 							<p>{room.description}</p>
 							<div className={styles.houseList} style={{ maxHeight: '50px' }}>

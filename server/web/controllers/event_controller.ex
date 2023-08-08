@@ -14,7 +14,11 @@ defmodule Berkeley.EventController do
   def create(conn, attrs) do
     current_user = conn.assigns[:current_user]
 
-    payload = Map.put_new(attrs["event"], "creator_id", current_user.id)
+    payload =
+      Map.merge(attrs["event"], %{
+        "creator_id" => current_user.id,
+        "house_id" => current_user.house_id
+      })
 
     with {:ok, %Event{} = event} <- Events.create(payload) do
       conn

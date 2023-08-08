@@ -57,7 +57,7 @@ function Form(props: Props) {
 					)}
 				</fieldset>
 			))}
-			<Button>{template.submit}</Button>
+			<Button type="submit">{template.submit}</Button>
 		</form>
 	);
 }

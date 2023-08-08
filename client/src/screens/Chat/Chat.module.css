@@ -96,6 +96,7 @@
 	display: flex;
 	align-items: center;
 	font-size: 1rem;
+	font-weight: 500;
 	color: var(--white);
 	background: var(--accent-bg);
 	border-radius: 6px;
@@ -139,7 +140,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin: 20px 0px;
+	margin-bottom: 15px
 }
 
 .roomHeader > h2 {
@@ -155,7 +156,7 @@
 	border: 2px solid var(--tertiary-bg);
 	color: var(--text);
 	flex-basis: 100px;
-	gap: 10px;
+	gap: 5px;
 	text-decoration: none;
 	transition-duration: 0.3s;
 	border-radius: 16px;
@@ -186,6 +187,7 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
+	font-size: 1rem;
 	justify-content: flex-start;
 	margin: 0;
 }

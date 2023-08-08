@@ -20,7 +20,7 @@ defmodule Berkeley.Events do
 
   """
   def list_events do
-    Event |> Repo.all() |> Repo.preload(:creator)
+    Event |> Repo.all() |> Repo.preload([:creator, :house])
   end
 
   @doc """
@@ -36,7 +36,7 @@ defmodule Berkeley.Events do
 
   """
   def get_event!(id) do
-    with %Event{} = event <- Repo.one(event_query(id: id)) do
+    with %Event{} = event <- Repo.get_by(Event, id: id) |> Repo.preload([:creator, :house]) do
       event
     else
       _ -> {:not_found, "Event does not exist."}
@@ -65,7 +65,7 @@ defmodule Berkeley.Events do
              |> Ecto.Changeset.put_assoc(:rooms, rooms)
            end)
            |> Repo.transaction() do
-      {:ok, result[:event]}
+      {:ok, result[:event] |> Repo.preload(:house)}
     end
   end
 

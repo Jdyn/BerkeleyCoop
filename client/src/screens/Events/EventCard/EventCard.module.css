@@ -30,11 +30,20 @@
 	font-weight: 700;
 }
 
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
 .header > h3 {
 	color: var(--accent-bg);
 }
 
 .header > span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
 	color: var(--secondary-text);
 	font-size: 0.9rem;
 }
@@ -46,7 +55,7 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: center;
 	flex: 1;
 }
 

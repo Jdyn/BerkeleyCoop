@@ -1,0 +1,32 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow: auto;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	padding: 20px;
+	gap: 10px;
+	border-bottom: 2px solid var(--tertiary-bg);
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.header > a {
+	display: flex;
+	align-items: center;
+	color: var(--text);
+}
+
+.header > a > svg {
+	padding: 5px;
+	border-radius: 50%;
+}
+
+.header > a > svg:hover {
+	background: var(--primary-bg);
+}

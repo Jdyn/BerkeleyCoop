@@ -11,7 +11,7 @@ defmodule Berkeley.House do
     field(:description, :string)
 
     has_many(:occupants, User)
-
+    has_many(:events, Berkeley.Event)
     # To implement joining a user to a room by their house
     many_to_many(:rooms, Room, join_through: "houses_rooms")
 
@@ -24,9 +24,5 @@ defmodule Berkeley.House do
     |> cast(attrs, [:name, :description])
     |> validate_required([:name, :description])
     |> unique_constraint(:name)
-  end
-
-  def get_house(house_attrs) do
-    Repo.get_by(House, id: house_attrs["id"])
   end
 end

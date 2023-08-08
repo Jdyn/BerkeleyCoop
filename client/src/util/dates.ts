@@ -39,17 +39,17 @@ export function formatEventStatus(startDateStr: string, endDateStr: string): str
 
   if (startDifference < 0) {
     if (endDays > 0) {
-      return `Ending in ${endDays} days from now`;
+      return `Ending in ${endDays} days`;
     } else if (endHours > 0) {
-      return `Ending in ${endHours} hours from now`;
+      return `Ending in ${endHours} hours`;
     } else {
       return "Ending soon";
     }
   } else {
     if (startDays > 0) {
-      return `Starting in ${startDays} days from now`;
+      return `Starting in ${startDays} days`;
     } else if (startHours > 0) {
-      return `Starting in ${startHours} hours from now`;
+      return `Starting in ${startHours} hours`;
     } else {
       return "Starting soon";
     }

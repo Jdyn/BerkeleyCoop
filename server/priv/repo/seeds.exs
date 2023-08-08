@@ -133,11 +133,55 @@ Accounts.register(
 
 Accounts.register(
   %{
-    first_name: "Sally",
-    last_name: "Mae",
+    first_name: "Michael",
+    last_name: "Faraday",
     email: "test@test1.com",
     password: "Password123",
-    house_id: 1
+    house_id: 4
+  },
+  :default
+)
+
+Accounts.register(
+  %{
+    first_name: "Niels",
+    last_name: "Bor",
+    email: "test@test2.com",
+    password: "Password123",
+    house_id: 3
+  },
+  :default
+)
+
+Accounts.register(
+  %{
+    first_name: "Julius",
+    last_name: "Opppenheimer",
+    email: "test@test3.com",
+    password: "Password123",
+    house_id: 2
+  },
+  :default
+)
+
+Accounts.register(
+  %{
+    first_name: "Albert",
+    last_name: "Einstein",
+    email: "test@test4.com",
+    password: "Password123",
+    house_id: 6
+  },
+  :default
+)
+
+Accounts.register(
+  %{
+    first_name: "Albert",
+    last_name: "Einstein",
+    email: "test@test5.com",
+    password: "Password123",
+    house_id: 7
   },
   :default
 )
@@ -146,9 +190,20 @@ Accounts.register(
   %{
     first_name: "Alice",
     last_name: "Wonder",
-    email: "test@test2.com",
+    email: "test@test6.com",
     password: "Password123",
-    house_id: 2
+    house_id: 12
+  },
+  :default
+)
+
+Accounts.register(
+  %{
+    first_name: "Max",
+    last_name: "Planck",
+    email: "test@test7.com",
+    password: "Password123",
+    house_id: 9
   },
   :default
 )

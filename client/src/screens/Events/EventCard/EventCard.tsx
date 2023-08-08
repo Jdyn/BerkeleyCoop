@@ -1,4 +1,4 @@
-import { TrashIcon } from '@heroicons/react/24/outline';
+import { ClockIcon, MapIcon, MapPinIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import styles from './EventCard.module.css';
 import { ReactComponent as EventImage } from '../../../images/event.svg';
@@ -22,13 +22,14 @@ function EventCard({ event }: Props) {
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<h3>Event</h3>
+					<span> <MapIcon width="18px" /> {event.house.name}</span>
+					<span> <ClockIcon width="18px" /> {dateRange(event.startDate, event.endDate)}</span>
 					<h2>{event.title}</h2>
-					<span>{dateRange(event.startDate, event.endDate)}</span>
 					{isStarted(event.startDate) && <div className={styles.started}>Event Started!</div>}
 				</div>
 				<div className={styles.wrapper}>
-					<span>description:</span>
-					<p className={styles.description}>{event.description}</p>
+					{/* <span>description:</span> */}
+					{/* <p className={styles.description}>{event.description}</p> */}
 					<span>{formatEventStatus(event.startDate, event.endDate)}</span>
 				</div>
 				<Link className={styles.link} to={`/events/${event.id}`}>

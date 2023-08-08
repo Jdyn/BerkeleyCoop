@@ -9,6 +9,7 @@ defmodule Berkeley.Repo.Migrations.CreateEvents do
       add(:end_date, :utc_datetime)
 
       add(:creator_id, references(:users, on_delete: :delete_all))
+      add(:house_id, references(:houses, on_delete: :delete_all))
 
       timestamps()
     end

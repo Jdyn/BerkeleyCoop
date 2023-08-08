@@ -6,11 +6,15 @@ import baseQuery from "../baseQuery";
 export const eventApi = createApi({
   reducerPath: "event",
   baseQuery,
-  tagTypes: ["events"],
+  tagTypes: ["events", "event"],
   endpoints: ({ query, mutation }) => ({
     getEvents: query<{ events: any[] }, void>({
       query: () => `/events`,
       providesTags: ["events"],
+    }),
+		getEvent: query<{ event: any }, string | undefined>({
+      query: (id) => `/events/${id}`,
+      providesTags: ["event"],
     }),
     createEvent: mutation<{ event: any }, { event: any }>({
       query: (body) => ({
@@ -30,4 +34,4 @@ export const eventApi = createApi({
   }),
 });
 
-export const { useCreateEventMutation, useGetEventsQuery, useDeleteEventMutation } = eventApi;
+export const { useCreateEventMutation, useGetEventsQuery, useDeleteEventMutation, useGetEventQuery } = eventApi;

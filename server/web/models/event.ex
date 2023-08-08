@@ -2,8 +2,8 @@ defmodule Berkeley.Event do
   @moduledoc false
   use Berkeley.Web, :model
 
-  alias Berkeley.User
   alias Berkeley.Chat.Room
+  alias Berkeley.User
 
   schema "events" do
     field(:title, :string)
@@ -17,6 +17,7 @@ defmodule Berkeley.Event do
     many_to_many(:participants, User, join_through: "participants_events")
 
     has_one(:room, Room)
+    belongs_to(:house, Berkeley.House)
 
     timestamps()
   end
@@ -24,7 +25,7 @@ defmodule Berkeley.Event do
   @doc false
   def changeset(room, attrs) do
     room
-    |> cast(attrs, [:title, :description, :start_date, :end_date, :creator_id])
-    |> validate_required([:title, :description, :start_date, :end_date, :creator_id])
+    |> cast(attrs, [:title, :description, :start_date, :end_date, :house_id, :creator_id])
+    |> validate_required([:title, :description, :start_date, :end_date, :house_id, :creator_id])
   end
 end
