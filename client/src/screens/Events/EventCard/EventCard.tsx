@@ -1,4 +1,4 @@
-import { ClockIcon, MapIcon, MapPinIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { ClockIcon, MapIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import styles from './EventCard.module.css';
 import { ReactComponent as EventImage } from '../../../images/event.svg';

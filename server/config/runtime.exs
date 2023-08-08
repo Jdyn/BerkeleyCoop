@@ -35,7 +35,7 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  config :live_beats, Berkeley.Endpoint,
+  config :berkeley, Berkeley.Endpoint,
     url: [host: host, port: 80],
     http: [
       # Enable IPv6 and bind on all interfaces.
