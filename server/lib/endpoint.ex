@@ -16,7 +16,8 @@ defmodule Berkeley.Endpoint do
 
   socket("/socket", Berkeley.UserSocket,
     websocket: true,
-    longpoll: false
+    longpoll: false,
+    check_origin: ["https://berkeley.vercel.app", "http://localhost:3000"]
   )
 
   # socket("/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]])

@@ -19,7 +19,10 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host = System.get_env("PHX_HOST") ||
+  raise """
+  HOST URL is missing.
+  """
   ecto_ipv6? = System.get_env("ECTO_IPV6") == "true"
 
   config :berkeley, Berkeley.Repo,
@@ -37,11 +40,8 @@ if config_env() == :prod do
 
   config :berkeley, Berkeley.Endpoint,
     url: [host: host, port: 80],
+    check_origin: ["https://berkeley.vercel.app", "http://localhost:3000"],
     http: [
-      # Enable IPv6 and bind on all interfaces.
-      # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
-      # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
-      # for details about using IPv6 vs IPv4 and loopback vs public addresses.
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: String.to_integer(System.get_env("PORT") || "4000")
     ],

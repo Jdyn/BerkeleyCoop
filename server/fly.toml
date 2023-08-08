@@ -15,16 +15,30 @@ swap_size_mb = 512
 
 [env]
   PHX_HOST = "berkeley.fly.dev"
-  PORT = "8080"
+  PORT = "4000"
 
-[http_service]
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
+[[services]]
+  http_checks = []
+  internal_port = 4000
   processes = ["app"]
-  [http_service.concurrency]
+  protocol = "tcp"
+  script_checks = []
+
+  [services.concurrency]
+    hard_limit = 2500
+    soft_limit = 2000
     type = "connections"
-    hard_limit = 1000
-    soft_limit = 1000
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "20s"  # allow some time for startup
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
