@@ -12,6 +12,9 @@ export const eventApi = createApi({
       query: () => `/events`,
       providesTags: ["events"],
     }),
+		getAccountEvents: query<{ events: any[] }, void>({
+      query: () => `/account/events`,
+    }),
 		getEvent: query<{ event: any }, string | undefined>({
       query: (id) => `/events/${id}`,
       providesTags: ["event"],
@@ -34,4 +37,4 @@ export const eventApi = createApi({
   }),
 });
 
-export const { useCreateEventMutation, useGetEventsQuery, useDeleteEventMutation, useGetEventQuery } = eventApi;
+export const { useCreateEventMutation, useGetEventsQuery, useDeleteEventMutation, useGetEventQuery, useGetAccountEventsQuery } = eventApi;

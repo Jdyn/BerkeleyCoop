@@ -3,12 +3,18 @@ defmodule Berkeley.EventController do
 
   alias Berkeley.Event
   alias Berkeley.Events
+  alias Berkeley.Repo
 
   action_fallback(Berkeley.ErrorController)
 
   def index(conn, _params) do
     events = Events.list_events()
     render(conn, "index.json", events: events)
+  end
+
+  def user_index(conn, _params) do
+    events = Repo.all(from(e in Event, where: e.creator_id == ^conn.assigns[:current_user].id))
+    render(conn, "index.json", events: events |> Repo.preload([:creator, :house]))
   end
 
   def create(conn, attrs) do

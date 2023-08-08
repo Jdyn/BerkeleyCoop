@@ -29,14 +29,14 @@ function SideNavigation({ style, expand, children }: SideNavigationProps) {
 	const [current, setCurrent] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
-			Object.keys(navMap).forEach((key) => {
-				const match = matchPath({ path: key, end: false,  caseSensitive: false}, location.pathname);
-				if (match) {
-					const index = navMap[key].toString()
-					setValue(index);
-					setCurrent(index);
-				}
-			});
+		Object.keys(navMap).forEach((key) => {
+			const match = matchPath({ path: key, end: false, caseSensitive: false }, location.pathname);
+			if (match) {
+				const index = navMap[key].toString();
+				setValue(index);
+				setCurrent(index);
+			}
+		});
 	}, [location.pathname]);
 
 	return (
@@ -74,20 +74,26 @@ function SideNavigation({ style, expand, children }: SideNavigationProps) {
 						)}
 					</button>
 				</NavigationMenu.Item>
-				<NavigationMenu.List className={styles.list}>
-					{Array.isArray(children)
-						? children.map((child, index) => (
-								<NavigationMenu.Item
-									key={index}
-									value={`${index}`}
-									asChild
-									className={clsx(value === index.toString() && styles.active)}
-								>
-									<NavigationMenu.Link asChild>{child}</NavigationMenu.Link>
-								</NavigationMenu.Item>
-						  ))
-						: children}
-					<NavigationMenu.Indicator className={styles.indicator} style={{ width: width - 20 }} />
+				<NavigationMenu.List asChild>
+					<div className={styles.list}>
+						{Array.isArray(children)
+							? children.map((child, index) => (
+									<NavigationMenu.Item
+										key={index}
+										value={`${index}`}
+										asChild
+										className={clsx(value === index.toString() && styles.active)}
+									>
+										<NavigationMenu.Link asChild>{child}</NavigationMenu.Link>
+									</NavigationMenu.Item>
+							  ))
+							: children}
+						<NavigationMenu.Indicator
+							tabIndex={-1}
+							className={styles.indicator}
+							style={{ width: width - 20 }}
+						/>
+					</div>
 				</NavigationMenu.List>
 			</div>
 		</NavigationMenu.Root>
@@ -102,7 +108,7 @@ export const SideNavigationLink = forwardRef<
 	HTMLButtonElement,
 	DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps, HTMLAnchorElement>
 >(({ children, to, onClick }, ref) => (
-	<NavigationMenu.Trigger ref={ref} asChild>
+	<NavigationMenu.Trigger ref={ref} asChild>	
 		<Link onClick={onClick} id={to.toString()} className={clsx(styles.listItem)} to={to}>
 			{children}
 		</Link>

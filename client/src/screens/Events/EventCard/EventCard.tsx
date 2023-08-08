@@ -25,7 +25,7 @@ function EventCard({ event }: Props) {
 					<span> <MapIcon width="18px" /> {event.house.name}</span>
 					<span> <ClockIcon width="18px" /> {dateRange(event.startDate, event.endDate)}</span>
 					<h2>{event.title}</h2>
-					{isStarted(event.startDate) && <div className={styles.started}>Event Started!</div>}
+					{/* {isStarted(event.startDate) && <div className={styles.started}>Event Started!</div>} */}
 				</div>
 				<div className={styles.wrapper}>
 					{/* <span>description:</span> */}

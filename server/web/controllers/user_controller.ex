@@ -3,6 +3,7 @@ defmodule Berkeley.UserController do
 
   alias Berkeley.Accounts
   alias Berkeley.Auth.OAuth
+  alias Berkeley.Repo
 
   action_fallback(Berkeley.ErrorController)
 
@@ -17,7 +18,7 @@ defmodule Berkeley.UserController do
     conn
     |> put_remember_token(token)
     |> configure_session(renew: true)
-    |> render("login.json", user: conn.assigns[:current_user], token: Base.url_encode64(token, padding: false))
+    |> render("login.json", user: conn.assigns[:current_user] |> Repo.preload(:house), token: Base.url_encode64(token, padding: false))
   end
 
   def show_sessions(conn, _params) do
@@ -61,7 +62,7 @@ defmodule Berkeley.UserController do
       |> put_session(:user_token, token)
       |> put_remember_token(token)
       |> put_status(:created)
-      |> render("show.json", user: user)
+      |> render("show.json", user: user |> Repo.preload(:house))
     end
   end
 

@@ -2,9 +2,6 @@ defmodule Berkeley.RoomController do
   use Berkeley.Web, :controller
 
   alias Berkeley.Chat
-  alias Berkeley.Chat.Room
-  alias Berkeley.Repo
-  alias Berkeley.Endpoint
 
   action_fallback(Berkeley.ErrorController)
 

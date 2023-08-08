@@ -79,7 +79,7 @@ function Chat() {
 	return (
 		<div className={styles.root}>
 			<h1 className={styles.header}>
-				Chat
+				Chats
 				<Modal
 					modal={modal}
 					title="Create a new room?"

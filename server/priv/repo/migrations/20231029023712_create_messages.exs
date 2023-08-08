@@ -3,7 +3,7 @@ defmodule Berkeley.Repo.Migrations.CreateMessages do
 
   def change do
     create table(:messages) do
-      add :content, :string
+      add :content, :text
 
       add :creator_id, references(:users), null: false
       add :room_id, references(:rooms), null: false

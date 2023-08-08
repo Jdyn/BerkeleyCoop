@@ -57,7 +57,7 @@ function SignUp(_props: Props) {
 			navigate('/');
 		}
 	}, [isSuccess, navigate]);
-	console.log(errors);
+	console.log(error);
 	return (
 		<div className={styles.root}>
 			<div className={styles.hero}>
@@ -68,7 +68,7 @@ function SignUp(_props: Props) {
 			</div>
 			<div className={styles.container}>
 				<div className={styles.wrapper}>
-					<h1>Sign in to your account.</h1>
+					<h1>Sign up for an account.</h1>
 					<form className={styles.form} onSubmit={onSubmit}>
 						<label className={styles.field} htmlFor="email">
 							Email

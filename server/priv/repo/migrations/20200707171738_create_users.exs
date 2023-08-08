@@ -8,7 +8,7 @@ defmodule Berkeley.Repo.Migrations.CreateUsers do
       add(:last_name, :string)
       add(:role, :string, default: "user")
       add(:avatar, :string)
-
+      add :bio, :text
       add(:phone, :string)
 
       add(:password_hash, :string, null: true)

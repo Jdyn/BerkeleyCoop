@@ -66,7 +66,6 @@ function LogIn(_props: Props) {
 							)}
 						</label>
 
-
 						<label className={styles.field} htmlFor="password">
 							Password
 							<input {...register('password')} type="password" />
@@ -83,7 +82,26 @@ function LogIn(_props: Props) {
 								<div>{(error as any).data.error}</div>
 							</div>
 						)}
-						<Button type="submit" isLoading={isLoading}>Sign In</Button>
+						{(error as any)?.data?.errors && (
+							<div className={styles.error}>
+								<ExclamationCircleIcon />
+								<div>
+									{Object.entries((error as any).data.errors).map(([key, value]: [any, any]) => (
+										<>
+											<h4>{key}</h4>
+											<ul key={key}>
+												{value.map((v: string) => (
+													<li key={v}>{v}</li>
+												))}
+											</ul>
+										</>
+									))}
+								</div>
+							</div>
+						)}
+						<Button type="submit" isLoading={isLoading}>
+							Sign In
+						</Button>
 					</form>
 					<Link className={styles.link} to="/signup">
 						Don't have an account yet? Sign up

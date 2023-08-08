@@ -1,0 +1,92 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow: auto;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	padding: 20px;
+	border-bottom: 2px solid var(--tertiary-bg);
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+}
+
+.main {
+	display: flex;
+	flex: 1;
+	padding: 20px;
+	gap: 20px;
+	flex-direction: column;
+}
+
+.hero {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	border-radius: 18px;
+	border: 2px solid var(--border);
+	background: var(--primary-bg);
+}
+.background {
+	display: flex;
+	height: 175px;
+	border-radius: 16px;
+	background-image: linear-gradient(
+		270.3deg,
+		rgba(84, 212, 228, 1) 0.2%,
+		rgba(68, 36, 164, 1) 100%
+	);
+	border-bottom: 2px solid var(--border);
+}
+.wrapper {
+	display: flex;
+	flex: 1;
+	padding: 20px 20px;
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	padding: 0px 10px;
+	/* gap: 10px; */
+	flex: 1;
+}
+
+.content > h1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.content > p {
+	display: flex;
+	margin-top: 20px;
+	flex: 1;
+}
+
+.events {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	flex: 1;
+}
+
+.avatar {
+	width: 128px;
+	height: 128px;
+	margin-top: -75px;
+}
+.avatar > span > span {
+	border: 4px solid var(--primary-bg);
+	font-size: 2rem;
+}
+
+.eventsWrapper {
+	display: grid;
+	gap: 15px;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 300px));
+	grid-template-rows: repeat(auto-fit, 375px);
+}

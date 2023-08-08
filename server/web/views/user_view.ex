@@ -21,7 +21,7 @@ defmodule Berkeley.UserView do
   def render("login.json", %{user: user, token: token}) do
     %{
       ok: true,
-      user: render_one(user, UserView, "user.json", as: :user),
+      user: render_one(user, UserView, "user_with_house.json", as: :user),
       token: token
     }
   end
@@ -39,7 +39,8 @@ defmodule Berkeley.UserView do
       lastName: user.last_name,
       email: user.email,
       confirmedAt: user.confirmed_at,
-      isAdmin: user.is_admin
+      isAdmin: user.is_admin,
+      bio: user.bio,
     }
   end
 
@@ -51,6 +52,7 @@ defmodule Berkeley.UserView do
       email: user.email,
       confirmedAt: user.confirmed_at,
       isAdmin: user.is_admin,
+      bio: user.bio,
       house: render_one(user.house, Berkeley.HouseView, "house.json", as: :house)
     }
   end

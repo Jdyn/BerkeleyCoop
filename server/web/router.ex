@@ -32,6 +32,7 @@ defmodule Berkeley.Router do
     pipe_through([:api, :ensure_auth])
 
     resources("/events", EventController)
+    get("/account/events", EventController, :user_index)
     post("/rooms", RoomController, :create)
 
     resources("/account", UserController, singleton: true, only: [:show]) do

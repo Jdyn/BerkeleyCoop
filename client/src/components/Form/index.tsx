@@ -23,7 +23,7 @@ interface Props {
 }
 
 function Form(props: Props) {
-	const { onSubmit, template, errors, isLoading} = props;
+	const { onSubmit, template, errors, isLoading } = props;
 
 	const [form, setForm] = useState<Record<string, any>>({});
 
@@ -35,10 +35,8 @@ function Form(props: Props) {
 	return (
 		<form className={styles.form} onSubmit={submitForm}>
 			{template.fields.map((field) => (
-				<fieldset className={styles.container} key={field.name}>
-					<label className={styles.label} htmlFor={field.name}>
-						{field.name}
-					</label>
+				<label className={styles.container} htmlFor={field.name}>
+					{field.name}
 					<input
 						className={styles.input}
 						value={form[field.key || field.name] || ''}
@@ -52,12 +50,15 @@ function Form(props: Props) {
 							})
 						}
 					/>
+
 					{errors[field.key || field.name] && (
 						<span className={styles.error}>{errors[field.key || field.name]}</span>
 					)}
-				</fieldset>
+				</label>
 			))}
-			<Button type="submit" isLoading={isLoading}>{template.submit}</Button>
+			<Button type="submit" isLoading={isLoading}>
+				{template.submit}
+			</Button>
 		</form>
 	);
 }

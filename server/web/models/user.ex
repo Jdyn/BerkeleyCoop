@@ -19,6 +19,7 @@ defmodule Berkeley.User do
     field(:last_name, :string)
     field(:role, :string, default: "user")
     field(:avatar, :string)
+    field(:bio, :string)
 
     field(:phone, :string)
 
@@ -36,7 +37,7 @@ defmodule Berkeley.User do
 
     # To implement joining a room as a user.
     many_to_many(:rooms, Room, join_through: "users_rooms")
-      
+
     # To implement joining an event as a user.
     many_to_many(:events, Event, join_through: "participants_events")
 
@@ -54,7 +55,7 @@ defmodule Berkeley.User do
   """
   def registration_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, @registration_fields ++ [:password])
+    |> cast(attrs, @registration_fields ++ [:password, :bio])
     |> validate_required(@registration_fields ++ [:password])
     |> validate_email()
     |> validate_password()

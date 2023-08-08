@@ -4,7 +4,7 @@ defmodule Berkeley.Repo.Migrations.CreateRooms do
   def change do
     create table(:rooms) do
       add :name, :string
-      add :description, :string
+      add :description, :text
 
       add(:creator_id, references(:users, on_delete: :delete_all))
       add(:event_id, references(:events, on_delete: :delete_all))
