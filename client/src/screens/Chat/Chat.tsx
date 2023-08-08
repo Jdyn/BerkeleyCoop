@@ -108,9 +108,10 @@ function Chat() {
 								control={control}
 								defaultValue={[]}
 								name="houses"
-								render={({ field: { onChange, value } }) => (
+								render={({ field: { onChange, value, ref} }) => (
 									<Select
 										id="house input"
+										ref={ref}
 										value={value}
 										onChange={(newValue) => {
 											onChange(

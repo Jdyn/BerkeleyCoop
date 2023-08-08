@@ -40,11 +40,12 @@ const template: FormTemplate = {
 
 const Events = memo(() => {
 	const { data } = useGetEventsQuery();
-	const [createEvent, { isSuccess, reset, error }] = useCreateEventMutation();
+	const [createEvent, { isSuccess, reset, error, isLoading }] = useCreateEventMutation();
 	const modal = useState(false);
 
 	useEffect(() => {
 		if (isSuccess) {
+			console.log('success');
 			modal[1](false);
 			reset();
 		}
@@ -81,7 +82,7 @@ const Events = memo(() => {
 					title="Create an event"
 					description="Publish an event for others to join and participate!"
 				>
-					<Button>
+					<Button isLoading={isLoading}>
 						<PlusCircleIcon width="20px" /> Create
 					</Button>
 					<Form

@@ -65,7 +65,7 @@ defmodule Berkeley.Events do
              |> Ecto.Changeset.put_assoc(:rooms, rooms)
            end)
            |> Repo.transaction() do
-      {:ok, result[:event] |> Repo.preload(:house)}
+      {:ok, result[:event] |> Repo.preload([:house, :creator])}
     end
   end
 

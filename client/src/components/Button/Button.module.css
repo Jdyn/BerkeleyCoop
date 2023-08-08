@@ -40,7 +40,6 @@
 	background: var(--green-10);
 }
 
-
 .secondary {
 	color: var(--text);
 	background: var(--white);
@@ -51,4 +50,20 @@
 	color: var(--text);
 	background: var(--primary-bg);
 	border: 2px solid var(--border);
+}
+
+.spin {
+	animation: spin 1s linear infinite;
+	color: rgba(255,  255, 255, 0.7);
+	opacity: 1;
+	fill: transparent;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
