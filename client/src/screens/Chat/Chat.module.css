@@ -173,6 +173,7 @@
 
 .roomItem > p {
 	font-size: 0.9rem;
+	margin: 5px 0px;
 }
 .roomItem:hover > p {
 	color: #e6ebf1 !important;

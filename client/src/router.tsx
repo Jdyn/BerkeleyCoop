@@ -16,13 +16,15 @@ const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (
 
 	try {
 		const response = await result.unwrap();
+		console.log(await result.unwrap())
 		if (response.ok) {
 			return null;
 		}
 	} catch (error) {
 		return redirect('/signin');
 	}
-	return redirect('/signin');
+	return null;
+	// return redirect('/signin');
 };
 
 const baseUrl = import.meta.env.PROD

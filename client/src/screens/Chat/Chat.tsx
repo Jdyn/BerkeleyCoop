@@ -15,7 +15,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { HashtagIcon } from '@heroicons/react/20/solid';
 import { useChannel } from '../../hooks/socket/useChannel';
 import useEvent from '../../hooks/socket/useEvent';
-import { formatTimeAgo } from '../../util/dates';
+import { formatTimeAgo, lastUpdated } from '../../util/dates';
 import Modal from '../../components/Modal/Modal';
 import { useCreateRoomMutation, useGetHousesQuery } from '../../api/chat/chat';
 import Select from '../../components/Select/Select';
@@ -33,7 +33,8 @@ function Chat() {
 	const [rooms, setRooms] = useState<any[]>([]);
 	const channel = useChannel(id ? `chat:${id}` : `chat:lobby`);
 	const { data } = useGetHousesQuery();
-	const [createRoom, { isSuccess, error, isLoading, reset }] = useCreateRoomMutation();
+	const [createRoom, { data: newRoom, isSuccess, error, isLoading, reset }] =
+		useCreateRoomMutation();
 
 	const { control, register, handleSubmit } = useForm<any>();
 
@@ -48,9 +49,9 @@ function Chat() {
 		if (isSuccess) {
 			modal[1](false);
 			reset();
-			navigate('/chats', { replace: true });
+			navigate(`/chats/${newRoom?.id}`, { replace: true });
 		}
-	}, [isSuccess, modal, navigate, reset]);
+	}, [isSuccess, modal, navigate, newRoom?.id, reset]);
 
 	useEvent(channel, 'shout', (message) => {
 		setMessages((prev) => [...prev, message]);
@@ -182,6 +183,7 @@ function Chat() {
 							<h3>
 								<HashtagIcon width="18px" /> {room.name}
 							</h3>
+							<span>{`Updated ${lastUpdated(room.updatedAt)}`}</span>
 							<p>{room.description}</p>
 							<div className={styles.houseList} style={{ maxHeight: '50px' }}>
 								{room.houses.map((house: any) => (
@@ -193,6 +195,11 @@ function Chat() {
 									</span>
 								))}
 							</div>
+							<p>
+								{room.messages
+									? `${room.messages.length} ${room.messages.length === 1 ? 'message' : 'messages'}`
+									: null}
+							</p>
 						</Link>
 					))}
 				</div>

@@ -141,8 +141,9 @@ defmodule Berkeley.Seed do
 
     Accounts.register(
       %{
-        first_name: "John",
-        last_name: "Doe",
+        first_name: "Albert",
+        last_name: "Einstein",
+        username: "RelativelySpeaking",
         email: "test@test.com",
         password: "Password123",
         house_id: 1
@@ -154,6 +155,7 @@ defmodule Berkeley.Seed do
       %{
         first_name: "Michael",
         last_name: "Faraday",
+        username: "RealBatman",
         email: "test@test1.com",
         password: "Password123",
         house_id: 4
@@ -163,8 +165,9 @@ defmodule Berkeley.Seed do
 
     Accounts.register(
       %{
-        first_name: "Niels",
-        last_name: "Bor",
+        first_name: "Margot",
+        last_name: "Robbie",
+        username: "Barbie123",
         email: "test@test2.com",
         password: "Password123",
         house_id: 3
@@ -176,6 +179,7 @@ defmodule Berkeley.Seed do
       %{
         first_name: "Julius",
         last_name: "Opppenheimer",
+        username: "TheBringer",
         email: "test@test3.com",
         password: "Password123",
         house_id: 2
@@ -185,8 +189,9 @@ defmodule Berkeley.Seed do
 
     Accounts.register(
       %{
-        first_name: "Albert",
-        last_name: "Einstein",
+        first_name: "Joe",
+        last_name: "Dirt",
+        username: "TheDirt",
         email: "test@test4.com",
         password: "Password123",
         house_id: 6
@@ -196,8 +201,9 @@ defmodule Berkeley.Seed do
 
     Accounts.register(
       %{
-        first_name: "Albert",
+        first_name: "David Blaine",
         last_name: "Einstein",
+        username: "TheMagician",
         email: "test@test5.com",
         password: "Password123",
         house_id: 7
@@ -209,6 +215,7 @@ defmodule Berkeley.Seed do
       %{
         first_name: "Alice",
         last_name: "Wonder",
+        username: "AgileAlice2",
         email: "test@test6.com",
         password: "Password123",
         house_id: 12
@@ -220,6 +227,7 @@ defmodule Berkeley.Seed do
       %{
         first_name: "Max",
         last_name: "Planck",
+        username: "PlankMan54",
         email: "test@test7.com",
         password: "Password123",
         house_id: 9

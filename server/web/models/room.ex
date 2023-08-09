@@ -24,12 +24,15 @@ defmodule Berkeley.Chat.Room do
 
   @doc false
   def create_changeset(room, attrs) do
+    dbg attrs
+
     houses = Repo.all(from h in House, where: h.name in ^attrs["houses"])
 
     room
     |> cast(attrs, [:name, :description, :creator_id, :event_id])
     |> validate_required([:name, :description, :creator_id, :houses])
     |> put_assoc(:houses, houses)
+    |> validate_houses(houses)
     |> foreign_key_constraint(:creator_id)
   end
 
@@ -38,5 +41,15 @@ defmodule Berkeley.Chat.Room do
     |> cast(attrs, [:name, :description, :creator_id, :event_id])
     |> validate_required([:name, :description, :creator_id])
     |> foreign_key_constraint(:creator_id)
+  end
+
+  def validate_houses(changeset, houses) do
+    # Ensure the users current house is in the list of houses
+    user = Repo.get!(User, changeset.changes.creator_id)
+    if Enum.any?(houses, fn house -> house.id == user.house_id end) do
+      changeset
+    else
+      add_error(changeset, :houses, "You must include your current house in the room.")
+    end
   end
 end

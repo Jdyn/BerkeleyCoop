@@ -10,11 +10,15 @@ defmodule Berkeley.RoomController do
 
     payload = Map.put_new(attrs["room"], "creator_id", current_user.id)
 
-    with {:ok, _} <- Chat.create_room(payload) do
+    with {:ok, room} <- Chat.create_room(payload) do
+
+      rooms = Chat.list_rooms(current_user)
+      Berkeley.Endpoint.broadcast("chat:lobby", "lobby", Chat.RoomView.render("index.json", %{rooms: rooms}))
 
       conn
       |> put_status(:created)
-      |> send_resp(:no_content, "")
+      |> put_view(Berkeley.Chat.RoomView)
+      |> render("room.json", room: room |> Berkeley.Repo.preload([:creator, :users, :houses, :event, :messages]))
     end
   end
 end

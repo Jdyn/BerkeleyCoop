@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useAccountSignInMutation } from '../../api/account/account';
 import Button from '../../components/Button/Button';
 import styles from './Auth.module.css';
+import Input from '../../components/Input';
 
 const schema = Yup.object({
 	email: Yup.string().email('Invalid email address').required(),
@@ -35,10 +36,11 @@ function LogIn(_props: Props) {
 	const onSubmit = handleSubmit((data) => {
 		signIn(data);
 	});
-
+	console.log(isSuccess)
 	useEffect(() => {
 		if (isSuccess) {
-			navigate('/events');
+			console.log('navigating')
+			navigate('/');
 		}
 	}, [isSuccess, navigate]);
 
@@ -56,7 +58,7 @@ function LogIn(_props: Props) {
 					<form className={styles.form} onSubmit={onSubmit}>
 						<label className={styles.field} htmlFor="email">
 							Email
-							<input {...register('email')} type="email" />
+							<Input register={register} name="email" type="email" />
 							{errors.email && (
 								<div className={styles.error}>
 									<ExclamationCircleIcon />
@@ -67,7 +69,7 @@ function LogIn(_props: Props) {
 
 						<label className={styles.field} htmlFor="password">
 							Password
-							<input {...register('password')} type="password" />
+							<Input register={register} name="password" type="password" />
 							{errors.password && (
 								<div className={styles.error}>
 									<ExclamationCircleIcon />

@@ -5,8 +5,8 @@ import { ReactComponent as EventImage } from '../../../images/event.svg';
 import { dateRange, formatEventStatus } from '../../../util/dates';
 import AlertDialog from '../../../components/AlertDialog/AlertDialog';
 import { useDeleteEventMutation } from '../../../api/event/event';
-import { useUser } from '../../../hooks/useUser';
 import Button from '../../../components/Button';
+import { useGetAccountQuery } from '../../../api/account/account';
 
 interface Props {
 	event: any;
@@ -14,7 +14,7 @@ interface Props {
 
 function EventCard({ event }: Props) {
 	const [deleteEvent] = useDeleteEventMutation();
-	const user = useUser();
+	const { data: user } = useGetAccountQuery();
 
 	return (
 		<div className={styles.root}>
@@ -22,8 +22,14 @@ function EventCard({ event }: Props) {
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<h3>Event</h3>
-					<span> <MapIcon width="18px" /> {event.house.name}</span>
-					<span> <ClockIcon width="18px" /> {dateRange(event.startDate, event.endDate)}</span>
+					<span>
+						{' '}
+						<MapIcon width="18px" /> {event.house.name}
+					</span>
+					<span>
+						{' '}
+						<ClockIcon width="18px" /> {dateRange(event.startDate, event.endDate)}
+					</span>
 					<h2>{event.title}</h2>
 					{/* {isStarted(event.startDate) && <div className={styles.started}>Event Started!</div>} */}
 				</div>
@@ -36,7 +42,7 @@ function EventCard({ event }: Props) {
 					<Button>View Event</Button>
 				</Link>
 			</div>
-			{user?.id === event?.creator?.id && (
+			{user?.user.id === event?.creator?.id && (
 				<AlertDialog
 					className={styles.alert}
 					title="Are you sure you want to delete this event?"

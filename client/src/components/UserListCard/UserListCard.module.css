@@ -15,8 +15,10 @@
 .status {
 	display: inline-flex;
 	align-items: center;
+	word-wrap: normal;
+	white-space: normal;
 	gap: 5px;
-	overflow: hidden;
+	overflow: auto;
 	color: var(--secondary-text);
 }
 

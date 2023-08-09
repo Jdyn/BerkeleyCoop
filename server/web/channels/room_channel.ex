@@ -15,9 +15,9 @@ defmodule Berkeley.RoomChannel do
   @impl true
   def handle_info(:after_join, socket) do
     user = socket.assigns.user
-    members = Berkeley.User |> Repo.all() |> Repo.preload(:house)
+    users = from(u in Berkeley.User, order_by: [desc: u.last_seen], preload: [:house]) |> Repo.all()
 
-    push(socket, "members", Berkeley.UserView.render("index.json", %{users: members}))
+    push(socket, "members", Berkeley.UserView.render("index.json", %{users: users}))
 
     online_at = inspect(System.system_time(:millisecond))
 

@@ -11,7 +11,7 @@ defmodule Berkeley.User do
   alias Berkeley.UserToken
   alias Berkeley.Event
 
-  @registration_fields ~w(email first_name last_name house_id)a
+  @registration_fields ~w(email username first_name last_name house_id)a
 
   schema "users" do
     field(:email, :string)
@@ -20,9 +20,10 @@ defmodule Berkeley.User do
     field(:role, :string, default: "user")
     field(:avatar, :string)
     field(:bio, :string)
+    field(:username, :string)
+    field(:last_seen, :utc_datetime, default: DateTime.truncate(DateTime.utc_now(), :second))
 
     field(:phone, :string)
-
     field(:password_hash, :string)
     field(:password, :string, virtual: true)
 

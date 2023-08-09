@@ -36,6 +36,7 @@ defmodule Berkeley.UserView do
     %{
       id: user.id,
       firstName: user.first_name,
+      username: user.username,
       lastName: user.last_name,
       email: user.email,
       confirmedAt: user.confirmed_at,
@@ -47,6 +48,8 @@ defmodule Berkeley.UserView do
   def render("user_with_house.json", %{user: user}) do
     %{
       id: user.id,
+      username: user.username,
+      lastSeen: user.last_seen,
       firstName: user.first_name,
       lastName: user.last_name,
       email: user.email,

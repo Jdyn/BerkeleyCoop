@@ -5,7 +5,7 @@ import { CalendarDaysIcon } from '@heroicons/react/20/solid';
 import {
 	ArrowRightOnRectangleIcon,
 	ChatBubbleBottomCenterIcon,
-	HomeIcon,
+	QueueListIcon,
 	UserCircleIcon
 } from '@heroicons/react/24/outline';
 import SideNavigation, { SideNavigationLink } from '../SideNavigation/SideNavigation';
@@ -73,8 +73,8 @@ function RootLayout() {
 		<main className={styles.root}>
 			<SideNavigation expand="right" style={{ gridArea: 'left' }}>
 				<SideNavigationLink to="/">
-					<HomeIcon width="24px" />
-					Home
+					<UserCircleIcon width="24px" />
+					Profile
 				</SideNavigationLink>
 				<SideNavigationLink to="/events">
 					<CalendarDaysIcon width="24px" />
@@ -108,7 +108,7 @@ function RootLayout() {
 			<SideNavigation expand="left" style={{ gridArea: 'right' }}>
 				<div className={styles.userList} style={{ flexGrow: 1 }}>
 					<h3>
-						<UserCircleIcon width="24px" style={{ overflow: 'visible' }} /> Members
+						<QueueListIcon width="24px" style={{ overflow: 'visible' }} /> Member List
 					</h3>
 					{userList.map((user: any) => (
 						<UserListCard key={user.id} user={user} online={user.onlineAt} />

@@ -12,6 +12,7 @@ defmodule Berkeley.Chat do
   alias Berkeley.Endpoint
   alias Berkeley.Repo
   alias Berkeley.User
+  alias Berkeley.Endpoint
 
   @doc """
   Returns the list of rooms.
@@ -28,12 +29,13 @@ defmodule Berkeley.Chat do
         r in Room,
         left_join: h in assoc(r, :houses),
         where: h.id == ^user.house_id,
-        select: r
+        select: r,
+        order_by: [desc: r.updated_at]
       )
       |> Repo.all()
-      |> Repo.preload([:creator, :users, :event, :houses])
+      |> Repo.preload([:creator, :users, :event, :houses, messages: [:creator]])
 
-    user_rooms = user |> assoc(:rooms) |> Repo.all() |> Repo.preload([:creator, :users, :event, :houses])
+    user_rooms = user |> assoc(:rooms) |> order_by(desc: :updated_at) |> Repo.all() |> Repo.preload([:creator, :users, :event, :houses, :messages])
 
     house_rooms ++ user_rooms
   end
@@ -153,11 +155,19 @@ defmodule Berkeley.Chat do
   end
 
   def create_message(attrs \\ %{}) do
-    %Message{}
+    {:ok, message} = %Message{}
     |> Message.changeset(attrs)
     |> Repo.insert!()
     |> preload_message_creator()
     |> publish_message_created()
+
+    user = Repo.get!(User, message.user.id)
+
+    with _ <- change_room_updatd_at(message.room_id) do
+      rooms = Chat.list_rooms(user)
+
+      Endpoint.broadcast("chat:#{message.room_id}", "lobby", Chat.RoomView.render("index.json", %{rooms: rooms}))
+    end
   end
 
   def update_message(%Message{} = message, attrs) do
@@ -191,5 +201,13 @@ defmodule Berkeley.Chat do
     |> Chat.Query.previous_n(n)
     |> Repo.all()
     |> Repo.preload(:sender)
+  end
+
+  def change_room_updatd_at(room_id) do
+    Repo.get!(Room, room_id)
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_change(:updated_at, DateTime.truncate(DateTime.utc_now(), :second))
+    |> Repo.update!()
+    |> dbg
   end
 end

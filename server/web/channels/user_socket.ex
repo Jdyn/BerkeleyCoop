@@ -23,6 +23,7 @@ defmodule Berkeley.UserSocket do
         :error
 
       user ->
+        user = Accounts.update_last_seen(user)
         {:ok, assign(socket, :user, user)}
     end
   end
