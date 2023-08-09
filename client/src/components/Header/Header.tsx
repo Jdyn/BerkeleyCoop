@@ -8,7 +8,7 @@ function Headers() {
 	return (
 		<nav className={styles.root}>
 			<h1>
-				<HomeModernIcon width="32px" />
+				<HomeModernIcon width="48px" />
 				BSC
 			</h1>
 			{/* <div className={styles.actions}>

@@ -3,7 +3,6 @@ defmodule Berkeley.Accounts do
   alias Berkeley.Auth.OAuth
   alias Berkeley.Repo
   alias Berkeley.User
-  alias Berkeley.UserNotifier
   alias Berkeley.UserToken
   alias Berkeley.Chat
 
@@ -285,7 +284,6 @@ defmodule Berkeley.Accounts do
     else
       {encoded_token, user_token} = UserToken.build_email_token(user, "confirm")
       Repo.insert!(user_token)
-      # UserNotifier.deliver_confirmation_instructions(user, encoded_token)
       :ok
     end
   end
