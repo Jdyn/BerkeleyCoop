@@ -208,6 +208,5 @@ defmodule Berkeley.Chat do
     |> Ecto.Changeset.change()
     |> Ecto.Changeset.put_change(:updated_at, DateTime.truncate(DateTime.utc_now(), :second))
     |> Repo.update!()
-    |> dbg
   end
 end

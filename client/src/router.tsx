@@ -12,11 +12,12 @@ import { SocketProvider } from './hooks/socket/SocketContext';
 import SignUp from './screens/Auth/signup';
 
 const rootLoader: (dispatch: Dispatch) => LoaderFunction = (dispatch) => async (_request) => {
+	dispatch(accountApi.util.resetApiState());
 	const result = dispatch(accountApi.endpoints.getAccount.initiate() as unknown as AnyAction);
 
 	try {
 		const response = await result.unwrap();
-		console.log(await result.unwrap())
+
 		if (response.ok) {
 			return null;
 		}

@@ -9,7 +9,6 @@ defmodule Berkeley.ErrorController do
   end
 
   def call(conn, {:error, _key, %Ecto.Changeset{} = changeset, _}) do
-    dbg changeset
     conn
     |> put_status(:unprocessable_entity)
     |> put_view(Berkeley.ErrorView)

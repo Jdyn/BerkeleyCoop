@@ -24,8 +24,6 @@ defmodule Berkeley.Chat.Room do
 
   @doc false
   def create_changeset(room, attrs) do
-    dbg attrs
-
     houses = Repo.all(from h in House, where: h.name in ^attrs["houses"])
 
     room
