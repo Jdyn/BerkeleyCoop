@@ -15,7 +15,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { HashtagIcon } from '@heroicons/react/20/solid';
 import { useChannel } from '../../hooks/socket/useChannel';
 import useEvent from '../../hooks/socket/useEvent';
-import { useUser } from '../../hooks/useUser';
 import { formatTimeAgo } from '../../util/dates';
 import Modal from '../../components/Modal/Modal';
 import { useCreateRoomMutation, useGetHousesQuery } from '../../api/chat/chat';
@@ -24,6 +23,7 @@ import Button from '../../components/Button';
 import formStyles from '../../components/Form/index.module.css';
 import styles from './Chat.module.css';
 import Input from '../../components/Input';
+import { useGetAccountQuery } from '../../api/account/account';
 
 function Chat() {
 	const { id } = useParams<{ id: string }>();
@@ -42,7 +42,7 @@ function Chat() {
 		[data]
 	);
 
-	const user = useUser();
+	const { data: user } = useGetAccountQuery();
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -223,14 +223,14 @@ function Chat() {
 								<div
 									className={clsx(
 										styles.message,
-										message.user.id === user?.id && styles.ownMessage
+										message.user.id === user?.user.id && styles.ownMessage
 									)}
 									key={message.id}
 								>
 									<h4
 										className={styles.messageHeader}
 										style={{
-											flexDirection: message.user.id === user?.id ? 'row' : 'row-reverse'
+											flexDirection: message.user.id === user?.user.id ? 'row' : 'row-reverse'
 										}}
 									>
 										<div>{formatTimeAgo(message.inserted_at)}</div>
@@ -239,7 +239,7 @@ function Chat() {
 									<div
 										className={clsx(
 											styles.messageContent,
-											message.user.id === user?.id && styles.selfMessageContent
+											message.user.id === user?.user.id && styles.selfMessageContent
 										)}
 									>
 										<p>{message.content}</p>
