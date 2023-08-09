@@ -18,7 +18,5 @@ config :berkeley, Berkeley.Endpoint,
   http: [port: 4002],
   server: false
 
-# config :swoosh, :api_client, false
-
 # Print only warnings and errors during test
 config :logger, level: :warn

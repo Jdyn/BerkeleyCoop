@@ -36,7 +36,6 @@ defmodule Berkeley.MixProject do
       {:phoenix_ecto, "~> 4.4.2"},
       {:ecto_sql, "~> 3.10.1"},
       {:postgrex, "~> 0.17.2"},
-      # {:swoosh, "~> 1.8"},
       {:assent, "~> 0.2.1"},
       {:telemetry_metrics, "~> 0.4.0"},
       {:telemetry_poller, "~> 0.4.0"},
