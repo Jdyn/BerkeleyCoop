@@ -34,8 +34,8 @@ function Form(props: Props) {
 
 	return (
 		<form className={styles.form} onSubmit={submitForm}>
-			{template.fields.map((field, index) => (
-				<label key={index} className={styles.container} htmlFor={field.name}>
+			{template.fields.map((field) => (
+				<label key={field.name} className={styles.container} htmlFor={field.name}>
 					{field.name}
 					<input
 						className={styles.input}

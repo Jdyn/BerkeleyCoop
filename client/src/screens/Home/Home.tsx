@@ -46,7 +46,6 @@ function Home() {
 	}, [data?.user, resetForm]);
 
 	const onSubmit = handleSubmit((payload: any) => {
-		console.log(payload);
 		updateUser(payload);
 	});
 
@@ -112,7 +111,6 @@ function Home() {
 										render={({ field: { onChange, value } }) => (
 											<Switch.Root
 												className={styles.switchRoot}
-												value={value}
 												checked={value}
 												onCheckedChange={(newValue) => onChange(newValue)}
 											>
@@ -129,7 +127,6 @@ function Home() {
 										render={({ field: { onChange, value } }) => (
 											<Switch.Root
 												className={styles.switchRoot}
-												value={value}
 												checked={value}
 												onCheckedChange={(newValue) => onChange(newValue)}
 											>

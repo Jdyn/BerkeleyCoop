@@ -3,6 +3,8 @@ export interface User {
 	firstName: string;
 	lastName: string;
 	username: string;
+	hideName: boolean;
+	hideHouse: boolean;
 	email: string;
 	confirmedAt: string;
 	isAdmin: boolean;

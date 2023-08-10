@@ -241,7 +241,9 @@ function Chat() {
 										}}
 									>
 										<div>{formatTimeAgo(message.inserted_at)}</div>
-										<span>{message.username}</span>
+										<span>
+											{message.user.hideName ? message.user.username : `${message.user.firstName} ${message.user.lastName}`}
+										</span>
 									</h4>
 									<div
 										className={clsx(

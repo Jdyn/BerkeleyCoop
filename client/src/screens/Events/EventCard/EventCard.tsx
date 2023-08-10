@@ -5,7 +5,6 @@ import { ReactComponent as EventImage } from '../../../images/event.svg';
 import { dateRange, formatEventStatus } from '../../../util/dates';
 import AlertDialog from '../../../components/AlertDialog/AlertDialog';
 import { useDeleteEventMutation } from '../../../api/event/event';
-import Button from '../../../components/Button';
 import { useGetAccountQuery } from '../../../api/account/account';
 
 interface Props {
