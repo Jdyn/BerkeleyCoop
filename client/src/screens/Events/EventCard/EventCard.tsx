@@ -23,11 +23,9 @@ function EventCard({ event }: Props) {
 				<div className={styles.header}>
 					<h3>Event</h3>
 					<span>
-						{' '}
 						<MapIcon width="18px" /> {event.house.name}
 					</span>
 					<span>
-						{' '}
 						<ClockIcon width="18px" /> {dateRange(event.startDate, event.endDate)}
 					</span>
 					<h2>{event.title}</h2>
@@ -39,7 +37,7 @@ function EventCard({ event }: Props) {
 					<span>{formatEventStatus(event.startDate, event.endDate)}</span>
 				</div>
 				<Link className={styles.link} to={`/events/${event.id}`}>
-					<Button>View Event</Button>
+					{/* <Button>View Event</Button> */}
 				</Link>
 			</div>
 			{user?.user.id === event?.creator?.id && (

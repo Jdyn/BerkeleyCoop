@@ -42,6 +42,8 @@ defmodule Berkeley.UserView do
       confirmedAt: user.confirmed_at,
       isAdmin: user.is_admin,
       bio: user.bio,
+      hideHouse: user.hide_house,
+      hideName: user.hide_name
     }
   end
 
@@ -56,7 +58,9 @@ defmodule Berkeley.UserView do
       confirmedAt: user.confirmed_at,
       isAdmin: user.is_admin,
       bio: user.bio,
-      house: render_one(user.house, Berkeley.HouseView, "house.json", as: :house)
+      house: render_one(user.house, Berkeley.HouseView, "house.json", as: :house),
+      hideHouse: user.hide_house,
+      hideName: user.hide_name
     }
   end
 

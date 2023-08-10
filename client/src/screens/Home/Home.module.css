@@ -90,3 +90,96 @@
 	grid-template-columns: repeat(auto-fit, minmax(100px, 300px));
 	grid-template-rows: repeat(auto-fit, 375px);
 }
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	font-size: 1rem;
+}
+
+.info > p {
+	padding: 20px 0px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	justify-self: center;
+	max-width: 500px;
+	margin: 20px 0px;
+}
+
+.formLabel {
+	display: flex;
+	gap: 10px;
+	flex-direction: column;
+}
+
+.formLabel > textarea::placeholder {
+	font-size: 1rem;
+}
+
+.switchLabel {
+	display: grid;
+	grid-template-columns: 2fr 2fr;
+}
+
+.switchRoot {
+	width: 42px;
+	height: 25px;
+	background: var(--indigo-a7);
+	border-radius: 9999px;
+	position: relative;
+	box-shadow: 0 2px 10px var(--black-a7);
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	justify-self: flex-end;
+}
+.switchRoot:focus {
+	box-shadow: 0 0 0 2px black;
+}
+.switchRoot[data-state='checked'] {
+	background-color: var(--accent-bg);
+}
+
+.switchThumb {
+	display: block;
+	width: 21px;
+	height: 21px;
+	background-color: white;
+	border-radius: 9999px;
+	box-shadow: 0 2px 2px var(--black-a7);
+	transition: transform 100ms;
+	transform: translateX(2px);
+	will-change: transform;
+}
+.switchThumb[data-state='checked'] {
+	transform: translateX(19px);
+}
+
+.error {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	background: var(--red-9);
+	border-radius: 6px;
+	font-size: 0.8rem;
+	padding: 2px 10px;
+	color: white;
+	border: 2px solid var(--red-11)
+}
+.error > div {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.error > div > ul {
+	padding-left: 15px;
+}
+
+.error > svg {
+	height: 20px;
+}

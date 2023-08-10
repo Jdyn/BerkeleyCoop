@@ -3,11 +3,9 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-  /* overflow: hidden; */
+  overflow: hidden;
   user-select: none;
-
   border-radius: 100%;
-  background-color: var(--black-a3);
 	overflow: visible;
 }
 

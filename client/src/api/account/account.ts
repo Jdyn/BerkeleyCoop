@@ -79,6 +79,14 @@ export const accountApi = createApi({
 				Cookies.remove('user');
 			},
 			invalidatesTags: ['sessions', 'user']
+		}),
+		accountUpdate: mutation<{ user: Record<string, any>}, Record<string, any>>({
+			query: (body) => ({
+				url: '/account/update',
+				method: 'POST',
+				body
+			}),
+			invalidatesTags: ['user']
 		})
 	})
 });
@@ -89,5 +97,5 @@ const updateSession = (user: User, token: string): void => {
 	}
 };
 
-export const { useAccountSignInMutation, useAccountSignOutMutation, useGetAccountQuery, useAccountSignUpMutation } =
+export const { useAccountSignInMutation, useAccountSignOutMutation, useGetAccountQuery, useAccountSignUpMutation, useAccountUpdateMutation } =
 	accountApi;

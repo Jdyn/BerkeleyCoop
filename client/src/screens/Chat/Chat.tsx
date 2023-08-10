@@ -255,20 +255,22 @@ function Chat() {
 							))}
 						</div>
 					</div>
-					<form
-						className={styles.inputForm}
-						onSubmit={(e) => {
-							e.preventDefault();
-							const input = document.getElementById('message') as HTMLInputElement;
-							channel?.push('shout', { content: input.value });
-							input.value = '';
-						}}
-					>
-						<input id="message" className={styles.input} placeholder="Enter a message..." />
-						<button title="Send a chat message" className={styles.submit} type="submit">
-							<PaperAirplaneIcon width="24px" />
-						</button>
-					</form>
+					{currentRoom?.id && (
+						<form
+							className={styles.inputForm}
+							onSubmit={(e) => {
+								e.preventDefault();
+								const input = document.getElementById('message') as HTMLInputElement;
+								channel?.push('shout', { content: input.value });
+								input.value = '';
+							}}
+						>
+							<input id="message" className={styles.input} placeholder="Enter a message..." />
+							<button title="Send a chat message" className={styles.submit} type="submit">
+								<PaperAirplaneIcon width="24px" />
+							</button>
+						</form>
+					)}
 				</div>
 			</main>
 		</div>

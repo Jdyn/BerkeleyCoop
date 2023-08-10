@@ -4,6 +4,8 @@ defmodule Berkeley.UserController do
   alias Berkeley.Accounts
   alias Berkeley.Auth.OAuth
   alias Berkeley.Repo
+  alias Berkeley.User
+  alias Berkeley.UserView
 
   action_fallback(Berkeley.ErrorController)
 
@@ -18,7 +20,10 @@ defmodule Berkeley.UserController do
     conn
     |> put_remember_token(token)
     |> configure_session(renew: true)
-    |> render("login.json", user: conn.assigns[:current_user] |> Repo.preload(:house), token: Base.url_encode64(token, padding: false))
+    |> render("login.json",
+      user: Repo.preload(conn.assigns[:current_user], :house),
+      token: Base.url_encode64(token, padding: false)
+    )
   end
 
   def show_sessions(conn, _params) do
@@ -26,6 +31,20 @@ defmodule Berkeley.UserController do
 
     tokens = Accounts.find_all_sessions(current_user)
     render(conn, "sessions.json", tokens: tokens)
+  end
+
+  def update(conn, params) do
+    # Update the user
+    current_user = conn.assigns[:current_user]
+
+    with {:ok, user} <- Accounts.update(current_user, params) do
+
+      users = from(u in Berkeley.User, order_by: [desc: u.last_seen], preload: [:house]) |> Repo.all()
+      Berkeley.Endpoint.broadcast("room:lobby", "members", Berkeley.UserView.render("index.json", %{users: users}))
+
+
+      render(conn, "show.json", user: user)
+    end
   end
 
   @doc """
@@ -62,7 +81,7 @@ defmodule Berkeley.UserController do
       |> put_session(:user_token, token)
       |> put_remember_token(token)
       |> put_status(:created)
-      |> render("show.json", user: user |> Repo.preload(:house))
+      |> render("show.json", user: Repo.preload(user, :house))
     end
   end
 

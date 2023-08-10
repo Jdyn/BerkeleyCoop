@@ -6,10 +6,10 @@ defmodule Berkeley.User do
   use Berkeley.Web, :model
 
   alias Berkeley.Chat.Room
+  alias Berkeley.Event
   alias Berkeley.House
   alias Berkeley.User
   alias Berkeley.UserToken
-  alias Berkeley.Event
 
   @registration_fields ~w(email username first_name last_name house_id)a
 
@@ -31,8 +31,10 @@ defmodule Berkeley.User do
 
     field(:is_admin, :boolean, default: false)
 
-    has_many(:tokens, UserToken)
+    field(:hide_house, :boolean, default: false)
+    field(:hide_name, :boolean, default: false)
 
+    has_many(:tokens, UserToken)
 
     belongs_to(:house, House)
 
@@ -60,6 +62,12 @@ defmodule Berkeley.User do
     |> validate_required(@registration_fields ++ [:password])
     |> validate_email()
     |> validate_password()
+  end
+
+  def update_changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:username, :bio, :hide_house, :hide_name])
+    |> validate_required([:username, :bio, :hide_house, :hide_name])
   end
 
   def oauth_registration_changeset(%User{} = user, attrs) do

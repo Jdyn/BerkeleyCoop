@@ -15,6 +15,7 @@ import { useGetHousesQuery } from '../../api/chat/chat';
 const schema = Yup.object({
 	email: Yup.string().email('Invalid email address').required(),
 	password: Yup.string().max(20, 'Must be 20 characters or less').required(),
+	username: Yup.string().max(20, 'Must be 20 characters or less').required(),
 	last_name: Yup.string().max(20, 'Must be 20 characters or less').required(),
 	first_name: Yup.string().max(20, 'Must be 20 characters or less').required(),
 	house_id: Yup.object().required('Please select a house')
@@ -22,6 +23,7 @@ const schema = Yup.object({
 
 type FormData = {
 	email: string;
+	username: string;
 	password: string;
 	first_name: string;
 	last_name: string;
@@ -73,6 +75,16 @@ function SignUp(_props: Props) {
 						<label className={styles.field} htmlFor="email">
 							Email
 							<input {...register('email')} type="email" />
+							{errors.email && (
+								<div className={styles.error}>
+									<ExclamationCircleIcon />
+									<span>{errors.email.message}</span>
+								</div>
+							)}
+						</label>
+						<label className={styles.field} htmlFor="email">
+							Username
+							<input {...register('username')} type="username" />
 							{errors.email && (
 								<div className={styles.error}>
 									<ExclamationCircleIcon />

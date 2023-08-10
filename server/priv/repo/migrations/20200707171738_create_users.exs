@@ -12,6 +12,8 @@ defmodule Berkeley.Repo.Migrations.CreateUsers do
       add(:phone, :string)
       add(:username, :string)
       add(:last_seen, :utc_datetime)
+      add(:hide_house, :boolean, default: false)
+      add(:hide_name, :boolean, default: false)
 
       add(:password_hash, :string, null: true)
       add(:confirmed_at, :naive_datetime)

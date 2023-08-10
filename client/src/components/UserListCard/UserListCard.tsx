@@ -13,10 +13,9 @@ function UserListCard({ user, online }: Props) {
 			<Avatar firstName={user.firstName} lastName={user.lastName} />
 			<div className={styles.header}>
 				<h4 className={styles.name}>
-					{/* {user.firstName} {user.lastName} */}
-					{user.username}
+					{user.hideName ? user.username : `${user.firstName} ${user.lastName}`}
 				</h4>
-				<div>{user.house && <div className={styles.house}>{user.house.name}</div>}</div>
+				{user.hideHouse ? null : <div className={styles.house}>{user.house.name}</div>}
 				<div className={styles.status}>
 					{online ? (
 						<>

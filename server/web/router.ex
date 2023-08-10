@@ -35,6 +35,7 @@ defmodule Berkeley.Router do
     resources("/events", EventController)
     get("/account/events", EventController, :user_index)
     post("/rooms", RoomController, :create)
+    post("/account/update", UserController, :update)
 
     resources("/account", UserController, singleton: true, only: [:show]) do
       get("/sessions", UserController, :show_sessions)

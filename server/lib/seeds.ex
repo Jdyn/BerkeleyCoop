@@ -10,10 +10,11 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 defmodule Berkeley.Seed do
-  alias Berkeley.Repo
-  alias Berkeley.Chat.Room
+  @moduledoc false
   alias Berkeley.Accounts
+  alias Berkeley.Chat.Room
   alias Berkeley.House
+  alias Berkeley.Repo
 
   def run do
     houses = [
@@ -242,13 +243,40 @@ defmodule Berkeley.Seed do
       messages: []
     })
 
-    Repo.insert(%Room{
-      name: "Casa Zimbabwe",
-      description: "General chat room",
-      creator_id: 1,
-      houses: [Repo.get_by!(House, name: "Casa Zimbabwe")],
-      users: [],
-      messages: []
+    Berkeley.Events.create(%{
+      title: "Glade Picnic",
+      description: "Picnic at the park! Bring food and drinks!",
+      creator_id: 5,
+      house_id: 5,
+      start_date: DateTime.add(DateTime.utc_now(), 1, :day),
+      end_date: DateTime.add(DateTime.utc_now(), 2, :day)
+    })
+
+    Berkeley.Events.create(%{
+      title: "Barbie Movie",
+      description: "Dress warm, you kenever be warm kenough!",
+      creator_id: 5,
+      house_id: 5,
+      start_date: DateTime.to_string(DateTime.add(DateTime.utc_now(), 12, :day)),
+      end_date: DateTime.to_string(DateTime.add(DateTime.utc_now(), 13, :day))
+    })
+
+    Berkeley.Events.create(%{
+      title: "Zimbabwe Hangout",
+      description: "Bring a smile",
+      creator_id: 5,
+      house_id: 5,
+      start_date: DateTime.add(DateTime.utc_now(), 3, :day),
+      end_date: DateTime.add(DateTime.utc_now(), 4, :day)
+    })
+
+    Berkeley.Events.create(%{
+      title: "SF Exploratorium Adventure",
+      description: "Dress warm, you kenever be warm kenough!",
+      creator_id: 5,
+      house_id: 5,
+      start_date: DateTime.to_string(DateTime.add(DateTime.utc_now(), 9, :day)),
+      end_date: DateTime.to_string(DateTime.add(DateTime.utc_now(), 10, :day))
     })
 
     # user = Repo.get!(User, 1) |> Repo.preload(:rooms)

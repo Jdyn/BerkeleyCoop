@@ -43,6 +43,12 @@ defmodule Berkeley.Accounts do
     Repo.one(query)
   end
 
+  def update(user, attrs) do
+    user
+    |> User.update_changeset(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Registers a user.
 

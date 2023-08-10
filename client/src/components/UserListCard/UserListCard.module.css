@@ -15,8 +15,8 @@
 .status {
 	display: inline-flex;
 	align-items: center;
-	word-wrap: normal;
-	white-space: normal;
+	/* word-wrap: normal;
+	white-space: normal; */
 	gap: 5px;
 	overflow: auto;
 	color: var(--secondary-text);
@@ -24,7 +24,6 @@
 
 .indicator {
 	display: inline-flex;
-
 	width: 10px;
 	height: 10px;
 	border-radius: 100%;
