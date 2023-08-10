@@ -67,7 +67,7 @@ defmodule Berkeley.User do
   def update_changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:username, :bio, :hide_house, :hide_name])
-    |> validate_required([:username, :bio, :hide_house, :hide_name])
+    |> validate_required([:username, :hide_house, :hide_name])
   end
 
   def oauth_registration_changeset(%User{} = user, attrs) do

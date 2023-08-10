@@ -4,8 +4,6 @@ defmodule Berkeley.UserController do
   alias Berkeley.Accounts
   alias Berkeley.Auth.OAuth
   alias Berkeley.Repo
-  alias Berkeley.User
-  alias Berkeley.UserView
 
   action_fallback(Berkeley.ErrorController)
 

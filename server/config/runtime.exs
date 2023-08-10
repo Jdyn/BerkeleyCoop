@@ -37,8 +37,8 @@ if config_env() == :prod do
   ecto_ipv6? = System.get_env("ECTO_IPV6") == "true"
 
   config :berkeley, Berkeley.Repo,
-    # ssl: true,
-    socket_options: [],
+    ssl: false,
+    socket_options: [:inet6],
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
