@@ -12,8 +12,6 @@
 defmodule Berkeley.Seed do
   alias Berkeley.Repo
   alias Berkeley.Chat.Room
-  alias Berkeley.User
-  alias Berkeley.Chat.Message
   alias Berkeley.Accounts
   alias Berkeley.House
 

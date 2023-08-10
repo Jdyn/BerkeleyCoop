@@ -282,7 +282,7 @@ defmodule Berkeley.Accounts do
     if user.confirmed_at do
       {:not_found, "Your email has already been confirmed."}
     else
-      {encoded_token, user_token} = UserToken.build_email_token(user, "confirm")
+      {_, user_token} = UserToken.build_email_token(user, "confirm")
       Repo.insert!(user_token)
       :ok
     end

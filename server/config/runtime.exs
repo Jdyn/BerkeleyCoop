@@ -6,6 +6,15 @@ import Config
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
+System.get_env("PHX_SERVER") ||
+  raise """
+  PHX_SERVER WAS NOT SET.
+  """
+
+System.get_env("RELEASE_NAME") ||
+  raise """
+  RELEASE_NAME WAS NOT SET.
+  """
 
 if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
   config :berkeley, Berkeley.Endpoint, server: true
@@ -19,10 +28,12 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-  host = System.get_env("PHX_HOST") ||
-  raise """
-  HOST URL is missing.
-  """
+  host =
+    System.get_env("PHX_HOST") ||
+      raise """
+      HOST URL is missing.
+      """
+
   ecto_ipv6? = System.get_env("ECTO_IPV6") == "true"
 
   config :berkeley, Berkeley.Repo,
