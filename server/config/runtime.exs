@@ -6,17 +6,17 @@ import Config
 # and secrets from environment variables or elsewhere. Do not define
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
-System.get_env("PHX_SERVER") ||
-  raise """
-  PHX_SERVER WAS NOT SET.
-  """
+# System.get_env("PHX_SERVER") ||
+#   raise """
+#   PHX_SERVER WAS NOT SET.
+#   """
 
-System.get_env("RELEASE_NAME") ||
-  raise """
-  RELEASE_NAME WAS NOT SET.
-  """
+# System.get_env("RELEASE_NAME") ||
+#   raise """
+#   RELEASE_NAME WAS NOT SET.
+#   """
 
-if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
+if System.get_env("PHX_SERVER") do
   config :berkeley, Berkeley.Endpoint, server: true
 end
 
@@ -38,7 +38,7 @@ if config_env() == :prod do
 
   config :berkeley, Berkeley.Repo,
     # ssl: true,
-    socket_options: if(ecto_ipv6?, do: [:inet6], else: []),
+    socket_options: [],
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 

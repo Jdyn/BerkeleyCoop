@@ -10,7 +10,7 @@ defmodule Berkeley.Application do
       # Start the Ecto repository
       Berkeley.Repo,
       # Start the Telemetry supervisor
-      Berkeley.Telemetry,
+      # Berkeley.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Berkeley.PubSub},
       # Start the Endpoint (http/https)

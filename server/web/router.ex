@@ -19,6 +19,7 @@ defmodule Berkeley.Router do
   scope "/api", Berkeley do
     pipe_through(:api)
     get("/houses", HouseController, :index)
+    get("/seed", HouseController, :seed)
 
     resources("/account", UserController, singleton: true, only: []) do
       post("/signup", UserController, :sign_up)
