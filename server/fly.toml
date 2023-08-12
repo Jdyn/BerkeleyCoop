@@ -6,7 +6,6 @@
 app = "berkeley"
 primary_region = "sjc"
 kill_signal = "SIGTERM"
-swap_size_mb = 512
 
 [build]
 

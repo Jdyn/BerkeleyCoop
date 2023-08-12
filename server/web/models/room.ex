@@ -11,7 +11,7 @@ defmodule Berkeley.Chat.Room do
     field(:name, :string)
     field(:description, :string)
 
-    has_many(:messages, Message)
+    has_many(:messages, Message, on_delete: :delete_all)
 
     many_to_many(:users, User, join_through: "users_rooms")
     many_to_many(:houses, House, join_through: "houses_rooms")

@@ -35,7 +35,7 @@ defmodule Berkeley.Chat do
       |> Repo.all()
       |> Repo.preload([:creator, :users, :event, :houses, messages: [:creator]])
 
-    user_rooms = user |> assoc(:rooms) |> order_by(desc: :updated_at) |> Repo.all() |> Repo.preload([:creator, :users, :event, :houses, :messages])
+    user_rooms = user |> assoc(:rooms) |> order_by(desc: :updated_at) |> Repo.all() |> Repo.preload([:creator, :users, :event, :houses, messages: [:creator]])
 
     house_rooms ++ user_rooms
   end
